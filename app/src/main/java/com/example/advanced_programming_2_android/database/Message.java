@@ -3,9 +3,7 @@ package com.example.advanced_programming_2_android.database;
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
 import androidx.room.PrimaryKey;
-
-import java.util.Date;
-
+import androidx.annotation.NonNull;
 
 @Entity(tableName = "messages",
         foreignKeys = @ForeignKey(entity = User.class,
@@ -13,14 +11,16 @@ import java.util.Date;
                 childColumns = "senderUsername",
                 onDelete = ForeignKey.CASCADE))
 public class Message {
-    @PrimaryKey(autoGenerate = true)
+    @PrimaryKey
+    @NonNull
     private int id;
-    private Date created;
+    private String createdDate;
     private String senderUsername;
     private String contact;
 
-    public Message(Date created, String senderUsername, String contact) {
-        this.created = created;
+    public Message(@NonNull int id, String createdDate, String senderUsername, String contact) {
+        this.id = id;
+        this.createdDate = createdDate;
         this.senderUsername = senderUsername;
         this.contact = contact;
     }
@@ -35,12 +35,12 @@ public class Message {
         this.id = id;
     }
 
-    public Date getCreated() {
-        return created;
+    public String getCreatedDate() {
+        return createdDate;
     }
 
-    public void setCreated(Date created) {
-        this.created = created;
+    public void setCreatedDate(String createdDate) {
+        this.createdDate = createdDate;
     }
 
     public String getSenderUsername() {
@@ -59,5 +59,4 @@ public class Message {
         this.contact = contact;
     }
 }
-
 

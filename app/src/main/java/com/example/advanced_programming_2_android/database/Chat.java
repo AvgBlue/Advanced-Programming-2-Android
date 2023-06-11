@@ -2,15 +2,22 @@ package com.example.advanced_programming_2_android.database;
 
 import java.util.List;
 
-public class Chat {
-    private int id;
-    private List<User> users;
-    private Message lastMessage;
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
+import androidx.annotation.NonNull;
 
-    public Chat(int id, List<User> users, Message lastMessage) {
+@Entity(tableName = "chats")
+public class Chat {
+    @PrimaryKey
+    @NonNull
+    private int id;
+    private List<String> usernames;
+    private int lastMessageId;
+
+    public Chat(@NonNull int id, List<String> usernames, int lastMessageId) {
         this.id = id;
-        this.users = users;
-        this.lastMessage = lastMessage;
+        this.usernames = usernames;
+        this.lastMessageId = lastMessageId;
     }
 
     // Getters and Setters
@@ -23,19 +30,22 @@ public class Chat {
         this.id = id;
     }
 
-    public List<User> getUsers() {
-        return users;
+    public List<String> getUsernames() {
+        return usernames;
     }
 
-    public void setUsers(List<User> users) {
-        this.users = users;
+    public int getLastMessageId() {
+        return lastMessageId;
     }
 
-    public Message getLastMessage() {
-        return lastMessage;
+    public void setUsernames(List<String> usernames) {
+        this.usernames = usernames;
     }
 
-    public void setLastMessage(Message lastMessage) {
-        this.lastMessage = lastMessage;
+    public void setLastMessageId(int lastMessageId) {
+        this.lastMessageId = lastMessageId;
     }
+
+
 }
+

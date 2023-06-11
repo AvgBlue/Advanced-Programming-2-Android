@@ -2,15 +2,18 @@ package com.example.advanced_programming_2_android.database;
 
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
+import androidx.annotation.NonNull;
+
 
 @Entity(tableName = "users")
 public class User {
     @PrimaryKey
+    @NonNull
     private String username;
     private String displayName;
     private String profilePic;
 
-    public User(String username, String displayName, String profilePic) {
+    public User(@NonNull String username, String displayName, String profilePic) {
         this.username = username;
         this.displayName = displayName;
         this.profilePic = profilePic;
