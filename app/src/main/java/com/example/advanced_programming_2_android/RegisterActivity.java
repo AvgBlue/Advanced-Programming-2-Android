@@ -43,7 +43,8 @@ public class RegisterActivity extends AppCompatActivity {
         btnRegister.setOnClickListener(view -> {
             if (allIsValid(edUsername.getText().toString(), edPassword.getText().toString(),
                     edDisplayName.getText().toString(), imageWasChosen)) {
-
+                Intent intent = new Intent(this, MainActivity.class);
+                startActivity(intent);
             }
         });
 
@@ -96,21 +97,30 @@ public class RegisterActivity extends AppCompatActivity {
     @SuppressLint("SetTextI18n")
     private boolean allIsValid(String username, String password, String name, AtomicBoolean isImageValid) {
         TextView tvErrors = findViewById(R.id.tvRegErrors);
+        tvErrors.setText("");
 
         boolean isValid = true;
 
         if (!validateUsername(username)) {
             isValid = false;
-            tvErrors.setText("username needs to be at most 20 characters");
+            tvErrors.setText("username needs to be at most 20 characters\n");
         }
 
         if (!validatePassword(password)) {
             isValid = false;
-            tvErrors.setText("username needs to be at most 20 characters");
+            tvErrors.setText(tvErrors.getText().toString() +
+                    "password needs to be at least 8 charcters and at most 20 characters and be made by numbers and letters\n");
         }
 
         if (!validateName(name)) {
-            
+            isValid = false;
+            tvErrors.setText(tvErrors.getText().toString() +
+                    "name needs to be at least 2 charcters and at most 20 characters and by made by only letters\n");
+        }
+
+        if (!isImageValid.get()) {
+            isValid = false;
+            tvErrors.setText(tvErrors.getText().toString() + "please add an image\n");
         }
 
         return isValid;

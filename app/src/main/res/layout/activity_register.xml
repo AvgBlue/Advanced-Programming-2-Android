@@ -72,8 +72,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:layout_marginTop="50dp"
             android:text=""
-            android:layout_marginTop="50dp"/>
+            android:textColor="#FF0000"/>
 
         <TextView
             android:id="@+id/tvRegisterToLogin"
@@ -81,7 +82,8 @@
             android:layout_height="wrap_content"
             android:text="@string/already_registered_click_here_to_login"
             android:layout_gravity="center"
-            android:layout_marginTop="50dp"/>
+            android:layout_marginTop="50dp"
+            />
 
 
 
