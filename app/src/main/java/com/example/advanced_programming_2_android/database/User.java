@@ -1,6 +1,11 @@
-package com.example.advanced_programming_2_android;
+package com.example.advanced_programming_2_android.database;
 
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
+
+@Entity(tableName = "users")
 public class User {
+    @PrimaryKey
     private String username;
     private String displayName;
     private String profilePic;

@@ -1,4 +1,4 @@
-package com.example.advanced_programming_2_android;
+package com.example.advanced_programming_2_android.database;
 
 import java.util.List;
 
