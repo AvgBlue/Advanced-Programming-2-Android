@@ -1,3 +1,9 @@
 <resources>
-    <string name="app_name">Advanced-Programming-2-Android</string>
+    <string name="app_name">Chit Chat</string>
+    <string name="username">Username</string>
+    <string name="password">password</string>
+    <string name="displayname">displayName</string>
+    <string name="select_picture">select picture</string>
+    <string name="register">Register</string>
+    <string name="already_registered_click_here_to_login">Already registered? click here to login</string>
 </resources>
