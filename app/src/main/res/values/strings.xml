@@ -6,4 +6,6 @@
     <string name="select_picture">select picture</string>
     <string name="register">Register</string>
     <string name="already_registered_click_here_to_login">Already registered? click here to login</string>
+    <string name="sign_in">Sign in</string>
+    <string name="login">login</string>
 </resources>

@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 
@@ -96,33 +97,27 @@ public class RegisterActivity extends AppCompatActivity {
 
     @SuppressLint("SetTextI18n")
     private boolean allIsValid(String username, String password, String name, AtomicBoolean isImageValid) {
-        TextView tvErrors = findViewById(R.id.tvRegErrors);
-        tvErrors.setText("");
-
-        boolean isValid = true;
 
         if (!validateUsername(username)) {
-            isValid = false;
-            tvErrors.setText("username needs to be at most 20 characters\n");
+            Toast.makeText(this, "username needs to be at most 20 characters", Toast.LENGTH_LONG).show();
+            return false;
         }
 
         if (!validatePassword(password)) {
-            isValid = false;
-            tvErrors.setText(tvErrors.getText().toString() +
-                    "password needs to be at least 8 charcters and at most 20 characters and be made by numbers and letters\n");
+            Toast.makeText(this, "password needs to be at least 8 charcters and at most 20 characters and be made by numbers and letters", Toast.LENGTH_LONG).show();
+            return false;
         }
 
         if (!validateName(name)) {
-            isValid = false;
-            tvErrors.setText(tvErrors.getText().toString() +
-                    "name needs to be at least 2 charcters and at most 20 characters and by made by only letters\n");
+            Toast.makeText(this, "name needs to be at least 2 charcters and at most 20 characters and by made by only letters", Toast.LENGTH_LONG).show();
+            return false;
         }
 
         if (!isImageValid.get()) {
-            isValid = false;
-            tvErrors.setText(tvErrors.getText().toString() + "please add an image\n");
+            Toast.makeText(this, "add an image", Toast.LENGTH_LONG).show();
+            return false;
         }
 
-        return isValid;
+        return true;
     }
 }
