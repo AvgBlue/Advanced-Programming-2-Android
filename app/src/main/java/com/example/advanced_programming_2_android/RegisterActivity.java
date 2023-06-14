@@ -19,7 +19,6 @@ import java.util.concurrent.atomic.AtomicBoolean;
 
 public class RegisterActivity extends AppCompatActivity {
     private ActivityResultLauncher<String> filePickerLauncher;
-    private TextView tvRegisterToLogin;
     private ImageView ivProfilepic;
     private EditText edUsername;
     private EditText edPassword;
