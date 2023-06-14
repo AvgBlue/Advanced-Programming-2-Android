@@ -7,14 +7,14 @@ import androidx.room.PrimaryKey;
 import androidx.annotation.NonNull;
 
 @Entity(tableName = "chats")
-public class Chat {
+public class ChatDatabase {
     @PrimaryKey
     @NonNull
     private int id;
     private List<String> usernames;
     private int lastMessageId;
 
-    public Chat(@NonNull int id, List<String> usernames, int lastMessageId) {
+    public ChatDatabase(@NonNull int id, List<String> usernames, int lastMessageId) {
         this.id = id;
         this.usernames = usernames;
         this.lastMessageId = lastMessageId;
