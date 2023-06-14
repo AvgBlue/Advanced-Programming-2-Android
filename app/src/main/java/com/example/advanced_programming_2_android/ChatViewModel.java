@@ -44,16 +44,8 @@ public class ChatViewModel extends ViewModel {
         List<Chat> chats = chatDao.getAllChats();
         List<ChatU> chatsU = new ArrayList<>();
         for (Chat chat : chats) {
-            // Set users
-            List<User> users = new ArrayList<>();
-            for (String username : chat.getUsernames()) {
-                users.add(userDao.getUserByUsername(username));
-            }
-            // Set last message
-            Message lastMessage = messageDao.getMessageById(chat.getLastMessageId());
-            User sender = userDao.getUserByUsername(lastMessage.getSenderUsername());
-            MessageU lastMessageU = new MessageU(lastMessage.getId(), lastMessage.getCreatedDate(), sender, lastMessage.getContact());
-            ChatU chatU = new ChatU(chat.getId(), users, lastMessageU);
+            // Convert each Chat to ChatU
+            ChatU chatU = ChatU.convertToChatU(chat, userDao,messageDao);
             chatsU.add(chatU);
         }
         // Set the chatLiveData to chatsU

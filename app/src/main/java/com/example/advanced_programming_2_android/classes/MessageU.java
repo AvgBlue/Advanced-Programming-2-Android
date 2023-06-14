@@ -1,6 +1,12 @@
 package com.example.advanced_programming_2_android.classes;
 
 import com.example.advanced_programming_2_android.database.User;
+
+import com.example.advanced_programming_2_android.database.Message;
+import com.example.advanced_programming_2_android.database.UserDao;
+import com.example.advanced_programming_2_android.database.MessageDao;
+
+
 public class MessageU {
 
     private int id;
@@ -45,5 +51,13 @@ public class MessageU {
 
     public void setContact(String contact) {
         this.contact = contact;
+    }
+
+
+    public static MessageU convertToMessageU(int id, UserDao userDao ,MessageDao messageDao){
+        Message message = messageDao.getMessageById(id);
+        User senderUser = userDao.getUserByUsername(message.getSenderUsername());
+        MessageU messageU = new MessageU(message.getId(),message.getCreatedDate(),senderUser,message.getContact());
+        return messageU;
     }
 }
