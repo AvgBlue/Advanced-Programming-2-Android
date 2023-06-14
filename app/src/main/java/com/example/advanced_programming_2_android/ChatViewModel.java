@@ -7,12 +7,9 @@ import androidx.lifecycle.ViewModel;
 
 import com.example.advanced_programming_2_android.database.AppDB;
 import com.example.advanced_programming_2_android.database.Chat;
-import com.example.advanced_programming_2_android.database.Message;
-import com.example.advanced_programming_2_android.database.User;
 import com.example.advanced_programming_2_android.database.UserDao;
 import com.example.advanced_programming_2_android.database.MessageDao;
 import com.example.advanced_programming_2_android.database.ChatDao;
-import com.example.advanced_programming_2_android.classes.MessageU;
 import com.example.advanced_programming_2_android.classes.ChatU;
 
 import java.util.ArrayList;
