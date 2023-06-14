@@ -6,6 +6,7 @@
     android:background="@drawable/background_portrait"
     android:orientation="vertical">
 
+    <include layout="@layout/custom_action_bar_main"/>
     <!--
 
     <LinearLayout
