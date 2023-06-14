@@ -2,9 +2,10 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/backround_portrait"
+    android:background="@drawable/background_portrait"
     android:orientation="vertical">
 
+    <!--
     <LinearLayout
         android:background="@color/dark_blue"
         android:id="@+id/infocard"
@@ -20,7 +21,7 @@
             android:layout_weight="1"
             android:scaleType="fitCenter"
             android:src="@drawable/placeholder"
-           />
+            />
 
 
         <TextView
@@ -38,12 +39,15 @@
             android:paddingTop="15dp"/>
 
     </LinearLayout>
+    -->
+    
     <ListView
-        android:id="@+id/lvchats"
+        android:id="@+id/lvChats"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1" />
 
+    <!--
     <LinearLayout
         android:id="@+id/chatbox"
         android:layout_width="match_parent"
@@ -63,7 +67,7 @@
             android:drawableLeft="@drawable/ic_send"
             android:drawablePadding="20dp"
             android:backgroundTint="@color/dark_blue"
-           />
+            />
 
         <EditText
             android:padding="4dp"
@@ -76,4 +80,5 @@
             android:text="Type a message"
             android:textColor="@color/dark_blue"/>
     </LinearLayout>
+    -->
 </LinearLayout>

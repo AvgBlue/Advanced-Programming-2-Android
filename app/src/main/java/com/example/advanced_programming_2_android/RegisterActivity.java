@@ -32,7 +32,6 @@ public class RegisterActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
-        tvRegisterToLogin = findViewById(R.id.tvRegisterToLogin);
         ivProfilepic = findViewById(R.id.ivProfilePic);
         edUsername = findViewById(R.id.edRegUsername);
         edPassword = findViewById(R.id.edRegPassword);
@@ -47,11 +46,6 @@ public class RegisterActivity extends AppCompatActivity {
                 Intent intent = new Intent(this, MainActivity.class);
                 startActivity(intent);
             }
-        });
-
-        tvRegisterToLogin.setOnClickListener(view -> {
-            Intent intent = new Intent(this, LogInActivity.class);
-            startActivity(intent);
         });
 
         filePickerLauncher = registerForActivityResult(new ActivityResultContracts.GetContent(), uri -> {

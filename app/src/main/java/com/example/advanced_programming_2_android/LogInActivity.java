@@ -28,8 +28,8 @@ public class LogInActivity extends AppCompatActivity {
         btnLogin.setOnClickListener(view -> {
             // Todo: check if the user exist in with the api
             if (true) {
-                // Intent intent = new Intent(this, ChatActivity.class);
-                // startActivity(intent);
+                Intent intent = new Intent(this, ChatActivity.class);
+                startActivity(intent);
             } else {
                 Toast.makeText(this, "username or password is incorrect", Toast.LENGTH_LONG).show();
             }
