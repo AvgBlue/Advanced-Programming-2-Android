@@ -1,10 +1,9 @@
 package com.example.advanced_programming_2_android.classes;
 
 import android.net.Uri;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 public class Chat {
+
     private Uri profilePic;
     private String displayName;
     private String lastMessage;

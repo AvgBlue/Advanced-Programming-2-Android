@@ -3,8 +3,6 @@ package com.example.advanced_programming_2_android;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
-import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.example.advanced_programming_2_android.classes.Chat;

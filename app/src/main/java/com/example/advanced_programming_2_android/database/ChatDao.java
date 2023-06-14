@@ -11,20 +11,20 @@ import java.util.List;
 @Dao
 public interface ChatDao {
     @Insert
-    void insert(ChatDatabase... chatDatabase);
+    void insert(Chat... chat);
 
-    @Query("SELECT * FROM chats")
-    List<ChatDatabase> getAllChats();
+    @Query("SELECT * FROM Chats")
+    List<Chat> getAllChats();
 
     //get chat by id
-    @Query("SELECT * FROM chats WHERE id = :id")
-    ChatDatabase getChat(int id);
+    @Query("SELECT * FROM Chats WHERE id = :id")
+    Chat getChat(int id);
 
     @Update
-    void update(ChatDatabase... chatDatabase);
+    void update(Chat... chat);
 
     @Delete
-    void delete(ChatDatabase... chatDatabase);
+    void delete(Chat... chat);
 
 
 }

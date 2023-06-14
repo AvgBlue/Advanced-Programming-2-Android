@@ -133,3 +133,4 @@ public class PreferencesViewModel extends ViewModel {
 // preferencesViewModel.setTheme(theme); //this will trigger the observer above
 
 
+
