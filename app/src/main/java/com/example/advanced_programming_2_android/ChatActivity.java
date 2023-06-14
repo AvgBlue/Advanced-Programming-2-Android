@@ -2,6 +2,7 @@ package com.example.advanced_programming_2_android;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
@@ -55,6 +56,10 @@ public class ChatActivity extends AppCompatActivity {
         lvChats.setOnItemClickListener((parent, view, position, id) -> {
             Chat c = chats.get(position);
             chatAdapter.notifyDataSetChanged();
+
+            // for now not for later
+            Intent intent = new Intent(this, MessageActivity.class);
+            startActivity(intent);
         });
 
     }

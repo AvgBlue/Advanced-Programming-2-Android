@@ -6,7 +6,6 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.advanced_programming_2_android.classes.Chat;
@@ -48,10 +47,10 @@ public class ChatAdapter extends BaseAdapter {
 
         if (convertView == null) {
             convertView = LayoutInflater.from(parent.getContext())
-                    .inflate(R.layout.single_chat_layout, parent, false);
+                    .inflate(R.layout.item_container_chat, parent, false);
 
             ViewHolder viewHolder = new ViewHolder();
-            viewHolder.ivProfilePic = convertView.findViewById(R.id.ivChatProfilePic);
+            viewHolder.ivProfilePic = convertView.findViewById(R.id.ChatProfilePic);
             viewHolder.tvDisplayName = convertView.findViewById(R.id.tvChatDisplayName);
             viewHolder.tvLastMessage = convertView.findViewById(R.id.tvChatLastMessage);
             viewHolder.tvTimestamp = convertView.findViewById(R.id.tvChatTimestamp);
