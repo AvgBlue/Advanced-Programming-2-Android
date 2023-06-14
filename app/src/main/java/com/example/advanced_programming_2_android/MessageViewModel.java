@@ -64,20 +64,16 @@ public class MessageViewModel extends ViewModel {
 
 }
 
-// How to use the ChatViewModel:
-// 1. Create an instance of the ChatViewModel by passing the context.
-//    ChatViewModel chatViewModel = new ViewModelProvider(this).get(ChatViewModel.class);
+// How to use the MessageViewModel:
+// 1. Create an instance of the MessageViewModel by passing the context.
+//    MessageViewModel messageViewModel = new ViewModelProvider(this).get(MessageViewModel.class);
 
-// 2. Observe the chatLiveData for changes in your activity or fragment:
-//    chatViewModel.getChatLiveData().observe(this, chats -> {
-//        // Update the UI with the new chats list
+// 2. Observe the messageLiveData for changes in your activity or fragment:
+//    messageViewModel.getMessageLiveData(conversationId).observe(this, messages -> {
+//        // Update the UI with the new list of messages
 //        // For example, you can update a RecyclerView adapter with the new data
-//        adapter.setChats(chats);
+//        adapter.setMessages(messages);
 //    });
 
-// 3. To add a new chat and trigger the observer above, call the setChat() method:
-//    ChatU chat = new ChatU(chatId, users, lastMessage);
-//    chatViewModel.setChat(chat);
-//    // The observer will be notified and the UI will be updated with the new chat list
 
 
