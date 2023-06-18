@@ -17,7 +17,7 @@
 
         <com.makeramen.roundedimageview.RoundedImageView
             android:layout_gravity="center_vertical"
-            android:id="@+id/myProfilePic"
+            android:id="@+id/profilePic"
             android:layout_width="35dp"
             android:layout_height="35dp"
             android:scaleType="centerCrop"
@@ -27,15 +27,14 @@
             app:riv_oval="true" />
 
         <TextView
-            android:id="@+id/myName"
+            android:id="@+id/displayName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
+            android:paddingStart="16dp"
             android:text="display name"
             android:textColor="@color/white"
-            android:textSize="20sp"
-            android:paddingStart="16dp"
-            />
+            android:textSize="20sp" />
     </LinearLayout>
 
 
