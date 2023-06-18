@@ -24,7 +24,7 @@ public class RegisterActivity extends AppCompatActivity {
     private EditText edPassword;
     private EditText edDisplayName;
     private Button btnRegister;
-
+    private ImageView settings;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +36,7 @@ public class RegisterActivity extends AppCompatActivity {
         edPassword = findViewById(R.id.edRegPassword);
         edDisplayName = findViewById(R.id.edRegDisplayName);
         btnRegister = findViewById(R.id.btnRegister);
+        settings = findViewById(R.id.settings_action_bar);
 
         AtomicBoolean imageWasChosen = new AtomicBoolean(false);
 
@@ -61,6 +62,11 @@ public class RegisterActivity extends AppCompatActivity {
         Button btnPicture = findViewById(R.id.btnRegProfilePic);
         btnPicture.setOnClickListener(view -> {
             filePickerLauncher.launch("image/*");
+        });
+
+        settings.setOnClickListener(view -> {
+            Intent intent = new Intent(this, SettingsActivity.class);
+            startActivity(intent);
         });
     }
 

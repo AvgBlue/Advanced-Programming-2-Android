@@ -2,15 +2,17 @@ package com.example.advanced_programming_2_android;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.makeramen.roundedimageview.RoundedImageView;
 
 public class MessageActivity extends AppCompatActivity {
-
+    private ImageView settings;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -22,10 +24,16 @@ public class MessageActivity extends AppCompatActivity {
 
         RoundedImageView rivProfilePic = findViewById(R.id.profilePicChatWith);
         TextView tvDisplayName = findViewById(R.id.chatWithDisplayName);
+        settings = findViewById(R.id.settings_action_bar);
 
         Glide.with(this)
                 .load(profilePic)
                 .into(rivProfilePic);
         tvDisplayName.setText(displayName);
+
+        settings.setOnClickListener(view -> {
+            Intent intent = new Intent(this, SettingsActivity.class);
+            startActivity(intent);
+        });
     }
 }
