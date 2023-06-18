@@ -8,75 +8,10 @@
 
     <include layout="@layout/custom_action_bar_my_profile"
         android:id="@+id/action_bar"/>
-    <!--
 
-    <LinearLayout
-        android:background="@color/dark_blue"
-        android:id="@+id/infocard"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:padding="8dp">
+    <include layout="@layout/item_cotainer_search"
+        android:id="@+id/search_bar"/>
 
-        <ImageView
-            android:id="@+id/image"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:scaleType="fitCenter"
-            android:src="@drawable/placeholder"
-            />
-
-
-        <TextView
-            android:textAlignment="center"
-            android:textColor="@color/light_blue"
-            android:layout_weight="2"
-            android:id="@+id/username"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:text="placeholder"
-            android:textSize="25dp"
-            android:textStyle="bold"
-            android:layout_marginStart="16dp"
-            android:paddingBottom="15dp"
-            android:paddingTop="15dp"/>
-
-    </LinearLayout>
-    -->
-
-    <LinearLayout
-        android:id="@+id/search_layout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:background="@color/light_blue"
-        android:padding="4dp">
-
-        <EditText
-            android:padding="4dp"
-            android:id="@+id/etSearch"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:ems="10"
-            android:inputType="text"
-            android:hint="search.."
-            android:textColor="@color/dark_blue"/>
-
-        <Button
-            android:padding="10dp"
-            android:id="@+id/btnSearch"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="search"
-            android:textColor="@color/white"
-            android:textSize="20sp"
-            android:drawablePadding="20dp"
-            android:backgroundTint="@color/dark_blue"
-            />
-
-    </LinearLayout>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
@@ -100,40 +35,5 @@
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
-
-    <!--
-    <LinearLayout
-        android:id="@+id/chatbox"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:background="@color/light_blue"
-        android:padding="4dp">
-
-        <Button
-            android:padding="10dp"
-            android:id="@+id/btnsend"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Send"
-            android:textColor="@color/white"
-            android:textSize="20dp"
-            android:drawableLeft="@drawable/ic_send"
-            android:drawablePadding="20dp"
-            android:backgroundTint="@color/dark_blue"
-            />
-
-        <EditText
-            android:padding="4dp"
-            android:id="@+id/etinput"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:ems="10"
-            android:inputType="text"
-            android:text="Type a message"
-            android:textColor="@color/dark_blue"/>
-    </LinearLayout>
-    -->
 
 </LinearLayout>
