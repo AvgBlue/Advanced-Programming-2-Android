@@ -59,6 +59,8 @@ public class ChatActivity extends AppCompatActivity {
 
             // for now not for later
             Intent intent = new Intent(this, MessageActivity.class);
+            intent.putExtra("profilePic", c.getProfilePic().toString());
+            intent.putExtra("displayName", c.getDisplayName());
             startActivity(intent);
         });
 
