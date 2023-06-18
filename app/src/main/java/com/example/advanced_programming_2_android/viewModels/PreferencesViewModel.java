@@ -1,9 +1,11 @@
-package com.example.advanced_programming_2_android;
+package com.example.advanced_programming_2_android.viewModels;
 
 import android.content.Context;
 import android.content.SharedPreferences;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
+
+import com.example.advanced_programming_2_android.R;
 
 public class PreferencesViewModel extends ViewModel {
     private MutableLiveData<String> usernameLiveData;
