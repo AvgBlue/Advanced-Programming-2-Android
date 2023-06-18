@@ -79,6 +79,18 @@ public class ChatActivity extends AppCompatActivity {
         chats.add(c1);
         chats.add(c2);
         chats.add(c3);
+        chats.add(c1);
+        chats.add(c2);
+        chats.add(c3);
+        chats.add(c1);
+        chats.add(c2);
+        chats.add(c3);
+        chats.add(c1);
+        chats.add(c2);
+        chats.add(c3);
+        chats.add(c1);
+        chats.add(c2);
+        chats.add(c3);
 
         return chats;
     }
