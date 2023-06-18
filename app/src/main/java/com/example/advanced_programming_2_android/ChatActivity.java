@@ -13,14 +13,15 @@ import android.widget.EditText;
 import android.widget.ListView;
 
 import com.example.advanced_programming_2_android.classes.Chat;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class ChatActivity extends AppCompatActivity {
     private List<Chat> chats;
-    private Button btnSearch;
     private EditText etSearch;
+    private FloatingActionButton addChatBtn;
 
     private ChatAdapter chatAdapter;
     @Override
@@ -28,8 +29,9 @@ public class ChatActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat);
 
-        btnSearch = findViewById(R.id.btnSearch);
+        Button btnSearch = findViewById(R.id.btnSearch);
         etSearch = findViewById(R.id.etSearch);
+        addChatBtn = findViewById(R.id.btnAddChat);
 
         btnSearch.setOnClickListener(view -> {
             String nameToSearch = etSearch.getText().toString();
@@ -61,6 +63,11 @@ public class ChatActivity extends AppCompatActivity {
             Intent intent = new Intent(this, MessageActivity.class);
             intent.putExtra("profilePic", c.getProfilePic().toString());
             intent.putExtra("displayName", c.getDisplayName());
+            startActivity(intent);
+        });
+
+        addChatBtn.setOnClickListener(view -> {
+            Intent intent = new Intent(this, AddChatActivity.class);
             startActivity(intent);
         });
 
