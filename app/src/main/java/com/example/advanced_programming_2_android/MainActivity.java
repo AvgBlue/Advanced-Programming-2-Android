@@ -10,6 +10,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 
+import com.example.advanced_programming_2_android.api.UserAPI;
+
 public class MainActivity extends AppCompatActivity {
     private Button btnSignIn;
     private Button btnRegister;
@@ -19,7 +21,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
 
         btnSignIn = findViewById(R.id.sign_in_btn);
         btnRegister = findViewById(R.id.register_btn);

@@ -1,9 +1,8 @@
 package com.example.advanced_programming_2_android.api;
 
-import com.example.advanced_programming_2_android.classes.Chat;
 import com.example.advanced_programming_2_android.classes.LoginRequest;
-import com.example.advanced_programming_2_android.classes.MessageU;
-import com.example.advanced_programming_2_android.classes.User;
+import com.example.advanced_programming_2_android.database.Chat;
+import com.example.advanced_programming_2_android.database.User;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
