@@ -6,6 +6,13 @@ android {
     namespace 'com.example.advanced_programming_2_android'
     compileSdk 33
 
+    configurations.all {
+        resolutionStrategy {
+            force 'org.jetbrains.kotlin:kotlin-stdlib:1.8.10'
+            force 'org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.8.10'
+        }
+    }
+
     defaultConfig {
         applicationId "com.example.advanced_programming_2_android"
         minSdk 24
