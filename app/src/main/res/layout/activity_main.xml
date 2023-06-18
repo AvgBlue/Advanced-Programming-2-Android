@@ -2,7 +2,9 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/backround_portrait">
+    android:background="@drawable/background_portrait">
+
+        <include layout="@layout/custom_action_bar_main"/>
 
         <ImageView
             android:id="@+id/logo"
@@ -18,8 +20,8 @@
         <Button
             android:layout_below="@id/logo"
             android:id="@+id/sign_in_btn"
-            android:layout_width="200dp"
-            android:layout_height="80dp"
+            android:layout_width="180dp"
+            android:layout_height="60dp"
             android:text="Sign in"
             android:textSize="20sp"
             android:layout_centerHorizontal="true"
@@ -30,13 +32,12 @@
         <Button
             android:layout_below="@id/sign_in_btn"
             android:id="@+id/register_btn"
-            android:layout_width="200dp"
-            android:layout_height="80dp"
+            android:layout_width="180dp"
+            android:layout_height="60dp"
             android:textSize="20sp"
             android:layout_centerHorizontal="true"
-            android:text="Register"
+            android:text="@string/register"
             android:backgroundTint="@color/gray_blue"
             android:textColor="@color/light_blue" />
 
-    </RelativeLayout>
 </RelativeLayout>

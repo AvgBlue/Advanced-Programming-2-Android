@@ -2,60 +2,70 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/backround_portrait">
+    android:background="@drawable/background_portrait">
+
+    <include layout="@layout/custom_action_bar_main"/>
 
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true">
+
         <TextView
             android:id="@+id/signin"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="50dp"
+            android:layout_marginStart="50dp"
+            android:layout_marginTop="50dp"
+            android:layout_marginEnd="50dp"
+            android:layout_marginBottom="50dp"
             android:gravity="center"
-            android:text="Sing in"
+            android:text="@string/sign_in"
             android:textColor="@color/dark_blue"
-            android:textSize="35dp"
-            android:textStyle="bold"
-            />
+            android:textSize="35sp"
+            android:textStyle="bold" />
 
         <EditText
-            android:id="@+id/username"
+            android:id="@+id/usernameLogin"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/signin"
             android:background="@color/light_blue"
-            android:hint="Username"
+            android:hint="@string/username"
             android:textColorHint="@color/dark_blue"
             android:textColor="@color/dark_blue"
             android:layout_margin="10dp"
             android:padding="20dp"
-            android:drawableLeft="@drawable/ic_user"
+            android:drawableStart="@drawable/ic_user"
             android:drawablePadding="20dp"/>
         <EditText
-            android:id="@+id/password"
+            android:id="@+id/passwordLogin"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/username"
+            android:layout_below="@id/usernameLogin"
             android:background="@color/light_blue"
-            android:hint="Password"
+            android:hint="@string/password"
             android:textColorHint="@color/dark_blue"
             android:textColor="@color/dark_blue"
             android:layout_margin="10dp"
             android:padding="20dp"
-            android:drawableLeft="@drawable/ic_password"
+            android:drawableStart="@drawable/ic_password"
             android:drawablePadding="20dp"
+            android:inputType="textPassword"
             />
 
         <Button
             android:id="@+id/login_btn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Login"
-            android:layout_below="@id/password"
-            android:backgroundTint="@color/dark_blue"
+            android:layout_width="180dp"
+            android:layout_height="60dp"
+            android:layout_below="@id/passwordLogin"
             android:layout_centerHorizontal="true"
-            android:layout_margin="20dp"/>
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginBottom="20dp"
+            android:backgroundTint="@color/dark_blue"
+            android:text="Login"
+            android:textSize="20sp" />
     </RelativeLayout>
 </RelativeLayout>
