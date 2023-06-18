@@ -9,8 +9,8 @@ public class Chat {
     private String lastMessage;
     private String timestamp;
 
-    public Chat(String profilePic, String displayName, String lastMessage, String timestamp) {
-        this.profilePic = Uri.parse(profilePic);
+    public Chat(Uri profilePic, String displayName, String lastMessage, String timestamp) {
+        this.profilePic = profilePic;
         this.displayName = displayName;
         this.lastMessage = lastMessage;
         this.timestamp = timestamp;
@@ -20,8 +20,8 @@ public class Chat {
         return profilePic;
     }
 
-    public void setProfilePic(String profilePic) {
-        this.profilePic = Uri.parse(profilePic);;
+    public void setProfilePic(Uri profilePic) {
+        this.profilePic = profilePic;
     }
 
     public String getDisplayName() {

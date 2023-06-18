@@ -1,37 +1,30 @@
 package com.example.advanced_programming_2_android;
 
-import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 
-public class MainActivity extends AppCompatActivity {
-    private Button btnSignIn;
-    private Button btnRegister;
+public class AddChatActivity extends AppCompatActivity {
+    private EditText etUsername;
+    private Button btnAddChat;
     private ImageView settings;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_add_chat);
 
-
-        btnSignIn = findViewById(R.id.sign_in_btn);
-        btnRegister = findViewById(R.id.register_btn);
+        etUsername = findViewById(R.id.edAddChatUsername);
+        btnAddChat = findViewById(R.id.btnAddChat);
         settings = findViewById(R.id.settings_action_bar);
 
-        btnSignIn.setOnClickListener(view -> {
-            Intent intent = new Intent(this, LogInActivity.class);
-            startActivity(intent);
-        });
-
-        btnRegister.setOnClickListener(view -> {
-            Intent intent = new Intent(this, RegisterActivity.class);
+        btnAddChat.setOnClickListener(view -> {
+            Intent intent = new Intent(this, ChatActivity.class);
             startActivity(intent);
         });
 
@@ -41,10 +34,3 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 }
-
-
-
-
-
-
-

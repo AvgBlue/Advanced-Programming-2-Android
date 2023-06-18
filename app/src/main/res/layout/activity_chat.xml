@@ -1,11 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background_portrait"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@drawable/background_portrait">
 
+    <include layout="@layout/custom_action_bar_my_profile"
+        android:id="@+id/action_bar"/>
     <!--
+
     <LinearLayout
         android:background="@color/dark_blue"
         android:id="@+id/infocard"
@@ -40,13 +44,62 @@
 
     </LinearLayout>
     -->
-    
-    <ListView
-        android:id="@+id/lvChats"
+
+    <LinearLayout
+        android:id="@+id/search_layout"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:dividerHeight="5dp"/>
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="@color/light_blue"
+        android:padding="4dp">
+
+        <EditText
+            android:padding="4dp"
+            android:id="@+id/etSearch"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:ems="10"
+            android:inputType="text"
+            android:hint="search.."
+            android:textColor="@color/dark_blue"/>
+
+        <Button
+            android:padding="10dp"
+            android:id="@+id/btnSearch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="search"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            android:drawablePadding="20dp"
+            android:backgroundTint="@color/dark_blue"
+            />
+
+    </LinearLayout>
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ListView
+            android:id="@+id/lvChats"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_above="@+id/btnAddChat"
+            android:dividerHeight="5dp" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/btnAddChat"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:src="@drawable/ic_add"
+            android:backgroundTint="@color/light_blue"
+            android:layout_margin="10dp" />
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
 
     <!--
     <LinearLayout
@@ -82,4 +135,5 @@
             android:textColor="@color/dark_blue"/>
     </LinearLayout>
     -->
+
 </LinearLayout>

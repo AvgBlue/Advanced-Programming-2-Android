@@ -8,5 +8,7 @@
     <string name="already_registered_click_here_to_login">Already registered? click here to login</string>
     <string name="sign_in">Sign in</string>
     <string name="login">login</string>
+    <string name="want_to_chitchat">Want to ChitChat?</string>
+    <string name="chit_chat">Chit Chat</string>
     <string name="preference_file_key">com.example.chitchat</string>
 </resources>
