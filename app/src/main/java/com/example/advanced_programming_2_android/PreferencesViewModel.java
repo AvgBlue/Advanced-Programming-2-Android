@@ -10,6 +10,8 @@ public class PreferencesViewModel extends ViewModel {
     private MutableLiveData<String> tokenLiveData;
     private MutableLiveData<String> passwordLiveData;
     private MutableLiveData<Integer> themeLiveData;
+
+    private MutableLiveData<String> serverAddressLiveData;
     private SharedPreferences sharedPreferences;
 
     public PreferencesViewModel(Context context) {
@@ -23,6 +25,7 @@ public class PreferencesViewModel extends ViewModel {
         }
         return usernameLiveData;
     }
+
 
     public MutableLiveData<String> getTokenLiveData() {
         if (tokenLiveData == null) {
@@ -109,6 +112,30 @@ public class PreferencesViewModel extends ViewModel {
     private void saveThemeToSharedPreferences() {
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putInt("theme", themeLiveData.getValue());
+        editor.apply();
+    }
+
+    public MutableLiveData<String> getServerAddressLiveData() {
+        if (serverAddressLiveData == null) {
+            serverAddressLiveData = new MutableLiveData<>();
+            loadServerAddressFromSharedPreferences();
+        }
+        return serverAddressLiveData;
+    }
+
+    public void setServerAddress(String serverAddress) {
+        serverAddressLiveData.setValue(serverAddress);
+        saveServerAddressToSharedPreferences();
+    }
+
+    private void loadServerAddressFromSharedPreferences() {
+        String serverAddress = sharedPreferences.getString("serverAddress", "");
+        serverAddressLiveData.setValue(serverAddress);
+    }
+
+    private void saveServerAddressToSharedPreferences() {
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString("serverAddress", serverAddressLiveData.getValue());
         editor.apply();
     }
 }
