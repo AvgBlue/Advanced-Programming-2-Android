@@ -8,7 +8,7 @@
     android:animateLayoutChanges="true"
     android:background="@drawable/background_portrait"
     tools:context=".MessageActivity">
-
+    <include layout="@layout/custom_action_bar_chat_with"/>
     <View
         android:id="@+id/ViewBackground"
         android:layout_width="match_parent"
