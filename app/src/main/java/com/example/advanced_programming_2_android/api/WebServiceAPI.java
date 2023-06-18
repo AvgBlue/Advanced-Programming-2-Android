@@ -20,7 +20,7 @@ public interface WebServiceAPI {
     Call<List<Chat>> getChats(@Header("authorization") String authorization);
 
     @POST("api/Chats")
-    Call<Void> createChat(@Body Chat chat, @Header("authorization") String authorization);
+    Call<Void> createChat(@Body String username, @Header("authorization") String authorization);
 
     @GET("api/Chats/{id}")
     Call<Chat> getChatById(@Path("id") int id, @Header("authorization") String authorization);
@@ -29,7 +29,7 @@ public interface WebServiceAPI {
     Call<Void> deleteChat(@Path("id") int id, @Header("authorization") String authorization);
 
     @POST("api/Chats/{id}/messages")
-    Call<Void> createMessage(@Body MessageU message, @Path("id") int id, @Header("authorization") String authorization);
+    Call<Void> createMessage(@Body String message, @Path("id") int id, @Header("authorization") String authorization);
 
     @GET("api/Chats/{id}/messages")
     Call<Chat> getMessagesByChatId(@Path("id") int id, @Header("authorization") String authorization);
