@@ -10,7 +10,6 @@ public class PreferencesViewModel extends ViewModel {
     private MutableLiveData<String> tokenLiveData;
     private MutableLiveData<String> passwordLiveData;
     private MutableLiveData<Integer> themeLiveData;
-
     private MutableLiveData<String> serverAddressLiveData;
     private SharedPreferences sharedPreferences;
 
