@@ -8,7 +8,7 @@ import androidx.room.Room;
 import androidx.room.RoomDatabase;
 import androidx.room.TypeConverters;
 
-@Database(entities = {User.class, Message.class, Chat.class}, version = 8)
+@Database(entities = {User.class, Message.class, Chat.class,Conversation.class}, version = 10)
 @TypeConverters({Converters.class})
 public abstract class AppDB extends RoomDatabase {
 
@@ -25,4 +25,28 @@ public abstract class AppDB extends RoomDatabase {
     public abstract UserDao getUserDao();
     public abstract MessageDao getMessageDao();
     public abstract ChatDao getChatDao();
+    public abstract ConversationDao getConversationDao();
 }
+// how to use:
+// AppDB db = AppDB.getInstance(this);
+// UserDao userDao = db.getUserDao();
+// userDao.insert(user);
+// userDao.delete(user);
+// userDao.update(user);
+// List<User> users = userDao.getAllUsers();
+// User user = userDao.getUserByUsername("username");
+// User user = userDao.getUserById(1);
+// ChatDao chatDao = db.getChatDao();
+// chatDao.insert(chat);
+// chatDao.delete(chat);
+// chatDao.update(chat);
+// List<Chat> chats = chatDao.getAllChats();
+// Chat chat = chatDao.getChat(1);
+// MessageDao messageDao = db.getMessageDao();
+// messageDao.insert(message);
+// messageDao.delete(message);
+// messageDao.update(message);
+// List<Message> messages = messageDao.getAllMessages();
+// List<Message> messages = messageDao.getAllMessagesByUser("username");
+// Message message = messageDao.getMessageById(1);
+

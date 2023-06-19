@@ -11,4 +11,6 @@
     <string name="login">Login</string>
     <string name="want_to_chitchat">Want to ChitChat?</string>
     <string name="chit_chat">ChitChat</string>
+    <string name="preference_file_key">com.example.chitchat</string>
+    <string name="BaseUrl">http://10.0.2.2:5000/</string>
 </resources>

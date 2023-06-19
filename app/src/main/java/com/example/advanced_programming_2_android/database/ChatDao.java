@@ -13,11 +13,11 @@ public interface ChatDao {
     @Insert
     void insert(Chat... chat);
 
-    @Query("SELECT * FROM chats")
+    @Query("SELECT * FROM Chats")
     List<Chat> getAllChats();
 
     //get chat by id
-    @Query("SELECT * FROM chats WHERE id = :id")
+    @Query("SELECT * FROM Chats WHERE id = :id")
     Chat getChat(int id);
 
     @Update

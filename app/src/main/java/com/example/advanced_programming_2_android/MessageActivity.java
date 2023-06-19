@@ -22,8 +22,8 @@ public class MessageActivity extends AppCompatActivity {
         Uri profilePic = Uri.parse(getIntent().getStringExtra("profilePic"));
         String displayName = getIntent().getStringExtra("displayName");
 
-        RoundedImageView rivProfilePic = findViewById(R.id.profilePicChatWith);
-        TextView tvDisplayName = findViewById(R.id.chatWithDisplayName);
+        RoundedImageView rivProfilePic = findViewById(R.id.profilePic);
+        TextView tvDisplayName = findViewById(R.id.displayName);
         settings = findViewById(R.id.settings_action_bar);
 
         Glide.with(this)
