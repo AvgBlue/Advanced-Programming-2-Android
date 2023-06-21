@@ -36,6 +36,7 @@ public class PreferencesViewModel extends ViewModel {
     }
 
     private void setDefault() {
+        //TODO
         setServerAddress("TEST"); // change to actually read from config.xml
         setTheme(1); // change to actually read from config.xml
 

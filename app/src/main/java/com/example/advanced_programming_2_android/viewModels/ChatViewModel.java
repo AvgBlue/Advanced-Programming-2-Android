@@ -17,18 +17,29 @@ import java.util.List;
 
 public class ChatViewModel extends ViewModel {
 
+
     private ChatDao chatDao;
     private MessageDao messageDao;
     private UserDao userDao;
     private MutableLiveData<List<Chat>> chatLiveData;
 
-    public ChatViewModel(Context context) {
-        AppDB db = AppDB.getInstance(context);
-        chatDao = db.getChatDao();
-        messageDao = db.getMessageDao();
-        userDao = db.getUserDao();
+    public ChatViewModel(String token) {
+        chatRepository = new ChatRepository(token);
+        chats = chatRepository.getAllChats();
+
     }
 
+    public LiveData<List<Chat>> getChat() {
+        return chats;
+    }
+
+    public void getChatsApi(){
+        chatRepository.getChatsApi();
+    }
+
+}
+
+    /*
     public MutableLiveData<List<Chat>> getChatLiveData() {
         if (chatLiveData == null) {
             chatLiveData = new MutableLiveData<>();

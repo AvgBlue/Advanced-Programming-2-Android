@@ -18,17 +18,18 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ChatsAPI {
-    private MutableLiveData<List<Chat>> chatMutableLiveData;
+
+    private MutableLiveData<List<Chat>> chats;
     private Retrofit retrofit;
     private WebServiceAPI webServiceAPI;
 
-    public ChatsAPI() {
+    public ChatsAPI(MutableLiveData<List<Chat>> chatsListData) {
         retrofit = new Retrofit.Builder()
                 .baseUrl(MyApplication.context.getString(R.string.BaseUrl))
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         webServiceAPI = retrofit.create(WebServiceAPI.class);
-        chatMutableLiveData = new MutableLiveData<>();
+        this.chats = chatsListData;
     }
 
     public void getChats(String authorization) {
@@ -38,7 +39,7 @@ public class ChatsAPI {
             public void onResponse(Call<List<Chat>> call, Response<List<Chat>> response) {
                 if (response.isSuccessful()) {
                     List<Chat> chatList = response.body();
-                    chatMutableLiveData.setValue(chatList);
+                    chats.postValue(chatList);
                 } else {
                     Toast.makeText(MyApplication.context, "Could not get your chat", Toast.LENGTH_LONG).show();
                 }
