@@ -1,23 +1,28 @@
 package com.example.advanced_programming_2_android.database;
 
 import androidx.room.Entity;
-import androidx.room.ForeignKey;
 import androidx.room.PrimaryKey;
+import androidx.room.TypeConverters;
 
 import java.util.List;
-
+// represent the response of Get /api/Chat/{id}
+import com.google.gson.annotations.SerializedName;
 @Entity(tableName = "conversations")
+@TypeConverters({Converters.class})
 public class Conversation {
     @PrimaryKey
+    @SerializedName("id")
     private int id;
-    private List<Integer> messageIds;
+    @SerializedName("users")
+    private List<User> users;
+    @SerializedName("messages")
+    private List<Message> messages;
 
-    public Conversation(int id, List<Integer> messageIds) {
+    public Conversation(int id, List<User> users, List<Message> messages) {
         this.id = id;
-        this.messageIds = messageIds;
+        this.users = users;
+        this.messages = messages;
     }
-
-    // Getters and Setters
 
     public int getId() {
         return id;
@@ -27,11 +32,19 @@ public class Conversation {
         this.id = id;
     }
 
-    public List<Integer> getMessageIds() {
-        return messageIds;
+    public List<User> getUsers() {
+        return users;
     }
 
-    public void setMessageIds(List<Integer> messageIds) {
-        this.messageIds = messageIds;
+    public void setUsers(List<User> users) {
+        this.users = users;
+    }
+
+    public List<Message> getMessages() {
+        return messages;
+    }
+
+    public void setMessages(List<Message> messages) {
+        this.messages = messages;
     }
 }

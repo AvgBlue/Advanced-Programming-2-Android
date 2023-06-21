@@ -54,10 +54,5 @@ public class MessageU {
     }
 
 
-    public static MessageU convertToMessageU(int id, UserDao userDao ,MessageDao messageDao){
-        Message message = messageDao.getMessageById(id);
-        User senderUser = userDao.getUserByUsername(message.getSenderUsername());
-        MessageU messageU = new MessageU(message.getId(),message.getCreatedDate(),senderUser,message.getContact());
-        return messageU;
-    }
+
 }

@@ -3,14 +3,17 @@ package com.example.advanced_programming_2_android.database;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 import androidx.annotation.NonNull;
-
+import com.google.gson.annotations.SerializedName;
 
 @Entity(tableName = "users")
 public class User {
     @PrimaryKey
     @NonNull
+    @SerializedName("username")
     private String username;
+    @SerializedName("displayName")
     private String displayName;
+    @SerializedName("profilePic")
     private String profilePic;
 
     public User(@NonNull String username, String displayName, String profilePic) {

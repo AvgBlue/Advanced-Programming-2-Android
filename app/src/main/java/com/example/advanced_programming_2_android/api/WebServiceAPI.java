@@ -1,6 +1,7 @@
 package com.example.advanced_programming_2_android.api;
 
 import com.example.advanced_programming_2_android.classes.LoginRequest;
+import com.example.advanced_programming_2_android.classes.FullUser;
 import com.example.advanced_programming_2_android.database.Chat;
 import com.example.advanced_programming_2_android.database.User;
 
@@ -40,5 +41,5 @@ public interface WebServiceAPI {
     Call<User> getUserByUsername(@Path("username") String username, @Header("authorization") String authorization);
 
     @POST("api/Users")
-    Call<User> createUser(@Body User user);
+    Call<FullUser> createUser(@Body FullUser user);
 }
