@@ -21,6 +21,8 @@ public class UserAPI {
     Retrofit retrofit;
     WebServiceAPI webServiceAPI;
 
+
+
     public UserAPI() {
 
         retrofit = new Retrofit.Builder()
@@ -29,6 +31,8 @@ public class UserAPI {
                 .build();
         webServiceAPI = retrofit.create(WebServiceAPI.class);
         isUsernameExist = new MutableLiveData<>();
+
+
     }
 
     public void getUserByUsername(String username, String authorization) {
