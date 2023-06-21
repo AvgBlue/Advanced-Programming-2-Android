@@ -1,5 +1,6 @@
 package com.example.advanced_programming_2_android;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -65,8 +66,8 @@ public class ChatAdapter extends BaseAdapter {
                 .load(c.getUser().getProfilePic())
                 .into(viewHolder.ivProfilePic);
         viewHolder.tvDisplayName.setText(c.getUser().getDisplayName());
-        viewHolder.tvLastMessage.setText(c.getLastMessageContent());
-        viewHolder.tvTimestamp.setText(c.getLastMessageCreated());
+        viewHolder.tvLastMessage.setText(c.getLastMessage().getContent());
+        viewHolder.tvTimestamp.setText(c.getLastMessage().getCreated());
 
         return convertView;
     }
