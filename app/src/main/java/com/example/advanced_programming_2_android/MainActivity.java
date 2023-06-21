@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 
 import com.example.advanced_programming_2_android.api.UserAPI;
+import com.example.advanced_programming_2_android.database.AppDB;
 
 public class MainActivity extends AppCompatActivity {
     private Button btnSignIn;
@@ -21,6 +22,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        AppDB appdb=AppDB.getInstance(this);
 
         btnSignIn = findViewById(R.id.sign_in_btn);
         btnRegister = findViewById(R.id.register_btn);

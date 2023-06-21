@@ -12,7 +12,12 @@ import androidx.room.TypeConverters;
 @TypeConverters({Converters.class})
 public abstract class AppDB extends RoomDatabase {
 
+
     private static AppDB instance; // Add the instance variable
+
+    public static synchronized AppDB getInstance() {
+        return instance;
+    }
     public static synchronized AppDB getInstance(Context context) {
         if (instance == null) {
             instance = Room.databaseBuilder(context.getApplicationContext(), AppDB.class, "database-name")

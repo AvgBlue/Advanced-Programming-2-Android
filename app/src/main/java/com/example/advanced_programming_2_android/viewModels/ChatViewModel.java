@@ -20,6 +20,7 @@ import java.util.List;
 
 public class ChatViewModel extends ViewModel {
 
+
     private ChatDao chatDao;
     private MessageDao messageDao;
     private UserDao userDao;
@@ -28,18 +29,20 @@ public class ChatViewModel extends ViewModel {
     private ChatRepository chatRepository;
     private LiveData<List<Chat>> chats;
 
-    public ChatViewModel() {
-        chatRepository = new ChatRepository();
+    public ChatViewModel(String token) {
+        chatRepository = new ChatRepository(token);
         chats = chatRepository.getAllChats();
-//        AppDB db = AppDB.getInstance(context);
-//        chatDao = db.getChatDao();
-//        messageDao = db.getMessageDao();
-//        userDao = db.getUserDao();
+
     }
 
     public LiveData<List<Chat>> getChat() {
         return chats;
     }
+
+    public void getChatsApi(){
+        chatRepository.getChatsApi();
+    }
+
 }
 
     /*

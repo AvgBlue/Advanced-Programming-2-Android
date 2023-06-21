@@ -2,6 +2,8 @@ package com.example.advanced_programming_2_android.api;
 
 import android.widget.Toast;
 
+import androidx.lifecycle.MutableLiveData;
+
 import com.example.advanced_programming_2_android.MyApplication;
 import com.example.advanced_programming_2_android.R;
 import com.example.advanced_programming_2_android.database.Chat;
@@ -15,15 +17,18 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ChatsAPI {
+
+    private MutableLiveData<List<Chat>> chats;
     private Retrofit retrofit;
     private WebServiceAPI webServiceAPI;
 
-    public ChatsAPI() {
+    public ChatsAPI(MutableLiveData<List<Chat>> chatsListData) {
         retrofit = new Retrofit.Builder()
                 .baseUrl(MyApplication.context.getString(R.string.BaseUrl))
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         webServiceAPI = retrofit.create(WebServiceAPI.class);
+        this.chats = chatsListData;
     }
 
     public void getChats(String authorization) {
@@ -33,9 +38,9 @@ public class ChatsAPI {
             public void onResponse(Call<List<Chat>> call, Response<List<Chat>> response) {
                 if (response.isSuccessful()) {
                     List<Chat> chatList = response.body();
-                    // Process the chat list data
+                    chats.postValue(chatList);
                 } else {
-                    // Handle the error
+                    //TODO: Handle the error
                 }
             }
 
