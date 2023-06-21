@@ -54,6 +54,4 @@ public class ChatU {
         ChatU chatU = new ChatU(chat.getId(),users,lastMessage);
         return chatU;
     }
-
-
 }
