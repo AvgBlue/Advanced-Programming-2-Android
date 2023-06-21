@@ -22,6 +22,9 @@ public class ChatViewModel extends ViewModel {
     private MessageDao messageDao;
     private UserDao userDao;
     private MutableLiveData<List<Chat>> chatLiveData;
+    private UserRepository userRepository;
+    private ChatRepository chatRepository;
+    private LiveData<List<Chat>> chats;
 
     public ChatViewModel(String token) {
         chatRepository = new ChatRepository(token);
