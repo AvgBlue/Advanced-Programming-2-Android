@@ -1,6 +1,7 @@
 package com.example.advanced_programming_2_android;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProvider;
 
 import android.content.Intent;
 import android.net.Uri;
@@ -9,9 +10,13 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.example.advanced_programming_2_android.classes.Chat;
+import com.example.advanced_programming_2_android.viewModels.PreferencesViewModel;
+import com.example.advanced_programming_2_android.viewModels.PreferencesViewModelFactory;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.makeramen.roundedimageview.RoundedImageView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,15 +28,35 @@ public class ChatActivity extends AppCompatActivity {
     private ImageView settings;
 
     private ChatAdapter chatAdapter;
+    private TextView displayName;
+    private RoundedImageView profilePic;
+
+    private Button btnSearch;
+    private PreferencesViewModel preferencesViewModel;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat);
 
-        Button btnSearch = findViewById(R.id.btnSearch);
+        PreferencesViewModelFactory factory = new PreferencesViewModelFactory(getApplicationContext());
+        preferencesViewModel = new ViewModelProvider(this, factory).get(PreferencesViewModel.class);
+
+        String token = preferencesViewModel.getTokenLiveData().getValue();
+        String username = preferencesViewModel.getUsernameLiveData().getValue();
+
+        displayName = findViewById(R.id.displayName);
+        profilePic = findViewById(R.id.profilePic);
+        btnSearch = findViewById(R.id.btnSearch);
         etSearch = findViewById(R.id.etSearch);
         addChatBtn = findViewById(R.id.btnAddChat);
         settings = findViewById(R.id.settings_action_bar);
+
+        displayName.setText(username);
+        /*
+        Glide.with(this)
+                .load(uri)
+                .into(profilePic);
+         */
 
         btnSearch.setOnClickListener(view -> {
             String nameToSearch = etSearch.getText().toString();
