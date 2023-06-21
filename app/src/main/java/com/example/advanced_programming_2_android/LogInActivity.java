@@ -3,6 +3,7 @@ package com.example.advanced_programming_2_android;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -17,12 +18,16 @@ import android.widget.Toast;
 import com.example.advanced_programming_2_android.api.TokenAPI;
 import com.example.advanced_programming_2_android.api.UserAPI;
 import com.example.advanced_programming_2_android.classes.LoginRequest;
+import com.example.advanced_programming_2_android.viewModels.PreferencesViewModel;
+import com.example.advanced_programming_2_android.viewModels.PreferencesViewModelFactory;
 
 public class LogInActivity extends AppCompatActivity {
     private EditText tvUsername;
     private EditText tvPassword;
     private Button btnLogin;
     private ImageView settings;
+
+    private PreferencesViewModel preferencesViewModel;
 
     @SuppressLint("SetTextI18n")
     @Override
@@ -35,6 +40,9 @@ public class LogInActivity extends AppCompatActivity {
         btnLogin = findViewById(R.id.login_btn);
         settings = findViewById(R.id.settings_action_bar);
 
+        PreferencesViewModelFactory factory = new PreferencesViewModelFactory(getApplicationContext());
+        preferencesViewModel = new ViewModelProvider(this, factory).get(PreferencesViewModel.class);
+
         TokenAPI tokenAPI = new TokenAPI();
 
         btnLogin.setOnClickListener(view -> {
@@ -45,6 +53,8 @@ public class LogInActivity extends AppCompatActivity {
             MutableLiveData<String> tokenLiveData = tokenAPI.getTokenLiveData();
             tokenLiveData.observe(this, token -> {
                 if (token != null) {
+                    preferencesViewModel.setToken(token);
+                    preferencesViewModel.setUsername(username);
                     Intent intent = new Intent(this, ChatActivity.class);
                     startActivity(intent);
                 } else {
