@@ -7,7 +7,6 @@ import androidx.lifecycle.ViewModel;
 
 import com.example.advanced_programming_2_android.R;
 
-import android.util.Log; ////
 
 public class PreferencesViewModel extends ViewModel {
     private MutableLiveData<String> usernameLiveData;
