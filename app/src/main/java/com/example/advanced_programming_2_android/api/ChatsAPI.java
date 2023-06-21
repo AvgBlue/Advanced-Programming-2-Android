@@ -149,7 +149,7 @@ public class ChatsAPI {
         });
     }
 
-    public MutableLiveData<List<Chat>> getChatMutableLiveData() {
-        return chatMutableLiveData;
-    }
+//    public MutableLiveData<List<Chat>> getChatMutableLiveData() {
+//        return chatMutableLiveData;
+//    }
 }

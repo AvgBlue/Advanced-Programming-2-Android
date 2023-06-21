@@ -7,7 +7,6 @@ import androidx.lifecycle.ViewModelProvider;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -15,10 +14,10 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.example.advanced_programming_2_android.api.ChatsAPI;
 import com.example.advanced_programming_2_android.api.UserAPI;
 import com.example.advanced_programming_2_android.database.Chat;
 import com.example.advanced_programming_2_android.database.User;
+import com.example.advanced_programming_2_android.viewModels.ChatViewModel;
 import com.example.advanced_programming_2_android.viewModels.PreferencesViewModel;
 import com.example.advanced_programming_2_android.viewModels.PreferencesViewModelFactory;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -37,7 +36,7 @@ public class ChatActivity extends AppCompatActivity {
     private RoundedImageView profilePic;
     private Button btnSearch;
     private PreferencesViewModel preferencesViewModel;
-
+    private ChatViewModel chatViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,7 +49,8 @@ public class ChatActivity extends AppCompatActivity {
         String token = preferencesViewModel.getTokenLiveData().getValue();
         String username = preferencesViewModel.getUsernameLiveData().getValue();
 
-        ChatsAPI chatsAPI = new ChatsAPI();
+        chatViewModel = new ChatViewModel(token);
+
         UserAPI userAPI = new UserAPI();
         userAPI.getUserByUsername(username, token);
         MutableLiveData<User> myUser = userAPI.getUserMutableLiveData();
@@ -70,10 +70,8 @@ public class ChatActivity extends AppCompatActivity {
         });
 
         ListView lvChats =  findViewById(R.id.lvChats);
-
-        chatsAPI.getChats(token);
-        MutableLiveData<List<Chat>> myChats = chatsAPI.getChatMutableLiveData();
-        myChats.observe(this, chatList -> {
+        chatViewModel.getChatsApi();
+        chatViewModel.getChat().observe(this, chatList -> {
             chats = chatList;
             chatAdapter = new ChatAdapter(chats);
             lvChats.setAdapter(chatAdapter);
