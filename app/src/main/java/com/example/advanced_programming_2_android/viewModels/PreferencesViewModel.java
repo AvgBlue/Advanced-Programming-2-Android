@@ -11,6 +11,7 @@ import com.example.advanced_programming_2_android.R;
 public class PreferencesViewModel extends ViewModel {
     private MutableLiveData<String> usernameLiveData;
     private MutableLiveData<String> tokenLiveData;
+    private MutableLiveData<String> passwordLiveData;
     private MutableLiveData<Integer> themeLiveData;
     private MutableLiveData<String> serverAddressLiveData;
     private static SharedPreferences sharedPreferences;
@@ -21,6 +22,7 @@ public class PreferencesViewModel extends ViewModel {
         sharedPreferences = context.getSharedPreferences(context.getString(R.string.preference_file_key), Context.MODE_PRIVATE);
         usernameLiveData = new MutableLiveData<>();
         tokenLiveData = new MutableLiveData<>();
+        passwordLiveData = new MutableLiveData<>();
         themeLiveData = new MutableLiveData<>();
         serverAddressLiveData = new MutableLiveData<>();
     }
@@ -56,6 +58,14 @@ public class PreferencesViewModel extends ViewModel {
         return tokenLiveData;
     }
 
+    public MutableLiveData<String> getPasswordLiveData() {
+        if (passwordLiveData == null) {
+            passwordLiveData = new MutableLiveData<>();
+            loadPasswordFromSharedPreferences();
+        }
+        return passwordLiveData;
+    }
+
     public MutableLiveData<Integer> getThemeLiveData() {
         if (themeLiveData == null) {
             themeLiveData = new MutableLiveData<>();
@@ -74,6 +84,11 @@ public class PreferencesViewModel extends ViewModel {
         saveTokenToSharedPreferences();
     }
 
+    public void setPassword(String password) {
+        passwordLiveData.setValue(password);
+        savePasswordToSharedPreferences();
+    }
+
     public void setTheme(int theme) {
         themeLiveData.setValue(theme);
         saveThemeToSharedPreferences();
@@ -87,6 +102,11 @@ public class PreferencesViewModel extends ViewModel {
     private void loadTokenFromSharedPreferences() {
         String token = sharedPreferences.getString("token", "");
         tokenLiveData.setValue(token);
+    }
+
+    private void loadPasswordFromSharedPreferences() {
+        String password = sharedPreferences.getString("password", "");
+        passwordLiveData.setValue(password);
     }
 
     private void loadThemeFromSharedPreferences() {
@@ -103,6 +123,12 @@ public class PreferencesViewModel extends ViewModel {
     private void saveTokenToSharedPreferences() {
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString("token", tokenLiveData.getValue());
+        editor.apply();
+    }
+
+    private void savePasswordToSharedPreferences() {
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString("password", passwordLiveData.getValue());
         editor.apply();
     }
 

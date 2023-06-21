@@ -17,7 +17,6 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class UserAPI {
     private MutableLiveData<Boolean> isUsernameExist;
-
     Retrofit retrofit;
     WebServiceAPI webServiceAPI;
 
