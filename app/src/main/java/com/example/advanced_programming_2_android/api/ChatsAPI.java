@@ -15,13 +15,10 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ChatsAPI {
-    private MutableLiveData<List<Chat>> chatListData;
     private Retrofit retrofit;
     private WebServiceAPI webServiceAPI;
 
-    public ChatsAPI(MutableLiveData<List<Chat>> chatListData) {
-        this.chatListData = chatListData;
-
+    public ChatsAPI() {
         retrofit = new Retrofit.Builder()
                 .baseUrl(MyApplication.context.getString(R.string.BaseUrl))
                 .addConverterFactory(GsonConverterFactory.create())

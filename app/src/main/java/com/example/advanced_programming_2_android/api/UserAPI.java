@@ -1,5 +1,7 @@
 package com.example.advanced_programming_2_android.api;
 
+import android.widget.Toast;
+
 import androidx.lifecycle.MutableLiveData;
 
 import com.example.advanced_programming_2_android.MyApplication;
@@ -16,12 +18,10 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class UserAPI {
-    private MutableLiveData<List<User>> userListData;
-    private UserDao dao;
     Retrofit retrofit;
     WebServiceAPI webServiceAPI;
 
-    public UserAPI(MutableLiveData<List<User>> userListData, UserDao dao) {
+    public UserAPI() {
 
         retrofit = new Retrofit.Builder()
                 .baseUrl(MyApplication.context.getString(R.string.BaseUrl))
@@ -39,13 +39,13 @@ public class UserAPI {
                     User user = response.body();
                     // Process the user data
                 } else {
-                    // Handle the error
+
                 }
             }
 
             @Override
             public void onFailure(Call<User> call, Throwable t) {
-                // Handle the failure
+
             }
         });
     }
