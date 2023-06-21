@@ -9,13 +9,14 @@
         android:layout_below="@id/action_bar"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/background_portrait">
+        style="@style/background">
 
         <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
 
             <TextView
+                style="@style/textColor"
                 android:id="@+id/register"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -25,7 +26,6 @@
                 android:layout_marginBottom="50dp"
                 android:gravity="center"
                 android:text="Register"
-                android:textColor="@color/dark_blue"
                 android:textSize="35dp"
                 android:textStyle="bold" />
 
@@ -96,13 +96,13 @@
                 android:orientation="horizontal">
 
                 <Button
+                    style="@style/primaryButton"
                     android:id="@+id/btnRegProfilePic"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:layout_margin="20dp"
                     android:layout_weight="1"
-                    android:backgroundTint="@color/dark_blue"
                     android:drawableLeft="@drawable/ic_upload"
                     android:drawablePadding="20dp"
                     android:text="Upload" />
@@ -119,15 +119,18 @@
             </LinearLayout>
 
             <Button
+                style="@style/secondaryButton"
                 android:id="@+id/btnRegister"
                 android:layout_width="180dp"
                 android:layout_height="60dp"
-                android:textSize="20sp"
-                android:text="Register"
                 android:layout_below="@id/upload_image_group"
-                android:backgroundTint="@color/gray_blue"
                 android:layout_centerHorizontal="true"
-                android:layout_margin="20dp"/>
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginBottom="20dp"
+                android:text="Register"
+                android:textSize="20sp" />
         </RelativeLayout>
     </ScrollView>
 </RelativeLayout>
