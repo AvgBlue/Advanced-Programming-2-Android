@@ -20,7 +20,7 @@ public class Chat {
     private int id;
     @SerializedName("user")
     private User user;
-    @SerializedName("lastMessage")
+    @SerializedName("lastMessage.id")
     private int lastMessageId;
     @SerializedName("lastMessage.created")
     private String lastMessageCreated;
