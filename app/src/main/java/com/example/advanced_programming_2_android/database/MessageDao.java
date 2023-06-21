@@ -22,9 +22,6 @@ public interface MessageDao {
     @Query("SELECT * FROM messages")
     List<Message> getAllMessages();
 
-    // get all messages sent by a specific user
-    @Query("SELECT * FROM messages WHERE senderUsername = :username")
-    List<Message> getAllMessagesByUser(String username);
     // get a massage by id
     @Query("SELECT * FROM messages WHERE id = :id")
     Message getMessageById(int id);

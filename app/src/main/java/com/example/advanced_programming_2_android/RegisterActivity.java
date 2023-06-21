@@ -3,19 +3,23 @@ package com.example.advanced_programming_2_android;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.MutableLiveData;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.example.advanced_programming_2_android.api.UserAPI;
+import com.example.advanced_programming_2_android.classes.FullUser;
 
 import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.concurrent.atomic.AtomicReference;
 
 public class RegisterActivity extends AppCompatActivity {
     private ActivityResultLauncher<String> filePickerLauncher;
@@ -39,12 +43,25 @@ public class RegisterActivity extends AppCompatActivity {
         settings = findViewById(R.id.settings_action_bar);
 
         AtomicBoolean imageWasChosen = new AtomicBoolean(false);
+        AtomicReference<String> profilePic = new AtomicReference<>("");
+
+        UserAPI userAPI = new UserAPI();
 
         btnRegister.setOnClickListener(view -> {
-            if (allIsValid(edUsername.getText().toString(), edPassword.getText().toString(),
-                    edDisplayName.getText().toString(), imageWasChosen)) {
-                Intent intent = new Intent(this, MainActivity.class);
-                startActivity(intent);
+            String username = edUsername.getText().toString();
+            String password = edPassword.getText().toString();
+            String displayName = edDisplayName.getText().toString();
+
+            if (allIsValid(username, password, displayName, imageWasChosen)) {
+                FullUser fullUser = new FullUser(username, password, displayName, profilePic.get());
+                userAPI.createUser(fullUser);
+                MutableLiveData<Boolean> tokenLiveData = userAPI.getIsUsernameExist();
+                tokenLiveData.observe(this, isUsernameExist -> {
+                    if (!isUsernameExist) {
+                        Intent intent = new Intent(this, LogInActivity.class);
+                        startActivity(intent);
+                    }
+                });
             }
         });
 
@@ -56,6 +73,8 @@ public class RegisterActivity extends AppCompatActivity {
                         .into(ivProfilepic);
 
                 imageWasChosen.set(true);
+                profilePic.set(uri.toString());
+
             }
         });
 
@@ -71,10 +90,7 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     private boolean validateUsername(String username) {
-        if (username.length() == 0 || username.length() > 20) {
-            return false;
-        }
-        return true;
+        return username.length() != 0 && username.length() <= 20;
     }
 
     private boolean validatePassword(String password) {
@@ -90,8 +106,7 @@ public class RegisterActivity extends AppCompatActivity {
         if (name.length() < 2 || name.length() > 20) {
             return false;
         }
-        boolean hasOnlyLettersAndSpaces = name.matches("[a-zA-Z ]+");
-        return hasOnlyLettersAndSpaces;
+        return name.matches("[a-zA-Z ]+");
     }
 
     @SuppressLint("SetTextI18n")

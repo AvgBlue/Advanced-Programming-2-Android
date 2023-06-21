@@ -10,15 +10,13 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:background="@drawable/background_send_message"
-        android:layout_marginStart="4dp"
-        android:layout_marginLeft="4dp"
         android:padding="12dp"
         android:textColor="@color/black"
         android:textSize="13sp"
-        app:layout_constraintWidth_max="wrap"
-        app:layout_constraintStart_toEndOf="@+id/imageProfilePicMessage"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintWidth_percent="0.75"/>
+        app:layout_constraintWidth_max="wrap"
+        app:layout_constraintWidth_percent="0.75" />
 
     <TextView
         android:id="@+id/textDateTime"

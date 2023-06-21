@@ -1,5 +1,10 @@
 package com.example.advanced_programming_2_android.api;
 
+import android.util.Log;
+import android.widget.Toast;
+
+import androidx.lifecycle.MutableLiveData;
+
 import com.example.advanced_programming_2_android.MyApplication;
 import com.example.advanced_programming_2_android.R;
 import com.example.advanced_programming_2_android.classes.LoginRequest;
@@ -11,6 +16,7 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class TokenAPI {
+    private MutableLiveData<String> tokenLiveData;
     private Retrofit retrofit;
     private WebServiceAPI webServiceAPI;
 
@@ -20,6 +26,7 @@ public class TokenAPI {
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         webServiceAPI = retrofit.create(WebServiceAPI.class);
+        tokenLiveData = new MutableLiveData<>();
     }
 
     public void login(LoginRequest loginRequest) {
@@ -29,16 +36,20 @@ public class TokenAPI {
             public void onResponse(Call<String> call, Response<String> response) {
                 if (response.isSuccessful()) {
                     String token = response.body();
-                    // Process the token data
+                    tokenLiveData.setValue(token);
                 } else {
-                    // Handle the error
+                    Toast.makeText(MyApplication.context, "username or password is incorrect", Toast.LENGTH_LONG).show();
                 }
             }
 
             @Override
             public void onFailure(Call<String> call, Throwable t) {
-                // Handle the failure
+                Toast.makeText(MyApplication.context, "Failed to connect to the server", Toast.LENGTH_LONG).show();
             }
         });
+    }
+
+    public MutableLiveData<String> getTokenLiveData() {
+        return tokenLiveData;
     }
 }

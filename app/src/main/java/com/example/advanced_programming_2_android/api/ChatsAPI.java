@@ -1,6 +1,6 @@
 package com.example.advanced_programming_2_android.api;
 
-import androidx.lifecycle.MutableLiveData;
+import android.widget.Toast;
 
 import com.example.advanced_programming_2_android.MyApplication;
 import com.example.advanced_programming_2_android.R;
@@ -15,13 +15,10 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ChatsAPI {
-    private MutableLiveData<List<Chat>> chatListData;
     private Retrofit retrofit;
     private WebServiceAPI webServiceAPI;
 
-    public ChatsAPI(MutableLiveData<List<Chat>> chatListData) {
-        this.chatListData = chatListData;
-
+    public ChatsAPI() {
         retrofit = new Retrofit.Builder()
                 .baseUrl(MyApplication.context.getString(R.string.BaseUrl))
                 .addConverterFactory(GsonConverterFactory.create())
@@ -44,7 +41,7 @@ public class ChatsAPI {
 
             @Override
             public void onFailure(Call<List<Chat>> call, Throwable t) {
-                // Handle the failure
+                Toast.makeText(MyApplication.context, "Failed to connect to the server", Toast.LENGTH_LONG).show();
             }
         });
     }
@@ -63,7 +60,7 @@ public class ChatsAPI {
 
             @Override
             public void onFailure(Call<Void> call, Throwable t) {
-                // Handle the failure
+                Toast.makeText(MyApplication.context, "Failed to connect to the server", Toast.LENGTH_LONG).show();
             }
         });
     }
@@ -83,7 +80,7 @@ public class ChatsAPI {
 
             @Override
             public void onFailure(Call<Chat> call, Throwable t) {
-                // Handle the failure
+                Toast.makeText(MyApplication.context, "Failed to connect to the server", Toast.LENGTH_LONG).show();
             }
         });
     }
@@ -102,7 +99,7 @@ public class ChatsAPI {
 
             @Override
             public void onFailure(Call<Void> call, Throwable t) {
-                // Handle the failure
+                Toast.makeText(MyApplication.context, "Failed to connect to the server", Toast.LENGTH_LONG).show();
             }
         });
     }
@@ -121,7 +118,7 @@ public class ChatsAPI {
 
             @Override
             public void onFailure(Call<Void> call, Throwable t) {
-                // Handle the failure
+                Toast.makeText(MyApplication.context, "Failed to connect to the server", Toast.LENGTH_LONG).show();
             }
         });
     }
@@ -141,7 +138,7 @@ public class ChatsAPI {
 
             @Override
             public void onFailure(Call<Chat> call, Throwable t) {
-                // Handle the failure
+                Toast.makeText(MyApplication.context, "Failed to connect to the server", Toast.LENGTH_LONG).show();
             }
         });
     }

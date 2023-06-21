@@ -1,27 +1,29 @@
 package com.example.advanced_programming_2_android.database;
 
 import androidx.room.Entity;
-import androidx.room.ForeignKey;
 import androidx.room.PrimaryKey;
 import androidx.annotation.NonNull;
+import androidx.room.TypeConverters;
 
-@Entity(tableName = "messages",
-        foreignKeys = @ForeignKey(entity = User.class,
-                parentColumns = "username",
-                childColumns = "senderUsername",
-                onDelete = ForeignKey.CASCADE))
+import com.google.gson.annotations.SerializedName;
+@Entity(tableName = "messages")
+@TypeConverters({Converters.class})
 public class Message {
     @PrimaryKey
     @NonNull
+    @SerializedName("id")
     private int id;
+    @SerializedName("created")
     private String createdDate;
-    private String senderUsername;
+    @SerializedName("sender")
+    private User sender;
+    @SerializedName("content")
     private String contact;
 
-    public Message(@NonNull int id, String createdDate, String senderUsername, String contact) {
+    public Message(@NonNull int id, String createdDate, User sender, String contact) {
         this.id = id;
         this.createdDate = createdDate;
-        this.senderUsername = senderUsername;
+        this.sender = sender;
         this.contact = contact;
     }
 
@@ -43,12 +45,12 @@ public class Message {
         this.createdDate = createdDate;
     }
 
-    public String getSenderUsername() {
-        return senderUsername;
+    public User getSender() {
+        return sender;
     }
 
-    public void setSenderUsername(String senderUsername) {
-        this.senderUsername = senderUsername;
+    public void setSender(User sender) {
+        this.sender = sender;
     }
 
     public String getContact() {
