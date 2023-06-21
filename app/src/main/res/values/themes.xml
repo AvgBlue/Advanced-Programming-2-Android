@@ -1,9 +1,28 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Base.Theme.AdvancedProgramming2Android" parent="Theme.Material3.DayNight.NoActionBar">
+    <style name="LightTheme" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
     </style>
 
-    <style name="Theme.AdvancedProgramming2Android" parent="Base.Theme.AdvancedProgramming2Android" />
+    <style name="background" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- Customize your light theme here. -->
+        <item name="android:background">@drawable/background_portrait</item>
+    </style>
+
+    <style name="textColor" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- Customize your light theme here. -->
+        <item name="android:textColor">@color/dark_blue</item>
+    </style>
+
+    <style name="primaryButton" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- Customize your light theme here. -->
+        <item name="android:backgroundTint">@color/dark_blue</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="secondaryButton" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- Customize your light theme here. -->
+        <item name="android:backgroundTint">@color/gray_blue</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
 </resources>

@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background_portrait">
+    style="@style/background">
 
     <include layout="@layout/custom_action_bar_main_no_settings" />
     <RelativeLayout
@@ -10,31 +10,33 @@
         android:layout_height="wrap_content"
         android:layout_centerVertical="true">
         <TextView
+            style="@style/textColor"
             android:id="@+id/tvSetting"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="50dp"
             android:gravity="center"
             android:text="@string/settings"
-            android:textColor="@color/dark_blue"
             android:textSize="35sp"
             android:textStyle="bold"
             />
 
         <TextView
+            style="@style/textColor"
             android:id="@+id/tvHttp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/tvSetting"
             android:layout_marginStart="10dp"
             android:gravity="start"
-            android:text="Server HTTP Address:"
-            android:textColor="@color/dark_blue"
+            android:text="Server URL Address:"
             android:textSize="25sp"
             android:textStyle="bold"
             />
 
         <EditText
+            android:inputType="textUri"
+            android:digits="@string/url_characters"
             android:id="@+id/edHttp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -46,11 +48,12 @@
             android:background="@color/light_blue"
             android:drawableStart="@drawable/ic_http"
             android:drawablePadding="20dp"
-            android:hint="Server HTTP Address"
+            android:hint="Server URL Address"
             android:padding="20dp"
             android:textColor="@color/dark_blue"
             android:textColorHint="@color/dark_blue" />
         <TextView
+            style="@style/textColor"
             android:id="@+id/tvTheme"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -58,7 +61,6 @@
             android:layout_marginStart="10dp"
             android:gravity="start"
             android:text="Theme:"
-            android:textColor="@color/dark_blue"
             android:textSize="25sp"
             android:textStyle="bold"
             />
@@ -71,25 +73,28 @@
             android:padding="20dp">
 
             <RadioButton
-                android:id="@+id/simpleRadioButton"
+                style="@style/textColor"
+                android:id="@+id/rbLight"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Blue"
-                android:textColor="@color/dark_blue"
+                android:text="Light"
+                android:tag="1"
                 android:textSize="20sp"
                 android:textStyle="bold"/>
 
             <RadioButton
-                android:id="@+id/simpleRadioButton1"
+                style="@style/textColor"
+                android:id="@+id/rbDark"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Dark"
-                android:textColor="@color/dark_blue"
+                android:tag="2"
                 android:textSize="20sp"
                 android:textStyle="bold"/>
         </RadioGroup>
 
         <Button
+            style="@style/primaryButton"
             android:id="@+id/btnApply"
             android:layout_width="180dp"
             android:layout_height="60dp"
@@ -99,7 +104,6 @@
             android:layout_marginTop="20dp"
             android:layout_marginEnd="20dp"
             android:layout_marginBottom="20dp"
-            android:backgroundTint="@color/dark_blue"
             android:text="Apply"
             android:textSize="20sp"
             />
