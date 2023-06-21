@@ -1,6 +1,6 @@
 package com.example.advanced_programming_2_android.api;
 
-import androidx.lifecycle.MutableLiveData;
+import android.widget.Toast;
 
 import com.example.advanced_programming_2_android.MyApplication;
 import com.example.advanced_programming_2_android.R;
@@ -41,7 +41,7 @@ public class ChatsAPI {
 
             @Override
             public void onFailure(Call<List<Chat>> call, Throwable t) {
-                // Handle the failure
+                Toast.makeText(MyApplication.context, "Failed to connect to the server", Toast.LENGTH_LONG).show();
             }
         });
     }
@@ -60,7 +60,7 @@ public class ChatsAPI {
 
             @Override
             public void onFailure(Call<Void> call, Throwable t) {
-                // Handle the failure
+                Toast.makeText(MyApplication.context, "Failed to connect to the server", Toast.LENGTH_LONG).show();
             }
         });
     }
@@ -80,7 +80,7 @@ public class ChatsAPI {
 
             @Override
             public void onFailure(Call<Chat> call, Throwable t) {
-                // Handle the failure
+                Toast.makeText(MyApplication.context, "Failed to connect to the server", Toast.LENGTH_LONG).show();
             }
         });
     }
@@ -99,7 +99,7 @@ public class ChatsAPI {
 
             @Override
             public void onFailure(Call<Void> call, Throwable t) {
-                // Handle the failure
+                Toast.makeText(MyApplication.context, "Failed to connect to the server", Toast.LENGTH_LONG).show();
             }
         });
     }
@@ -118,7 +118,7 @@ public class ChatsAPI {
 
             @Override
             public void onFailure(Call<Void> call, Throwable t) {
-                // Handle the failure
+                Toast.makeText(MyApplication.context, "Failed to connect to the server", Toast.LENGTH_LONG).show();
             }
         });
     }
@@ -138,7 +138,7 @@ public class ChatsAPI {
 
             @Override
             public void onFailure(Call<Chat> call, Throwable t) {
-                // Handle the failure
+                Toast.makeText(MyApplication.context, "Failed to connect to the server", Toast.LENGTH_LONG).show();
             }
         });
     }

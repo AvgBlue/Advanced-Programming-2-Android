@@ -37,8 +37,6 @@ public class LogInActivity extends AppCompatActivity {
 
         TokenAPI tokenAPI = new TokenAPI();
 
-
-
         btnLogin.setOnClickListener(view -> {
             String username = tvUsername.getText().toString();
             String password = tvPassword.getText().toString();
