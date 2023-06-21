@@ -10,7 +10,7 @@ import com.example.advanced_programming_2_android.database.Chat;
 import com.example.advanced_programming_2_android.database.UserDao;
 import com.example.advanced_programming_2_android.database.MessageDao;
 import com.example.advanced_programming_2_android.database.ChatDao;
-import com.example.advanced_programming_2_android.classes.ChatU;
+
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,7 +20,7 @@ public class ChatViewModel extends ViewModel {
     private ChatDao chatDao;
     private MessageDao messageDao;
     private UserDao userDao;
-    private MutableLiveData<List<ChatU>> chatLiveData;
+    private MutableLiveData<List<Chat>> chatLiveData;
 
     public ChatViewModel(Context context) {
         AppDB db = AppDB.getInstance(context);
@@ -29,7 +29,7 @@ public class ChatViewModel extends ViewModel {
         userDao = db.getUserDao();
     }
 
-    public MutableLiveData<List<ChatU>> getChatLiveData() {
+    public MutableLiveData<List<Chat>> getChatLiveData() {
         if (chatLiveData == null) {
             chatLiveData = new MutableLiveData<>();
             loadChats(); // Load chats when the LiveData is first accessed
@@ -39,18 +39,12 @@ public class ChatViewModel extends ViewModel {
 
     private void loadChats() {
         List<Chat> chats = chatDao.getAllChats();
-        List<ChatU> chatsU = new ArrayList<>();
-        for (Chat chat : chats) {
-            // Convert each Chat to ChatU
-            ChatU chatU = ChatU.convertToChatU(chat, userDao,messageDao);
-            chatsU.add(chatU);
-        }
-        // Set the chatLiveData to chatsU
-        chatLiveData.setValue(chatsU);
+        // Set the chatLiveData to chats
+        chatLiveData.setValue(chats);
     }
 
-    public void setChat(ChatU chat) {
-        List<ChatU> chats = chatLiveData.getValue();
+    public void setChat(Chat chat) {
+        List<Chat> chats = chatLiveData.getValue();
         if (chats != null) {
             chats.add(chat);
             chatLiveData.setValue(chats);
