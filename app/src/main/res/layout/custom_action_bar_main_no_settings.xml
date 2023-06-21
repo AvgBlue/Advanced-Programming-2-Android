@@ -36,7 +36,7 @@
             android:layout_centerHorizontal="true"
             android:layout_marginStart="16dp"
             android:text="@string/chit_chat"
-            android:textColor="@color/black"
+            android:textColor="@color/white"
             android:textSize="20sp"/>
 
     </RelativeLayout>

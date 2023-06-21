@@ -7,16 +7,38 @@ import androidx.lifecycle.ViewModel;
 
 import com.example.advanced_programming_2_android.R;
 
+
 public class PreferencesViewModel extends ViewModel {
     private MutableLiveData<String> usernameLiveData;
     private MutableLiveData<String> tokenLiveData;
     private MutableLiveData<String> passwordLiveData;
     private MutableLiveData<Integer> themeLiveData;
     private MutableLiveData<String> serverAddressLiveData;
-    private SharedPreferences sharedPreferences;
+    private static SharedPreferences sharedPreferences;
 
-    public PreferencesViewModel(Context context) {
+    private static PreferencesViewModel preferencesViewModel = null;
+
+    private PreferencesViewModel(Context context) {
         sharedPreferences = context.getSharedPreferences(context.getString(R.string.preference_file_key), Context.MODE_PRIVATE);
+        usernameLiveData = new MutableLiveData<>();
+        tokenLiveData = new MutableLiveData<>();
+        passwordLiveData = new MutableLiveData<>();
+        themeLiveData = new MutableLiveData<>();
+        serverAddressLiveData = new MutableLiveData<>();
+    }
+
+    public static PreferencesViewModel createPreferencesViewModel(Context context){
+        if(preferencesViewModel == null){
+            preferencesViewModel = new PreferencesViewModel(context);
+            preferencesViewModel.setDefault();
+        }
+        return preferencesViewModel;
+    }
+
+    private void setDefault() {
+        setServerAddress("TEST"); // change to actually read from config.xml
+        setTheme(1); // change to actually read from config.xml
+
     }
 
     public MutableLiveData<String> getUsernameLiveData() {
@@ -140,25 +162,3 @@ public class PreferencesViewModel extends ViewModel {
         editor.apply();
     }
 }
-
-//how to use:
-// PreferencesViewModel preferencesViewModel = new ViewModelProvider(this).get(PreferencesViewModel.class);
-// preferencesViewModel.getUsernameLiveData().observe(this, username -> {
-//    //do something with username
-// });
-// preferencesViewModel.getTokenLiveData().observe(this, token -> {
-//    //do something with token
-// });
-// preferencesViewModel.getPasswordLiveData().observe(this, password -> {
-//    //do something with password
-// });
-// preferencesViewModel.getThemeLiveData().observe(this, theme -> {
-//    //do something with theme
-// });
-// preferencesViewModel.setUsername(username); //this will trigger the observer above
-// preferencesViewModel.setToken(token); //this will trigger the observer above
-// preferencesViewModel.setPassword(password); //this will trigger the observer above
-// preferencesViewModel.setTheme(theme); //this will trigger the observer above
-
-
-

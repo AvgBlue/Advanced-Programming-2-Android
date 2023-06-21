@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config>
+    <theme>1</theme>
+    <server_address>8080</server_address> <!--replace with the actual port -->
+    <!-- Add more configuration parameters as needed -->
+</config>
