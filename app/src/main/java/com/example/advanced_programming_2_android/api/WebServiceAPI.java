@@ -4,6 +4,7 @@ import com.example.advanced_programming_2_android.classes.LoginRequest;
 import com.example.advanced_programming_2_android.classes.FullUser;
 import com.example.advanced_programming_2_android.classes.Username;
 import com.example.advanced_programming_2_android.database.Chat;
+import com.example.advanced_programming_2_android.database.Conversation;
 import com.example.advanced_programming_2_android.database.User;
 
 import retrofit2.Call;
@@ -24,7 +25,7 @@ public interface WebServiceAPI {
     Call<Void> createChat(@Body Username username, @Header("authorization") String authorization);
 
     @GET("api/Chats/{id}")
-    Call<Chat> getChatById(@Path("id") int id, @Header("authorization") String authorization);
+    Call<Conversation> getChatById(@Path("id") int id, @Header("authorization") String authorization);
 
     @DELETE("api/Chats/{id}")
     Call<Void> deleteChat(@Path("id") int id, @Header("authorization") String authorization);

@@ -60,5 +60,15 @@ public class Message {
     public void setContact(String contact) {
         this.contact = contact;
     }
+
+    @Override
+    public String toString() {
+        return "Message{" +
+                "id=" + id +
+                ", createdDate='" + createdDate + '\'' +
+                ", sender=" + sender.toString() +
+                ", contact='" + contact + '\'' +
+                "}\n";
+    }
 }
 

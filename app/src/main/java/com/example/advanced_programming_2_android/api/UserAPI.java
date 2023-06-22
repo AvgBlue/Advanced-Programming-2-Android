@@ -64,6 +64,7 @@ public class UserAPI {
             public void onResponse(Call<FullUser> call, Response<FullUser> response) {
                 if (response.isSuccessful()) {
                     isUsernameExist.setValue(false);
+                    Toast.makeText(MyApplication.context, "You were registered", Toast.LENGTH_LONG).show();
                 } else {
                     isUsernameExist.setValue(true);
                     Toast.makeText(MyApplication.context, "Username already exist", Toast.LENGTH_LONG).show();

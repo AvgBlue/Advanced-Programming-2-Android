@@ -9,6 +9,7 @@ import com.example.advanced_programming_2_android.MyApplication;
 import com.example.advanced_programming_2_android.R;
 import com.example.advanced_programming_2_android.classes.Username;
 import com.example.advanced_programming_2_android.database.Chat;
+import com.example.advanced_programming_2_android.database.Conversation;
 
 import java.util.List;
 
@@ -19,30 +20,27 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ChatsAPI {
-
-    private MutableLiveData<List<Chat>> chats;
     private MutableLiveData<Boolean> isAddChatSucceeded;
     private Retrofit retrofit;
     private WebServiceAPI webServiceAPI;
 
-    public ChatsAPI(MutableLiveData<List<Chat>> chatsListData) {
+    public ChatsAPI() {
         retrofit = new Retrofit.Builder()
                 .baseUrl(MyApplication.context.getString(R.string.BaseUrl))
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         webServiceAPI = retrofit.create(WebServiceAPI.class);
-        this.chats = chatsListData;
         isAddChatSucceeded = new MutableLiveData<>();
     }
 
-    public void getChats(String authorization) {
+    public void getChats(MutableLiveData<List<Chat>> chatsListData, String authorization) {
         Call<List<Chat>> call = webServiceAPI.getChats("bearer '" + authorization + "'");
         call.enqueue(new Callback<List<Chat>>() {
             @Override
             public void onResponse(Call<List<Chat>> call, Response<List<Chat>> response) {
                 if (response.isSuccessful()) {
                     List<Chat> chatList = response.body();
-                    chats.postValue(chatList);
+                    chatsListData.postValue(chatList);
                 } else {
                     Toast.makeText(MyApplication.context, "Could not get your chat", Toast.LENGTH_LONG).show();
                 }
@@ -80,21 +78,21 @@ public class ChatsAPI {
         });
     }
 
-    public void getChatById(int id, String authorization) {
-        Call<Chat> call = webServiceAPI.getChatById(id, "bearer '" + authorization + "'");
-        call.enqueue(new Callback<Chat>() {
+    public void getChatById(MutableLiveData<Conversation> conversationData, int id, String authorization) {
+        Call<Conversation> call = webServiceAPI.getChatById(id, "bearer '" + authorization + "'");
+        call.enqueue(new Callback<Conversation>() {
             @Override
-            public void onResponse(Call<Chat> call, Response<Chat> response) {
+            public void onResponse(Call<Conversation> call, Response<Conversation> response) {
                 if (response.isSuccessful()) {
-                    Chat chat = response.body();
-                    // Process the chat data
+                    Conversation conversation = response.body();
+                    conversationData.postValue(conversation);
                 } else {
-                    // Handle the error
+                    Toast.makeText(MyApplication.context, "Could not get your conversation", Toast.LENGTH_LONG).show();
                 }
             }
 
             @Override
-            public void onFailure(Call<Chat> call, Throwable t) {
+            public void onFailure(Call<Conversation> call, Throwable t) {
                 Toast.makeText(MyApplication.context, "Failed to connect to the server", Toast.LENGTH_LONG).show();
             }
         });

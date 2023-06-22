@@ -26,7 +26,7 @@ public class ChatRepository {
         AppDB db = AppDB.getInstance();
         chatDao = db.getChatDao();
         chatListData = new ChatListData();
-        chatsAPI = new ChatsAPI(chatListData);
+        chatsAPI = new ChatsAPI();
         this.token = token;
     }
 
@@ -45,7 +45,7 @@ public class ChatRepository {
             new Thread(() -> {
                 chatListData.postValue(chatDao.getAllChats());
             }).start();
-            chatsAPI.getChats(token);
+            chatsAPI.getChats(chatListData, token);
         }
     }
 
@@ -56,12 +56,11 @@ public class ChatRepository {
         return chatsAPI.getIsAddChatSucceeded();
     }
 
-    public void getChatsApi(){
-        chatsAPI.getChats(token);
+    public void getChatsApi() {
+        chatsAPI.getChats(chatListData, token);
     }
 
     public void createChatApi(String chatWithUsername) {
         chatsAPI.createChat(chatWithUsername, token);
     }
-
 }
