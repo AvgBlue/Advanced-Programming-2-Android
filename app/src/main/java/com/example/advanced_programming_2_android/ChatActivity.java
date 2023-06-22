@@ -110,6 +110,8 @@ public class ChatActivity extends AppCompatActivity {
 
         addChatBtn.setOnClickListener(view -> {
             Intent intent = new Intent(this, AddChatActivity.class);
+            intent.putExtra("token", token);
+            intent.putExtra("username", username);
             startActivity(intent);
         });
 

@@ -1,19 +1,29 @@
 package com.example.advanced_programming_2_android;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.MutableLiveData;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
+
+import com.bumptech.glide.Glide;
+import com.example.advanced_programming_2_android.api.UserAPI;
+import com.example.advanced_programming_2_android.database.User;
+import com.makeramen.roundedimageview.RoundedImageView;
 
 public class AddChatActivity extends AppCompatActivity {
+
+    private TextView displayName;
+    private RoundedImageView profilePic;
     private EditText etUsername;
     private Button btnAddChat;
     private ImageView settings;
-
     private ImageView logout;
 
     @Override
@@ -21,10 +31,26 @@ public class AddChatActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_chat);
 
+        displayName = findViewById(R.id.displayName);
+        profilePic = findViewById(R.id.profilePic);
         etUsername = findViewById(R.id.edAddChatUsername);
         btnAddChat = findViewById(R.id.btnAddChat);
         settings = findViewById(R.id.settings_action_bar);
         logout = findViewById(R.id.logout_action_bar);
+
+        String token = getIntent().getStringExtra("token");
+        String username = getIntent().getStringExtra("username");
+
+        UserAPI userAPI = new UserAPI();
+        userAPI.getUserByUsername(username, token);
+        MutableLiveData<User> myUser = userAPI.getUserMutableLiveData();
+
+        displayName.setText(username);
+        myUser.observe(this, user -> {
+            Glide.with(this)
+                    .load(Uri.parse(user.getProfilePic()))
+                    .into(profilePic);
+        });
 
         btnAddChat.setOnClickListener(view -> {
             Intent intent = new Intent(this, ChatActivity.class);
