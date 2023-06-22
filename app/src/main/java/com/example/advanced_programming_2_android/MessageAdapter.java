@@ -7,20 +7,21 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.advanced_programming_2_android.classes.MessageU;
+
+import com.example.advanced_programming_2_android.database.Message;
 
 import java.util.List;
 
 public class MessageAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
-    private List<MessageU> messages;
+    private List<Message> messages;
     private String currentUser; // Assuming you have a variable to store the current user ID
 
     private static final int VIEW_TYPE_RECEIVED = 1;
     private static final int VIEW_TYPE_SENT = 2;
 
 
-    public MessageAdapter(List<MessageU> messages, String currentUser) {
+    public MessageAdapter(List<Message> messages, String currentUser) {
         this.messages = messages;
         this.currentUser = currentUser;
     }
@@ -42,7 +43,7 @@ public class MessageAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-        MessageU message = messages.get(position);
+        Message message = messages.get(position);
 
         if (holder instanceof ReceivedMessageViewHolder) {
             ReceivedMessageViewHolder receivedHolder = (ReceivedMessageViewHolder) holder;
@@ -65,16 +66,16 @@ public class MessageAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
 
     @Override
     public int getItemViewType(int position) {
-        MessageU message = messages.get(position);
+        Message message = messages.get(position);
 
-        if (message.getSenderUser().getUsername().equals(currentUser)) {
+        if (message.getSender().getUsername().equals(currentUser)) {
             return VIEW_TYPE_SENT;
         } else {
             return VIEW_TYPE_RECEIVED;
         }
     }
 
-    public void setMessages(List<MessageU> messages) {
+    public void setMessages(List<Message> messages) {
         this.messages = messages;
     }
 

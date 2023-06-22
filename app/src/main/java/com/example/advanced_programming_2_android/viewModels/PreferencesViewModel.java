@@ -56,7 +56,7 @@ public class PreferencesViewModel extends ViewModel {
     public static PreferencesViewModel createPreferencesViewModel(Context context) {
         if (preferencesViewModel == null) {
             preferencesViewModel = new PreferencesViewModel(context);
-            preferencesViewModel.setDefault(); // Move setDefault() inside the condition
+            preferencesViewModel.setDefault();
         }
         return preferencesViewModel;
     }

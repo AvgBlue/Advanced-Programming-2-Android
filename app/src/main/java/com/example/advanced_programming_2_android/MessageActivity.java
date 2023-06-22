@@ -1,46 +1,51 @@
 package com.example.advanced_programming_2_android;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.MutableLiveData;
+import androidx.lifecycle.LiveData;
 import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.appcompat.widget.AppCompatImageView;
-import androidx.lifecycle.ViewModelProvider;
+
 
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.util.Log;
-import android.view.View;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.advanced_programming_2_android.classes.MessageU;
+import com.example.advanced_programming_2_android.database.Conversation;
+import com.example.advanced_programming_2_android.database.Message;
 import com.example.advanced_programming_2_android.database.User;
-import com.example.advanced_programming_2_android.viewModels.MessageViewModel;
 import com.example.advanced_programming_2_android.viewModels.PreferencesViewModel;
 import com.example.advanced_programming_2_android.viewModels.PreferencesViewModelFactory;
-import com.example.advanced_programming_2_android.viewModels.ChatViewModel;
-import com.example.advanced_programming_2_android.viewModels.ChatViewModelFactory;
 import com.example.advanced_programming_2_android.viewModels.ConversationViewModel;
 import com.example.advanced_programming_2_android.viewModels.ConversationViewModelFactory;
-import com.example.advanced_programming_2_android.viewModels.PreferencesViewModel;
-import com.example.advanced_programming_2_android.viewModels.PreferencesViewModelFactory;
 import com.makeramen.roundedimageview.RoundedImageView;
 
 import java.util.List;
 
 public class MessageActivity extends AppCompatActivity {
     private ImageView settings;
+    private PreferencesViewModel preferencesViewModel;
+    private ConversationViewModel conversationViewModel;
+
+    private ImageView settingsButton;
+    private ImageButton sendButton;
+
+    private EditText inputMessage;
+    private MessageAdapter messageAdapter;
+
+    private RecyclerView messagesRecycleView;
+
+    private ImageView logout;
+
+    private int chatId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,7 +59,7 @@ public class MessageActivity extends AppCompatActivity {
         // Retrieve the profile picture URI and display name from the intent
         Uri profilePic = Uri.parse(getIntent().getStringExtra("profilePic"));
         String displayName = getIntent().getStringExtra("displayName");
-        int chatId = getIntent().getIntExtra("chatId", 0);
+        chatId = getIntent().getIntExtra("chatId", 0);
 
         ConversationViewModelFactory factoryConversation = new ConversationViewModelFactory(chatId, token);
         conversationViewModel = new ViewModelProvider(this, factoryConversation).get(ConversationViewModel.class);
@@ -65,32 +70,17 @@ public class MessageActivity extends AppCompatActivity {
         sendButton = findViewById(R.id.sentBtn);
         inputMessage = findViewById(R.id.inputMessage);
         messagesRecycleView = findViewById(R.id.chatRecycleView);
-
-        messageViewModel = new ViewModelProvider(this).get(MessageViewModel.class);
-
-        // TODO - change
-        PreferencesViewModelFactory factory = new PreferencesViewModelFactory(getApplicationContext());
-        preferencesViewModel = new ViewModelProvider(this, factory).get(PreferencesViewModel.class);
+        logout = findViewById(R.id.logout_action_bar);
 
         String username = preferencesViewModel.getUsernameLiveData().getValue();
 
-        List<MessageU> messeges = messageViewModel.getMessagesLiveData().getValue();
+
+        Conversation conversation = conversationViewModel.getConversation().getValue();
+        assert conversation!=null;
+        List<Message> messeges =conversation.getMessages();
         messageAdapter = new MessageAdapter(messeges, username);
         messagesRecycleView.setAdapter(messageAdapter);
         messagesRecycleView.setLayoutManager(new LinearLayoutManager(this));
-
-        messageViewModel.getMessagesLiveData().observe(this, new Observer<List<MessageU>>() {
-            @Override
-            public void onChanged(List<MessageU> messages) {
-
-                // TODO - change
-                String toastMessage = "live data changed";
-                // inputMessage.setText(toastMessage.toString());
-                Toast.makeText(getApplicationContext(), toastMessage, Toast.LENGTH_SHORT).show();
-                messageAdapter.setMessages(messages);
-                messageAdapter.notifyDataSetChanged();
-            }
-        });
 
         // Load the profile picture into the RoundedImageView using Glide library
         Glide.with(this)
@@ -101,15 +91,16 @@ public class MessageActivity extends AppCompatActivity {
         tvDisplayName.setText(displayName);
 
         conversationViewModel.getChatByIdApi();
-        conversationViewModel.getConversation().observe(this, conversation -> {
-            if (conversation != null) {
+        conversationViewModel.getConversation().observe(this, thisConversation -> {
+            if (thisConversation != null) {
+                // TODO - change
+                String toastMessage = "live data changed";
+                // inputMessage.setText(toastMessage.toString());
+                Toast.makeText(getApplicationContext(), toastMessage, Toast.LENGTH_SHORT).show();
+                messageAdapter.setMessages(thisConversation.getMessages());
+                messageAdapter.notifyDataSetChanged();
 
             }
-        });
-
-        sendMessageButton.setOnClickListener(view -> {
-            String messageToSend = etInput.getText().toString();
-            conversationViewModel.sendMessageApi(messageToSend, chatId);
         });
 
         settingsButton.setOnClickListener(view -> {
@@ -122,6 +113,11 @@ public class MessageActivity extends AppCompatActivity {
             sendMessage();
             inputMessage.setText("");
         });
+
+        logout.setOnClickListener(view -> {
+            Intent intent = new Intent(this, LogInActivity.class);
+            startActivity(intent);
+        });
     }
 
     private void sendMessage() {
@@ -133,10 +129,8 @@ public class MessageActivity extends AppCompatActivity {
         // TODO - to change
         String toastMessage = "You wanted to send: '" + content + "'.";
         Toast.makeText(getApplicationContext(), toastMessage, Toast.LENGTH_SHORT).show();
-        // TODO - to change the username, displayname, profilePic
-        User user = new User("username", "displayname", "pic");
-        // TODO - to change id, createdData
-        messageViewModel.addMessage(new MessageU(1, "createdData", user, content));
+
+        conversationViewModel.sendMessageApi(content, chatId);
     }
 
     public static String trimString(String input) {
@@ -149,9 +143,7 @@ public class MessageActivity extends AppCompatActivity {
 
         return trimmedString;
 
-        logout.setOnClickListener(view -> {
-            Intent intent = new Intent(this, LogInActivity.class);
-            startActivity(intent);
-        });
+
     }
+
 }
