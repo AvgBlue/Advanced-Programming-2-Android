@@ -19,6 +19,7 @@ import com.example.advanced_programming_2_android.api.UserAPI;
 import com.example.advanced_programming_2_android.database.Chat;
 import com.example.advanced_programming_2_android.database.User;
 import com.example.advanced_programming_2_android.viewModels.ChatViewModel;
+import com.example.advanced_programming_2_android.viewModels.ChatViewModelFactory;
 import com.example.advanced_programming_2_android.viewModels.PreferencesViewModel;
 import com.example.advanced_programming_2_android.viewModels.PreferencesViewModelFactory;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -51,7 +52,8 @@ public class ChatActivity extends AppCompatActivity {
         String token = preferencesViewModel.getTokenLiveData().getValue();
         String username = preferencesViewModel.getUsernameLiveData().getValue();
 
-        chatViewModel = new ChatViewModel(token);
+        ChatViewModelFactory factoryChat = new ChatViewModelFactory("your_token_here");
+        ChatViewModel viewModel = new ViewModelProvider(this, factory).get(ChatViewModel.class);
 
         UserAPI userAPI = new UserAPI();
         userAPI.getUserByUsername(username, token);
