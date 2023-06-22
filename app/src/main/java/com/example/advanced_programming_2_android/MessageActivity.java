@@ -74,14 +74,6 @@ public class MessageActivity extends AppCompatActivity {
 
         String username = preferencesViewModel.getUsernameLiveData().getValue();
 
-
-        Conversation conversation = conversationViewModel.getConversation().getValue();
-        assert conversation!=null;
-        List<Message> messeges =conversation.getMessages();
-        messageAdapter = new MessageAdapter(messeges, username);
-        messagesRecycleView.setAdapter(messageAdapter);
-        messagesRecycleView.setLayoutManager(new LinearLayoutManager(this));
-
         // Load the profile picture into the RoundedImageView using Glide library
         Glide.with(this)
                 .load(profilePic)
@@ -89,7 +81,7 @@ public class MessageActivity extends AppCompatActivity {
 
         // Set the display name in the TextView
         tvDisplayName.setText(displayName);
-
+// אנחנו אצרנו פה יש בעיה עם  יש בעיה שזה ריק
         conversationViewModel.getChatByIdApi();
         conversationViewModel.getConversation().observe(this, thisConversation -> {
             if (thisConversation != null) {
@@ -99,9 +91,18 @@ public class MessageActivity extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(), toastMessage, Toast.LENGTH_SHORT).show();
                 messageAdapter.setMessages(thisConversation.getMessages());
                 messageAdapter.notifyDataSetChanged();
-
             }
         });
+
+        Conversation conversation = conversationViewModel.getConversation().getValue();
+        if(conversation == null){
+            conversationViewModel.getChatByIdApi();
+            conversation = conversationViewModel.getConversation().getValue();
+        }
+        List<Message> messeges = conversation.getMessages();
+        messageAdapter = new MessageAdapter(messeges, username);
+        messagesRecycleView.setAdapter(messageAdapter);
+        messagesRecycleView.setLayoutManager(new LinearLayoutManager(this));
 
         settingsButton.setOnClickListener(view -> {
             // Open the SettingsActivity when the settings ImageView is clicked
@@ -135,7 +136,7 @@ public class MessageActivity extends AppCompatActivity {
 
     public static String trimString(String input) {
         if (input == null) {
-            return null;
+            return "";
         }
 
         String trimmedString = input.trim();
