@@ -1,11 +1,20 @@
 package com.example.advanced_programming_2_android.viewModels;
 
+import static java.lang.Integer.parseInt;
+
 import android.content.Context;
 import android.content.SharedPreferences;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.example.advanced_programming_2_android.R;
+
+import com.example.advanced_programming_2_android.database.AppDB;
+import com.example.advanced_programming_2_android.database.Settings;
+import com.example.advanced_programming_2_android.database.SettingsDao;
+import com.example.advanced_programming_2_android.settings.ConfigParser;
+
+import java.util.Map;
 
 
 public class PreferencesViewModel extends ViewModel {
@@ -18,27 +27,46 @@ public class PreferencesViewModel extends ViewModel {
 
     private static PreferencesViewModel preferencesViewModel = null;
 
+    private static Context context;
+    private SettingsDao settingsDao;
+
     private PreferencesViewModel(Context context) {
+        this.context = context;
         sharedPreferences = context.getSharedPreferences(context.getString(R.string.preference_file_key), Context.MODE_PRIVATE);
         usernameLiveData = new MutableLiveData<>();
         tokenLiveData = new MutableLiveData<>();
         passwordLiveData = new MutableLiveData<>();
         themeLiveData = new MutableLiveData<>();
         serverAddressLiveData = new MutableLiveData<>();
+
+        settingsDao = AppDB.getInstance(context).getSettingsDao();
+        Settings settings = settingsDao.getSettings();
+        if (settings == null) {
+            // Settings not initialized, create and insert into the database
+            settings = new Settings();
+            settingsDao.insert(settings);
+            preferencesViewModel.setDefault();
+        }
+        else{
+            setTheme(settingsDao.getTheme());
+            setServerAddress(settingsDao.getServerAddress());
+        }
     }
 
     public static PreferencesViewModel createPreferencesViewModel(Context context){
         if(preferencesViewModel == null){
             preferencesViewModel = new PreferencesViewModel(context);
-            preferencesViewModel.setDefault();
         }
         return preferencesViewModel;
     }
 
     private void setDefault() {
-        setServerAddress("TEST"); // change to actually read from config.xml
-        setTheme(1); // change to actually read from config.xml
-
+        Map<String, String> configMap = ConfigParser.parseConfig(context, R.xml.config);
+        String theme = configMap.get("theme");
+        String port = configMap.get("server_address");
+        setServerAddress(port);
+        assert theme != null;
+        setTheme(parseInt(theme));
     }
 
     public MutableLiveData<String> getUsernameLiveData() {
@@ -92,6 +120,7 @@ public class PreferencesViewModel extends ViewModel {
     public void setTheme(int theme) {
         themeLiveData.setValue(theme);
         saveThemeToSharedPreferences();
+        settingsDao.updateTheme(theme);
     }
 
     private void loadUsernameFromSharedPreferences() {
@@ -149,6 +178,7 @@ public class PreferencesViewModel extends ViewModel {
     public void setServerAddress(String serverAddress) {
         serverAddressLiveData.setValue(serverAddress);
         saveServerAddressToSharedPreferences();
+        settingsDao.updateServerAddress(serverAddress);
     }
 
     private void loadServerAddressFromSharedPreferences() {

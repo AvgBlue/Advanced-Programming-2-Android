@@ -4,8 +4,10 @@
     android:layout_height="match_parent"
     style="@style/background">
 
-    <include layout="@layout/custom_action_bar_main_no_settings" />
+    <include layout="@layout/custom_action_bar_main_no_settings"
+        android:id="@+id/action_bar"/>
     <RelativeLayout
+        android:layout_below="@id/action_bar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true">

@@ -8,7 +8,7 @@ import androidx.room.Room;
 import androidx.room.RoomDatabase;
 import androidx.room.TypeConverters;
 
-@Database(entities = {User.class, Message.class, Chat.class,Conversation.class}, version = 12)
+@Database(entities = {User.class, Message.class, Chat.class,Conversation.class, Settings.class}, version = 13)
 @TypeConverters({Converters.class})
 public abstract class AppDB extends RoomDatabase {
 
@@ -26,6 +26,7 @@ public abstract class AppDB extends RoomDatabase {
     public abstract MessageDao getMessageDao();
     public abstract ChatDao getChatDao();
     public abstract ConversationDao getConversationDao();
+    public abstract SettingsDao getSettingsDao();
 }
 // how to use:
 // AppDB db = AppDB.getInstance(this);

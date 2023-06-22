@@ -1,5 +1,6 @@
 package com.example.advanced_programming_2_android;
 
+import static com.example.advanced_programming_2_android.settings.ThemeManager.applyTheme;
 import static java.lang.Integer.parseInt;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -26,7 +27,8 @@ public class SettingsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
 
-        PreferencesViewModelFactory factory = new PreferencesViewModelFactory(getApplicationContext());
+        PreferencesViewModelFactory factory;
+        factory = new PreferencesViewModelFactory(getApplicationContext());
         preferencesViewModel = new ViewModelProvider(this, factory).get(PreferencesViewModel.class);
         setServerAddress();
         setTheme();
@@ -57,25 +59,6 @@ public class SettingsActivity extends AppCompatActivity {
         });
     }
 
-    private void applyTheme(){
-        int theme = preferencesViewModel.getThemeLiveData().getValue();
-        // checking if the switch is turned on
-        if (theme == 1) {
-
-            // setting theme to night mode
-            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
-
-        }
-
-        // if the above condition turns false
-        // it means switch is turned off
-        // by-default the switch will be off
-        else {
-            // setting theme to light theme
-            AppCompatDelegate.setDefaultNightMode (AppCompatDelegate.MODE_NIGHT_YES);
-        }
-    }
-
     private void setServerAddress() {
         EditText addressEditText = findViewById(R.id.edHttp);
         addressEditText.setText(preferencesViewModel.getServerAddressLiveData().getValue());
@@ -92,6 +75,6 @@ public class SettingsActivity extends AppCompatActivity {
             button.setChecked(true);
         }
 
-        applyTheme();
+        applyTheme(theme);
     }
 }

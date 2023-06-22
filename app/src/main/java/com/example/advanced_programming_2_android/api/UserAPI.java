@@ -1,13 +1,19 @@
 package com.example.advanced_programming_2_android.api;
 
+import static com.example.advanced_programming_2_android.MyApplication.context;
+
 import android.widget.Toast;
 
 import androidx.lifecycle.MutableLiveData;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.example.advanced_programming_2_android.MyApplication;
 import com.example.advanced_programming_2_android.R;
 import com.example.advanced_programming_2_android.classes.FullUser;
 import com.example.advanced_programming_2_android.database.User;
+import com.example.advanced_programming_2_android.settings.ConfigParser;
+import com.example.advanced_programming_2_android.viewModels.PreferencesViewModel;
+import com.example.advanced_programming_2_android.viewModels.PreferencesViewModelFactory;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -21,7 +27,6 @@ public class UserAPI {
     WebServiceAPI webServiceAPI;
 
     public UserAPI() {
-
         retrofit = new Retrofit.Builder()
                 .baseUrl(MyApplication.context.getString(R.string.BaseUrl))
                 .addConverterFactory(GsonConverterFactory.create())
@@ -45,7 +50,7 @@ public class UserAPI {
 
             @Override
             public void onFailure(Call<User> call, Throwable t) {
-                Toast.makeText(MyApplication.context, "Failed to connect to the server", Toast.LENGTH_LONG).show();
+                Toast.makeText(context, "Failed to connect to the server", Toast.LENGTH_LONG).show();
             }
         });
     }
@@ -59,13 +64,13 @@ public class UserAPI {
                     isUsernameExist.setValue(false);
                 } else {
                     isUsernameExist.setValue(true);
-                    Toast.makeText(MyApplication.context, "username already exist", Toast.LENGTH_LONG).show();
+                    Toast.makeText(context, "username already exist", Toast.LENGTH_LONG).show();
                 }
             }
 
             @Override
             public void onFailure(Call<FullUser> call, Throwable t) {
-                Toast.makeText(MyApplication.context, "Failed to connect to the server", Toast.LENGTH_LONG).show();
+                Toast.makeText(context, "Failed to connect to the server", Toast.LENGTH_LONG).show();
             }
         });
     }
