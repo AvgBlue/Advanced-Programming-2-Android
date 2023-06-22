@@ -52,8 +52,8 @@ public class ChatActivity extends AppCompatActivity {
         String token = preferencesViewModel.getTokenLiveData().getValue();
         String username = preferencesViewModel.getUsernameLiveData().getValue();
 
-        ChatViewModelFactory factoryChat = new ChatViewModelFactory("your_token_here");
-        ChatViewModel viewModel = new ViewModelProvider(this, factory).get(ChatViewModel.class);
+        ChatViewModelFactory factoryChat = new ChatViewModelFactory(token);
+        chatViewModel = new ViewModelProvider(this, factoryChat).get(ChatViewModel.class);
 
         UserAPI userAPI = new UserAPI();
         userAPI.getUserByUsername(username, token);
