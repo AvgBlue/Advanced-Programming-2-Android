@@ -1,5 +1,6 @@
 package com.example.advanced_programming_2_android;
 
+import android.annotation.SuppressLint;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,7 +12,10 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.example.advanced_programming_2_android.database.Chat;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class ChatAdapter extends BaseAdapter {
@@ -67,7 +71,7 @@ public class ChatAdapter extends BaseAdapter {
                 .into(viewHolder.ivProfilePic);
         viewHolder.tvDisplayName.setText(c.getUser().getDisplayName());
         viewHolder.tvLastMessage.setText(c.getLastMessage().getContent());
-        viewHolder.tvTimestamp.setText(c.getLastMessage().getCreated());
+        viewHolder.tvTimestamp.setText(changeStringToDate(c.getLastMessage().getCreated()));
 
         return convertView;
     }
@@ -76,5 +80,21 @@ public class ChatAdapter extends BaseAdapter {
         chats.clear();
         chats.addAll(filteredChats);
         notifyDataSetChanged();
+    }
+
+    public String changeStringToDate(String timestamp) {
+        String outputDateString = "";
+
+        @SuppressLint("SimpleDateFormat") SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS");
+        @SuppressLint("SimpleDateFormat") SimpleDateFormat outputFormat = new SimpleDateFormat("dd.MM.yyyy, mm:ss");
+
+        try {
+            Date date = inputFormat.parse(timestamp);
+            outputDateString = outputFormat.format(date);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        return outputDateString;
     }
 }
