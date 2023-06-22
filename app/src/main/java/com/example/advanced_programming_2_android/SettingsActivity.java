@@ -27,8 +27,7 @@ public class SettingsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
 
-        PreferencesViewModelFactory factory;
-        factory = new PreferencesViewModelFactory(getApplicationContext());
+        PreferencesViewModelFactory factory = new PreferencesViewModelFactory(getApplicationContext());
         preferencesViewModel = new ViewModelProvider(this, factory).get(PreferencesViewModel.class);
         setServerAddress();
         setTheme();
