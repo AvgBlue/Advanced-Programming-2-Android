@@ -5,6 +5,7 @@ import static java.lang.Integer.parseInt;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
+import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.os.Bundle;
@@ -15,7 +16,6 @@ import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import com.example.advanced_programming_2_android.viewModels.PreferencesViewModel;
-import com.example.advanced_programming_2_android.viewModels.PreferencesViewModelFactory;
 
 
 public class SettingsActivity extends AppCompatActivity {
@@ -27,9 +27,7 @@ public class SettingsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
 
-        PreferencesViewModelFactory factory;
-        factory = new PreferencesViewModelFactory(getApplicationContext());
-        preferencesViewModel = new ViewModelProvider(this, factory).get(PreferencesViewModel.class);
+        preferencesViewModel = new ViewModelProvider(this).get(PreferencesViewModel.class);
         setServerAddress();
         setTheme();
 
@@ -51,8 +49,8 @@ public class SettingsActivity extends AppCompatActivity {
             String toastMessage = "Applied";
             Toast.makeText(getApplicationContext(), toastMessage, Toast.LENGTH_SHORT).show();
 
-            preferencesViewModel.setServerAddress(editTextValue);
-            preferencesViewModel.setTheme(radioButtonTag);
+            preferencesViewModel.setServerAddress(this, editTextValue);
+            preferencesViewModel.setTheme(this, radioButtonTag);
 
             setServerAddress();
             setTheme();
@@ -61,20 +59,21 @@ public class SettingsActivity extends AppCompatActivity {
 
     private void setServerAddress() {
         EditText addressEditText = findViewById(R.id.edHttp);
-        addressEditText.setText(preferencesViewModel.getServerAddressLiveData().getValue());
+        addressEditText.setText(preferencesViewModel.getServerAddressLiveData(this).getValue());
     }
 
     private void setTheme() {
         RadioButton button = findViewById(R.id.rbLight);
-        Integer theme = preferencesViewModel.getThemeLiveData().getValue();
-        if (theme != null) {
-            if (theme == 2) {
-                button = findViewById(R.id.rbDark);
+        MutableLiveData<Integer> theme = preferencesViewModel.getThemeLiveData(this);
+        Integer themeValue = theme.getValue();  // Store the value in a separate variable
 
+        if (themeValue != null) {  // Add a null check here
+            if (themeValue == 2) {
+                button = findViewById(R.id.rbDark);
             }
             button.setChecked(true);
+            applyTheme(themeValue);  // Invoke applyTheme() only if themeValue is not null
         }
-
-        applyTheme(theme);
     }
+
 }

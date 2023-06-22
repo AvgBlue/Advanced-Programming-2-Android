@@ -23,171 +23,147 @@ public class PreferencesViewModel extends ViewModel {
     private MutableLiveData<String> passwordLiveData;
     private MutableLiveData<Integer> themeLiveData;
     private MutableLiveData<String> serverAddressLiveData;
-    private static SharedPreferences sharedPreferences;
 
-    private static PreferencesViewModel preferencesViewModel = null;
-
-    private static Context context;
-    private SettingsDao settingsDao;
-
-    private PreferencesViewModel(Context context) {
-        this.context = context;
-        sharedPreferences = context.getSharedPreferences(context.getString(R.string.preference_file_key), Context.MODE_PRIVATE);
+    private PreferencesViewModel() {
         usernameLiveData = new MutableLiveData<>();
         tokenLiveData = new MutableLiveData<>();
         passwordLiveData = new MutableLiveData<>();
         themeLiveData = new MutableLiveData<>();
         serverAddressLiveData = new MutableLiveData<>();
-
-        settingsDao = AppDB.getInstance(context).getSettingsDao();
-        Settings settings = settingsDao.getSettings();
-        if (settings == null) {
-            // Settings not initialized, create and insert into the database
-            settings = new Settings();
-            settingsDao.insert(settings);
-            preferencesViewModel.setDefault();
-        }
-        else{
-            setTheme(settingsDao.getTheme());
-            setServerAddress(settingsDao.getServerAddress());
-        }
     }
 
-    public static PreferencesViewModel createPreferencesViewModel(Context context){
-        if(preferencesViewModel == null){
-            preferencesViewModel = new PreferencesViewModel(context);
-        }
-        return preferencesViewModel;
+    private SharedPreferences getSharedPreferences(Context context){
+        return context.getSharedPreferences(context.getString(R.string.preference_file_key), Context.MODE_PRIVATE);
     }
 
-    private void setDefault() {
+    public void setDefault(Context context) {
         Map<String, String> configMap = ConfigParser.parseConfig(context, R.xml.config);
         String theme = configMap.get("theme");
         String port = configMap.get("server_address");
-        setServerAddress(port);
+        setServerAddress(context, port);
         assert theme != null;
-        setTheme(parseInt(theme));
+        setTheme(context, parseInt(theme));
     }
 
-    public MutableLiveData<String> getUsernameLiveData() {
+    public MutableLiveData<String> getUsernameLiveData(Context context) {
         if (usernameLiveData == null) {
             usernameLiveData = new MutableLiveData<>();
-            loadUsernameFromSharedPreferences();
+            loadUsernameFromSharedPreferences(context);
         }
         return usernameLiveData;
     }
 
 
-    public MutableLiveData<String> getTokenLiveData() {
+    public MutableLiveData<String> getTokenLiveData(Context context) {
         if (tokenLiveData == null) {
             tokenLiveData = new MutableLiveData<>();
-            loadTokenFromSharedPreferences();
+            loadTokenFromSharedPreferences(context);
         }
         return tokenLiveData;
     }
 
-    public MutableLiveData<String> getPasswordLiveData() {
+    public MutableLiveData<String> getPasswordLiveData(Context context) {
         if (passwordLiveData == null) {
             passwordLiveData = new MutableLiveData<>();
-            loadPasswordFromSharedPreferences();
+            loadPasswordFromSharedPreferences(context);
         }
         return passwordLiveData;
     }
 
-    public MutableLiveData<Integer> getThemeLiveData() {
+    public MutableLiveData<Integer> getThemeLiveData(Context context) {
         if (themeLiveData == null) {
             themeLiveData = new MutableLiveData<>();
-            loadThemeFromSharedPreferences();
+            loadThemeFromSharedPreferences(context);
         }
         return themeLiveData;
     }
 
-    public void setUsername(String username) {
+    public void setUsername(Context context,String username) {
         usernameLiveData.setValue(username);
-        saveUsernameToSharedPreferences();
+        saveUsernameToSharedPreferences(context);
     }
 
-    public void setToken(String token) {
+    public void setToken(Context context, String token) {
         tokenLiveData.setValue(token);
-        saveTokenToSharedPreferences();
+        saveTokenToSharedPreferences(context);
     }
 
-    public void setPassword(String password) {
+    public void setPassword(Context context, String password) {
         passwordLiveData.setValue(password);
-        savePasswordToSharedPreferences();
+        savePasswordToSharedPreferences(context);
     }
 
-    public void setTheme(int theme) {
+    public void setTheme(Context context,int theme) {
         themeLiveData.setValue(theme);
-        saveThemeToSharedPreferences();
-        settingsDao.updateTheme(theme);
+        saveThemeToSharedPreferences(context);
+        AppDB.getInstance(context).getSettingsDao().updateTheme(theme);
     }
 
-    private void loadUsernameFromSharedPreferences() {
-        String username = sharedPreferences.getString("username", "");
+    private void loadUsernameFromSharedPreferences(Context context) {
+        String username =  getSharedPreferences(context).getString("username", "");
         usernameLiveData.setValue(username);
     }
 
-    private void loadTokenFromSharedPreferences() {
-        String token = sharedPreferences.getString("token", "");
+    private void loadTokenFromSharedPreferences(Context context) {
+        String token = getSharedPreferences(context).getString("token", "");
         tokenLiveData.setValue(token);
     }
 
-    private void loadPasswordFromSharedPreferences() {
-        String password = sharedPreferences.getString("password", "");
+    private void loadPasswordFromSharedPreferences(Context context) {
+        String password = getSharedPreferences(context).getString("password", "");
         passwordLiveData.setValue(password);
     }
 
-    private void loadThemeFromSharedPreferences() {
-        int theme = sharedPreferences.getInt("theme", 0);
+    private void loadThemeFromSharedPreferences(Context context) {
+        int theme = getSharedPreferences(context).getInt("theme", 0);
         themeLiveData.setValue(theme);
     }
 
-    private void saveUsernameToSharedPreferences() {
-        SharedPreferences.Editor editor = sharedPreferences.edit();
+    private void saveUsernameToSharedPreferences(Context context) {
+        SharedPreferences.Editor editor = getSharedPreferences(context).edit();
         editor.putString("username", usernameLiveData.getValue());
         editor.apply();
     }
 
-    private void saveTokenToSharedPreferences() {
-        SharedPreferences.Editor editor = sharedPreferences.edit();
+    private void saveTokenToSharedPreferences(Context context) {
+        SharedPreferences.Editor editor = getSharedPreferences(context).edit();
         editor.putString("token", tokenLiveData.getValue());
         editor.apply();
     }
 
-    private void savePasswordToSharedPreferences() {
-        SharedPreferences.Editor editor = sharedPreferences.edit();
+    private void savePasswordToSharedPreferences(Context context) {
+        SharedPreferences.Editor editor = getSharedPreferences(context).edit();
         editor.putString("password", passwordLiveData.getValue());
         editor.apply();
     }
 
-    private void saveThemeToSharedPreferences() {
-        SharedPreferences.Editor editor = sharedPreferences.edit();
+    private void saveThemeToSharedPreferences(Context context) {
+        SharedPreferences.Editor editor = getSharedPreferences(context).edit();
         editor.putInt("theme", themeLiveData.getValue());
         editor.apply();
     }
 
-    public MutableLiveData<String> getServerAddressLiveData() {
+    public MutableLiveData<String> getServerAddressLiveData(Context context) {
         if (serverAddressLiveData == null) {
             serverAddressLiveData = new MutableLiveData<>();
-            loadServerAddressFromSharedPreferences();
+            loadServerAddressFromSharedPreferences(context);
         }
         return serverAddressLiveData;
     }
 
-    public void setServerAddress(String serverAddress) {
+    public void setServerAddress(Context context, String serverAddress) {
         serverAddressLiveData.setValue(serverAddress);
-        saveServerAddressToSharedPreferences();
-        settingsDao.updateServerAddress(serverAddress);
+        saveServerAddressToSharedPreferences(context);
+        AppDB.getInstance(context).getSettingsDao().updateServerAddress(serverAddress);
     }
 
-    private void loadServerAddressFromSharedPreferences() {
-        String serverAddress = sharedPreferences.getString("serverAddress", "");
+    private void loadServerAddressFromSharedPreferences(Context context) {
+        String serverAddress = getSharedPreferences(context).getString("serverAddress", "");
         serverAddressLiveData.setValue(serverAddress);
     }
 
-    private void saveServerAddressToSharedPreferences() {
-        SharedPreferences.Editor editor = sharedPreferences.edit();
+    private void saveServerAddressToSharedPreferences(Context context) {
+        SharedPreferences.Editor editor = getSharedPreferences(context).edit();
         editor.putString("serverAddress", serverAddressLiveData.getValue());
         editor.apply();
     }

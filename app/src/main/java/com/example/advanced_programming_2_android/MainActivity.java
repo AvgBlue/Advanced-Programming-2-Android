@@ -4,6 +4,7 @@ import static com.example.advanced_programming_2_android.settings.ThemeManager.a
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.content.Intent;
@@ -18,7 +19,6 @@ import com.example.advanced_programming_2_android.database.AppDB;
 import com.example.advanced_programming_2_android.database.Settings;
 import com.example.advanced_programming_2_android.database.SettingsDao;
 import com.example.advanced_programming_2_android.viewModels.PreferencesViewModel;
-import com.example.advanced_programming_2_android.viewModels.PreferencesViewModelFactory;
 
 public class MainActivity extends AppCompatActivity {
     private Button btnSignIn;
@@ -34,9 +34,28 @@ public class MainActivity extends AppCompatActivity {
         btnRegister = findViewById(R.id.register_btn);
         settingsButton = findViewById(R.id.settings_action_bar);
 
-        PreferencesViewModelFactory factory = new PreferencesViewModelFactory(getApplicationContext());
-        PreferencesViewModel preferencesViewModel = new ViewModelProvider(this, factory).get(PreferencesViewModel.class);
-        applyTheme(preferencesViewModel.getThemeLiveData().getValue());
+        // set up the PreferencesViewModel
+        PreferencesViewModel preferencesViewModel = new ViewModelProvider(this).get(PreferencesViewModel.class);
+        preferencesViewModel.setDefault(this);
+        MutableLiveData<Integer> theme = preferencesViewModel.getThemeLiveData(this);
+        if(theme.getValue() != null){
+            applyTheme(theme.getValue());
+        }
+
+
+        // read the information from the database
+        SettingsDao settingsDao = AppDB.getInstance(this).getSettingsDao();
+        Settings settings = settingsDao.getSettings();
+        if (settings == null) {
+            // Settings not initialized, create and insert into the database
+            settings = new Settings();
+            settingsDao.insert(settings);
+        }
+        else{
+            preferencesViewModel.setServerAddress(this, settingsDao.getServerAddress());
+            preferencesViewModel.setTheme(this, settingsDao.getTheme());
+        }
+
 
 
         btnSignIn.setOnClickListener(view -> {

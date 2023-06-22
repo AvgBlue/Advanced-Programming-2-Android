@@ -13,7 +13,6 @@ import com.example.advanced_programming_2_android.classes.FullUser;
 import com.example.advanced_programming_2_android.database.User;
 import com.example.advanced_programming_2_android.settings.ConfigParser;
 import com.example.advanced_programming_2_android.viewModels.PreferencesViewModel;
-import com.example.advanced_programming_2_android.viewModels.PreferencesViewModelFactory;
 
 import retrofit2.Call;
 import retrofit2.Callback;
