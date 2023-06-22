@@ -1,0 +1,102 @@
+package com.example.advanced_programming_2_android;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.advanced_programming_2_android.classes.MessageU;
+
+import java.util.List;
+
+public class MessageAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+
+    private List<MessageU> messages;
+    private String currentUser; // Assuming you have a variable to store the current user ID
+
+    private static final int VIEW_TYPE_RECEIVED = 1;
+    private static final int VIEW_TYPE_SENT = 2;
+
+
+    public MessageAdapter(List<MessageU> messages, String currentUser) {
+        this.messages = messages;
+        this.currentUser = currentUser;
+    }
+
+    @NonNull
+    @Override
+    public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        LayoutInflater inflater = LayoutInflater.from(parent.getContext());
+        View view;
+
+        if (viewType == VIEW_TYPE_RECEIVED) {
+            view = inflater.inflate(R.layout.item_container_recieved_message, parent, false);
+            return new ReceivedMessageViewHolder(view);
+        } else {
+            view = inflater.inflate(R.layout.item_container_send_message, parent, false);
+            return new SentMessageViewHolder(view);
+        }
+    }
+
+    @Override
+    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
+        MessageU message = messages.get(position);
+
+        if (holder instanceof ReceivedMessageViewHolder) {
+            ReceivedMessageViewHolder receivedHolder = (ReceivedMessageViewHolder) holder;
+            receivedHolder.tvContent.setText(message.getContact());
+            receivedHolder.tvTime.setText(message.getCreatedDate());
+        } else if (holder instanceof SentMessageViewHolder) {
+            SentMessageViewHolder sentHolder = (SentMessageViewHolder) holder;
+            sentHolder.tvContent.setText(message.getContact());
+            sentHolder.tvTime.setText(message.getCreatedDate());
+        }
+    }
+
+    @Override
+    public int getItemCount() {
+        if (messages == null) {
+            return 0; // Return 0 when the messages list is null
+        }
+        return messages.size();
+    }
+
+    @Override
+    public int getItemViewType(int position) {
+        MessageU message = messages.get(position);
+
+        if (message.getSenderUser().getUsername().equals(currentUser)) {
+            return VIEW_TYPE_SENT;
+        } else {
+            return VIEW_TYPE_RECEIVED;
+        }
+    }
+
+    public void setMessages(List<MessageU> messages) {
+        this.messages = messages;
+    }
+
+    private static class ReceivedMessageViewHolder extends RecyclerView.ViewHolder {
+        TextView tvContent;
+        TextView tvTime;
+
+        ReceivedMessageViewHolder(@NonNull View itemView) {
+            super(itemView);
+            tvContent = itemView.findViewById(R.id.tvContent);
+            tvTime = itemView.findViewById(R.id.tvTime);
+        }
+    }
+
+    private static class SentMessageViewHolder extends RecyclerView.ViewHolder {
+        TextView tvContent;
+        TextView tvTime;
+
+        SentMessageViewHolder(@NonNull View itemView) {
+            super(itemView);
+            tvContent = itemView.findViewById(R.id.tvContent);
+            tvTime = itemView.findViewById(R.id.tvTime);
+        }
+    }
+}
