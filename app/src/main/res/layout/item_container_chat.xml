@@ -1,68 +1,62 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="8dp">
+    android:orientation="horizontal"
+    android:padding="8dp"
+    android:background="@drawable/chat_background">
 
     <com.makeramen.roundedimageview.RoundedImageView
         android:id="@+id/ChatProfilePic"
-        android:layout_width="35dp"
-        android:layout_height="35dp"
-        android:scaleType="centerCrop"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:riv_oval="true" />
-
-    <View
-        android:id="@+id/viewSupporter"
-        android:layout_width="1dp"
-        android:layout_height="1dp"
-        app:layout_constraintBottom_toBottomOf="@id/ChatProfilePic"
-        app:layout_constraintStart_toEndOf="@id/ChatProfilePic"
-        app:layout_constraintTop_toTopOf="@id/ChatProfilePic" />
-
-    <TextView
-        android:id="@+id/tvChatDisplayName"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        android:ellipsize="end"
-        android:maxLines="1"
-        android:textColor="@color/black"
-        android:textSize="13sp"
-        app:layout_constraintBottom_toTopOf="@id/viewSupporter"
-        app:layout_constraintEnd_toStartOf="@id/tvChatTimestamp"
-        app:layout_constraintStart_toEndOf="@id/ChatProfilePic" />
+        android:adjustViewBounds="true"
+        android:scaleType="fitCenter"
+        android:minHeight="48dp"
+        app:riv_oval="true"
+        android:layout_weight="1"/>
 
-    <TextView
-        android:id="@+id/tvChatLastMessage"
+    <LinearLayout
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        android:ellipsize="end"
-        android:maxLines="1"
-        android:textColor="@color/black"
-        android:textSize="10sp"
-        app:layout_constraintEnd_toStartOf="@id/tvChatTimestamp"
-        app:layout_constraintStart_toEndOf="@id/ChatProfilePic"
-        app:layout_constraintTop_toBottomOf="@id/viewSupporter" />
+        android:layout_height="match_parent"
+        android:layout_weight="4"
+        android:orientation="vertical"
+        android:layout_marginLeft="10dp">
+
+        <TextView
+            android:id="@+id/tvChatDisplayName"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="3"
+            android:gravity="center_vertical"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:textColor="@color/black"
+            android:textSize="30sp"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/tvChatLastMessage"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="2"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:gravity="center_vertical"
+            android:textColor="@color/black"
+            android:textSize="25sp" />
+    </LinearLayout>
 
     <TextView
+        android:layout_gravity="top"
+        android:layout_weight="1"
+        android:gravity="center_vertical"
+        android:textColor="@color/black"
         android:id="@+id/tvChatTimestamp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/tvChatLastMessage"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintHorizontal_bias="1.0" />
+        android:textSize="20sp"
+        />
 
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>

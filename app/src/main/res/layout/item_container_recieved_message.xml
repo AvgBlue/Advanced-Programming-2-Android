@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
+    android:gravity="end"
     android:padding="4dp">
 
 
@@ -11,7 +12,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:background="@drawable/shape_bg_incoming_bubble">
+        android:background="@drawable/shape_bg_outcoming_bubble">
         <TextView
             android:layout_gravity="start"
             android:id="@+id/tvContent"
@@ -19,23 +20,24 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:lineSpacingExtra="2dp"
-            android:paddingStart="20dp"
+            android:paddingEnd="20dp"
             android:paddingTop="4dp"
-            android:paddingEnd="10dp"
+            android:paddingStart="10dp"
             android:text="@string/lorem_impsum"
             android:textColor="@color/black"
             android:textSize="20sp"
             />
 
+
         <TextView
             android:id="@+id/tvTime"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="end"
+            android:layout_gravity="start"
             android:layout_weight="1"
             android:layout_marginTop="4dp"
             android:text="0:00"
-            android:paddingEnd="4dp"
+            android:paddingStart="4dp"
             android:paddingBottom="4dp"
             android:textColor="@color/gray"
             android:textSize="11sp" />

@@ -10,11 +10,11 @@
             android:id="@+id/logo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:adjustViewBounds="true"
+            android:scaleType="fitCenter"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="50dp"
             android:src="@drawable/chit_chat_logo"
-            android:adjustViewBounds="true"
-            android:scaleType="fitCenter"
             android:padding="10dp" />
 
         <Button
