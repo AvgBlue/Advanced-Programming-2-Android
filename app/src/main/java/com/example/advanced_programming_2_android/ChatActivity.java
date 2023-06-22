@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModelProvider;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -31,6 +32,7 @@ public class ChatActivity extends AppCompatActivity {
     private EditText etSearch;
     private FloatingActionButton addChatBtn;
     private ImageView settings;
+    private ImageView logout;
     private ChatAdapter chatAdapter;
     private TextView displayName;
     private RoundedImageView profilePic;
@@ -61,6 +63,7 @@ public class ChatActivity extends AppCompatActivity {
         etSearch = findViewById(R.id.etSearch);
         addChatBtn = findViewById(R.id.btnAddChat);
         settings = findViewById(R.id.settings_action_bar);
+        logout = findViewById(R.id.logout_action_bar);
 
         displayName.setText(username);
         myUser.observe(this, user -> {
@@ -112,6 +115,11 @@ public class ChatActivity extends AppCompatActivity {
 
         settings.setOnClickListener(view -> {
             Intent intent = new Intent(this, SettingsActivity.class);
+            startActivity(intent);
+        });
+
+        logout.setOnClickListener(view -> {
+            Intent intent = new Intent(this, LogInActivity.class);
             startActivity(intent);
         });
     }

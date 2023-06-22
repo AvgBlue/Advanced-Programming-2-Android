@@ -13,6 +13,7 @@ import com.makeramen.roundedimageview.RoundedImageView;
 
 public class MessageActivity extends AppCompatActivity {
     private ImageView settings;
+    private ImageView logout;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -25,6 +26,7 @@ public class MessageActivity extends AppCompatActivity {
         RoundedImageView rivProfilePic = findViewById(R.id.profilePic);
         TextView tvDisplayName = findViewById(R.id.displayName);
         settings = findViewById(R.id.settings_action_bar);
+        logout = findViewById(R.id.logout_action_bar);
 
         Glide.with(this)
                 .load(profilePic)
@@ -33,6 +35,11 @@ public class MessageActivity extends AppCompatActivity {
 
         settings.setOnClickListener(view -> {
             Intent intent = new Intent(this, SettingsActivity.class);
+            startActivity(intent);
+        });
+
+        logout.setOnClickListener(view -> {
+            Intent intent = new Intent(this, LogInActivity.class);
             startActivity(intent);
         });
     }

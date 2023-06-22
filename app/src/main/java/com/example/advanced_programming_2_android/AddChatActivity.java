@@ -14,6 +14,8 @@ public class AddChatActivity extends AppCompatActivity {
     private Button btnAddChat;
     private ImageView settings;
 
+    private ImageView logout;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -22,6 +24,7 @@ public class AddChatActivity extends AppCompatActivity {
         etUsername = findViewById(R.id.edAddChatUsername);
         btnAddChat = findViewById(R.id.btnAddChat);
         settings = findViewById(R.id.settings_action_bar);
+        logout = findViewById(R.id.logout_action_bar);
 
         btnAddChat.setOnClickListener(view -> {
             Intent intent = new Intent(this, ChatActivity.class);
@@ -30,6 +33,11 @@ public class AddChatActivity extends AppCompatActivity {
 
         settings.setOnClickListener(view -> {
             Intent intent = new Intent(this, SettingsActivity.class);
+            startActivity(intent);
+        });
+
+        logout.setOnClickListener(view -> {
+            Intent intent = new Intent(this, LogInActivity.class);
             startActivity(intent);
         });
     }
