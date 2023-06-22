@@ -20,6 +20,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class ChatsAPI {
 
     private MutableLiveData<List<Chat>> chats;
+    private MutableLiveData<Boolean> isAddChatSucceeded;
     private Retrofit retrofit;
     private WebServiceAPI webServiceAPI;
 
@@ -58,9 +59,11 @@ public class ChatsAPI {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
                 if (response.isSuccessful()) {
-                    // Chat created successfully
+                    Toast.makeText(MyApplication.context, "New chat was created", Toast.LENGTH_LONG).show();
+                    isAddChatSucceeded.postValue(true);
                 } else {
-                    // Handle the error
+                    Toast.makeText(MyApplication.context, "The username " + username + " does not exist", Toast.LENGTH_LONG).show();
+                    isAddChatSucceeded.postValue(false);
                 }
             }
 
@@ -149,7 +152,8 @@ public class ChatsAPI {
         });
     }
 
-//    public MutableLiveData<List<Chat>> getChatMutableLiveData() {
-//        return chatMutableLiveData;
-//    }
+    // maybe will be needed to change to repository
+    public MutableLiveData<Boolean> getIsAddChatSucceeded() {
+        return isAddChatSucceeded;
+    }
 }

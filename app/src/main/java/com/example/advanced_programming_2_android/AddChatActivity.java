@@ -11,20 +11,26 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.advanced_programming_2_android.api.UserAPI;
+import com.example.advanced_programming_2_android.database.Chat;
 import com.example.advanced_programming_2_android.database.User;
+import com.example.advanced_programming_2_android.viewModels.ChatViewModel;
 import com.makeramen.roundedimageview.RoundedImageView;
 
-public class AddChatActivity extends AppCompatActivity {
+import java.util.List;
 
+public class AddChatActivity extends AppCompatActivity {
+    private List<Chat> chats;
     private TextView displayName;
     private RoundedImageView profilePic;
     private EditText etUsername;
     private Button btnAddChat;
     private ImageView settings;
     private ImageView logout;
+    private ChatViewModel chatViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,9 +58,36 @@ public class AddChatActivity extends AppCompatActivity {
                     .into(profilePic);
         });
 
+        chatViewModel = new ChatViewModel(token);
+
+        chatViewModel.getChatsApi();
+        chatViewModel.getChat().observe(this, chatList -> {
+            chats = chatList;
+        });
+
         btnAddChat.setOnClickListener(view -> {
-            Intent intent = new Intent(this, ChatActivity.class);
-            startActivity(intent);
+            String chatWithUsername = etUsername.getText().toString();
+            Boolean isUsernameAlreadyExistInChat = false;
+            for (Chat chatWith : chats) {
+                if (chatWith.getUser().getUsername().equals(chatWithUsername)) {
+                    isUsernameAlreadyExistInChat = true;
+                    Toast.makeText(MyApplication.context, chatWith.getUser().getDisplayName() + " is already in the friend list", Toast.LENGTH_LONG).show();
+                    break;
+                }
+            }
+            if (chatWithUsername.equals(username)) {
+                Toast.makeText(MyApplication.context, "Cannot add yourself", Toast.LENGTH_LONG).show();
+            } else {
+                if (!isUsernameAlreadyExistInChat) {
+                    chatViewModel.createChatApi(chatWithUsername);
+//                    chatViewModel.getIsAddChatSucceeded().observe(this, isAddChatSucceeded -> {
+//                        if (isAddChatSucceeded) {
+//                            Intent intent = new Intent(this, ChatActivity.class);
+//                            startActivity(intent);
+//                        }
+//                    });
+                }
+            }
         });
 
         settings.setOnClickListener(view -> {

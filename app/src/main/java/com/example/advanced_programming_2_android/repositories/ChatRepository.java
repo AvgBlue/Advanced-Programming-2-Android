@@ -20,7 +20,6 @@ public class ChatRepository {
     private ChatDao chatDao;
     private ChatListData chatListData;
     private ChatsAPI chatsAPI;
-
     private String token;
 
     public ChatRepository(String token) {
@@ -53,9 +52,16 @@ public class ChatRepository {
     public LiveData<List<Chat>> getAllChats() {
         return chatListData;
     }
+    public LiveData<Boolean> getIsAddChatSucceeded() {
+        return chatsAPI.getIsAddChatSucceeded();
+    }
 
     public void getChatsApi(){
         chatsAPI.getChats(token);
+    }
+
+    public void createChatApi(String chatWithUsername) {
+        chatsAPI.createChat(chatWithUsername, token);
     }
 
 }
