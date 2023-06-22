@@ -1,12 +1,15 @@
 package com.example.advanced_programming_2_android;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatImageView;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -23,8 +26,9 @@ public class MessageActivity extends AppCompatActivity {
     private ImageView settings;
     private ImageView logout;
     private PreferencesViewModel preferencesViewModel;
-
     private ConversationViewModel conversationViewModel;
+    private EditText etInput;
+    private AppCompatImageView sendMessageButton;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,6 +49,8 @@ public class MessageActivity extends AppCompatActivity {
         TextView tvDisplayName = findViewById(R.id.displayName);
         settings = findViewById(R.id.settings_action_bar);
         logout = findViewById(R.id.logout_action_bar);
+        etInput = findViewById(R.id.inputMessage);
+        sendMessageButton = findViewById(R.id.sendMessageButton);
 
         Glide.with(this)
                 .load(profilePic)
@@ -54,8 +60,13 @@ public class MessageActivity extends AppCompatActivity {
         conversationViewModel.getChatByIdApi();
         conversationViewModel.getConversation().observe(this, conversation -> {
             if (conversation != null) {
-                
+
             }
+        });
+
+        sendMessageButton.setOnClickListener(view -> {
+            String messageToSend = etInput.getText().toString();
+            conversationViewModel.sendMessageApi(messageToSend, chatId);
         });
 
         settings.setOnClickListener(view -> {

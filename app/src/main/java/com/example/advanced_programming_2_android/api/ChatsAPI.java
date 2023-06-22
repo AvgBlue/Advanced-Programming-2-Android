@@ -1,12 +1,12 @@
 package com.example.advanced_programming_2_android.api;
 
-import android.util.Log;
 import android.widget.Toast;
 
 import androidx.lifecycle.MutableLiveData;
 
 import com.example.advanced_programming_2_android.MyApplication;
 import com.example.advanced_programming_2_android.R;
+import com.example.advanced_programming_2_android.classes.Msg;
 import com.example.advanced_programming_2_android.classes.Username;
 import com.example.advanced_programming_2_android.database.Chat;
 import com.example.advanced_programming_2_android.database.Conversation;
@@ -118,14 +118,15 @@ public class ChatsAPI {
     }
 
     public void createMessage(String message, int id, String authorization) {
-        Call<Void> call = webServiceAPI.createMessage(message, id, "bearer '" + authorization + "'");
+        Msg msg = new Msg(message);
+        Call<Void> call = webServiceAPI.createMessage(msg, id, "bearer '" + authorization + "'");
         call.enqueue(new Callback<Void>() {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
                 if (response.isSuccessful()) {
                     // Message created successfully
                 } else {
-                    // Handle the error
+                    Toast.makeText(MyApplication.context, "Failed to send message", Toast.LENGTH_LONG).show();
                 }
             }
 

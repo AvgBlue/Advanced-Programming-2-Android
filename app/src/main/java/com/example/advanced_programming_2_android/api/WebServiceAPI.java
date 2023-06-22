@@ -2,6 +2,7 @@ package com.example.advanced_programming_2_android.api;
 
 import com.example.advanced_programming_2_android.classes.LoginRequest;
 import com.example.advanced_programming_2_android.classes.FullUser;
+import com.example.advanced_programming_2_android.classes.Msg;
 import com.example.advanced_programming_2_android.classes.Username;
 import com.example.advanced_programming_2_android.database.Chat;
 import com.example.advanced_programming_2_android.database.Conversation;
@@ -31,7 +32,7 @@ public interface WebServiceAPI {
     Call<Void> deleteChat(@Path("id") int id, @Header("authorization") String authorization);
 
     @POST("api/Chats/{id}/messages")
-    Call<Void> createMessage(@Body String message, @Path("id") int id, @Header("authorization") String authorization);
+    Call<Void> createMessage(@Body Msg msg, @Path("id") int id, @Header("authorization") String authorization);
 
     @GET("api/Chats/{id}/messages")
     Call<Chat> getMessagesByChatId(@Path("id") int id, @Header("authorization") String authorization);

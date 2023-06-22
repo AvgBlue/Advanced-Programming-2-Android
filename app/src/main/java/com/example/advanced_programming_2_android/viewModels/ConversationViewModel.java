@@ -22,4 +22,8 @@ public class ConversationViewModel extends ViewModel {
     public void getChatByIdApi(){
         conversationRepository.getConversationById();
     }
+
+    public void sendMessageApi(String message, int chatId){
+        conversationRepository.sendMessageApi(message, chatId);
+    }
 }

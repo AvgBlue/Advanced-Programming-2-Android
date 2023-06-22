@@ -50,4 +50,7 @@ public class ConversationRepository {
         chatsAPI.getChatById(conversationData, conversationId, token);
     }
 
+    public void sendMessageApi(String message, int chatId) {
+        chatsAPI.createMessage(message, chatId, token);
+    }
 }
