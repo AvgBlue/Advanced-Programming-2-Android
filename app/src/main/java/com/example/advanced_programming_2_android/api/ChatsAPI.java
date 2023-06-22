@@ -7,6 +7,7 @@ import androidx.lifecycle.MutableLiveData;
 
 import com.example.advanced_programming_2_android.MyApplication;
 import com.example.advanced_programming_2_android.R;
+import com.example.advanced_programming_2_android.classes.Username;
 import com.example.advanced_programming_2_android.database.Chat;
 
 import java.util.List;
@@ -31,6 +32,7 @@ public class ChatsAPI {
                 .build();
         webServiceAPI = retrofit.create(WebServiceAPI.class);
         this.chats = chatsListData;
+        isAddChatSucceeded = new MutableLiveData<>();
     }
 
     public void getChats(String authorization) {
@@ -53,7 +55,8 @@ public class ChatsAPI {
         });
     }
 
-    public void createChat(String username, String authorization) {
+    public void createChat(String chatWithUsername, String authorization) {
+        Username username = new Username(chatWithUsername);
         Call<Void> call = webServiceAPI.createChat(username,"bearer '" + authorization + "'");
         call.enqueue(new Callback<Void>() {
             @Override
@@ -61,8 +64,11 @@ public class ChatsAPI {
                 if (response.isSuccessful()) {
                     Toast.makeText(MyApplication.context, "New chat was created", Toast.LENGTH_LONG).show();
                     isAddChatSucceeded.postValue(true);
+                } else if (response.code() == 400) {
+                    Toast.makeText(MyApplication.context, "The username " + chatWithUsername + " does not exist", Toast.LENGTH_LONG).show();
+                    isAddChatSucceeded.postValue(false);
                 } else {
-                    Toast.makeText(MyApplication.context, "The username " + username + " does not exist", Toast.LENGTH_LONG).show();
+                    Toast.makeText(MyApplication.context, "Failed to create chat", Toast.LENGTH_LONG).show();
                     isAddChatSucceeded.postValue(false);
                 }
             }

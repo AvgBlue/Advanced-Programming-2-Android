@@ -70,8 +70,10 @@ public class ChatAdapter extends BaseAdapter {
                 .load(c.getUser().getProfilePic())
                 .into(viewHolder.ivProfilePic);
         viewHolder.tvDisplayName.setText(c.getUser().getDisplayName());
-        viewHolder.tvLastMessage.setText(c.getLastMessage().getContent());
-        viewHolder.tvTimestamp.setText(changeStringToDate(c.getLastMessage().getCreated()));
+        if (c.getLastMessage() != null) {
+            viewHolder.tvLastMessage.setText(c.getLastMessage().getContent());
+            viewHolder.tvTimestamp.setText(changeStringToDate(c.getLastMessage().getCreated()));
+        }
 
         return convertView;
     }

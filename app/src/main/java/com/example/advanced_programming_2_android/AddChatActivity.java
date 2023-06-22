@@ -80,12 +80,12 @@ public class AddChatActivity extends AppCompatActivity {
             } else {
                 if (!isUsernameAlreadyExistInChat) {
                     chatViewModel.createChatApi(chatWithUsername);
-//                    chatViewModel.getIsAddChatSucceeded().observe(this, isAddChatSucceeded -> {
-//                        if (isAddChatSucceeded) {
-//                            Intent intent = new Intent(this, ChatActivity.class);
-//                            startActivity(intent);
-//                        }
-//                    });
+                    chatViewModel.getIsAddChatSucceeded().observe(this, isAddChatSucceeded -> {
+                        if (isAddChatSucceeded) {
+                            Intent intent = new Intent(this, ChatActivity.class);
+                            startActivity(intent);
+                        }
+                    });
                 }
             }
         });
