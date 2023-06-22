@@ -1,5 +1,6 @@
 package com.example.advanced_programming_2_android;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,8 +9,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.example.advanced_programming_2_android.classes.Chat;
+import com.example.advanced_programming_2_android.database.Chat;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ChatAdapter extends BaseAdapter {
@@ -61,13 +63,11 @@ public class ChatAdapter extends BaseAdapter {
         Chat c = chats.get(position);
         ViewHolder viewHolder = (ViewHolder) convertView.getTag();
         Glide.with(parent.getContext())
-                .load(c.getProfilePic())
+                .load(c.getUser().getProfilePic())
                 .into(viewHolder.ivProfilePic);
-        viewHolder.tvDisplayName.setText(c.getDisplayName());
-        viewHolder.tvLastMessage.setText(c.getLastMessage());
-        viewHolder.tvTimestamp.setText(c.getTimestamp());
-
-
+        viewHolder.tvDisplayName.setText(c.getUser().getDisplayName());
+        viewHolder.tvLastMessage.setText(c.getLastMessage().getContent());
+        viewHolder.tvTimestamp.setText(c.getLastMessage().getCreated());
 
         return convertView;
     }

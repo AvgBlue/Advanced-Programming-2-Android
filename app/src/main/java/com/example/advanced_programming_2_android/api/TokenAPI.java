@@ -41,7 +41,7 @@ public class TokenAPI {
                     String token = response.body();
                     tokenLiveData.setValue(token);
                 } else {
-                    Toast.makeText(MyApplication.context, "username or password is incorrect", Toast.LENGTH_LONG).show();
+                    Toast.makeText(MyApplication.context, "Username or password is incorrect", Toast.LENGTH_LONG).show();
                 }
             }
 

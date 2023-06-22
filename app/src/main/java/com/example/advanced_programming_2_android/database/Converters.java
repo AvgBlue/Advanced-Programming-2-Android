@@ -8,6 +8,8 @@ import com.google.gson.reflect.TypeToken;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
+import com.example.advanced_programming_2_android.database.LastMessage;
+
 
 public class Converters {
     // List<String> converter
@@ -74,4 +76,16 @@ public class Converters {
     public static String messageListToString(List<Message> messageList) {
         return new Gson().toJson(messageList);
     }
+
+    // LastMessage converter
+    @TypeConverter
+    public static LastMessage fromLastMessageString(String value) {
+        return value == null ? null : new Gson().fromJson(value, LastMessage.class);
+    }
+
+    @TypeConverter
+    public static String lastMessageToString(LastMessage lastMessage) {
+        return lastMessage == null ? null : new Gson().toJson(lastMessage);
+    }
+
 }

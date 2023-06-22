@@ -22,6 +22,7 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class UserAPI {
+    private MutableLiveData<User> userMutableLiveData;
     private MutableLiveData<Boolean> isUsernameExist;
     Retrofit retrofit;
     WebServiceAPI webServiceAPI;
@@ -33,6 +34,7 @@ public class UserAPI {
                 .build();
         webServiceAPI = retrofit.create(WebServiceAPI.class);
         isUsernameExist = new MutableLiveData<>();
+        userMutableLiveData = new MutableLiveData<>();
     }
 
     public void getUserByUsername(String username, String authorization) {
@@ -42,9 +44,9 @@ public class UserAPI {
             public void onResponse(Call<User> call, Response<User> response) {
                 if (response.isSuccessful()) {
                     User user = response.body();
-                    // Process the user data
+                    userMutableLiveData.setValue(user);
                 } else {
-
+                    Toast.makeText(MyApplication.context, "Could not get your user", Toast.LENGTH_LONG).show();
                 }
             }
 
@@ -64,7 +66,7 @@ public class UserAPI {
                     isUsernameExist.setValue(false);
                 } else {
                     isUsernameExist.setValue(true);
-                    Toast.makeText(context, "username already exist", Toast.LENGTH_LONG).show();
+                    Toast.makeText(MyApplication.context, "Username already exist", Toast.LENGTH_LONG).show();
                 }
             }
 
@@ -77,5 +79,9 @@ public class UserAPI {
 
     public MutableLiveData<Boolean> getIsUsernameExist() {
         return isUsernameExist;
+    }
+
+    public MutableLiveData<User> getUserMutableLiveData() {
+        return userMutableLiveData;
     }
 }
