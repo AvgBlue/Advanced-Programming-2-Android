@@ -65,6 +65,9 @@ public class MessageActivity extends AppCompatActivity {
         messagesRecycleView =  findViewById(R.id.chatRecycleView);
 
         String username = preferencesViewModel.getUsernameLiveData().getValue();
+        messageAdapter = new MessageAdapter(new ArrayList<>(), username);
+        messagesRecycleView.setAdapter(messageAdapter);
+        messagesRecycleView.setLayoutManager(new LinearLayoutManager(this));
 
         if (conversationViewModel.getConversation().getValue() != null) {
             List<Message> messages = conversationViewModel.getConversation().getValue().getMessages();
@@ -86,15 +89,7 @@ public class MessageActivity extends AppCompatActivity {
         conversationViewModel.getChatByIdApi();
         conversationViewModel.getConversation().observe(this, conversation -> {
             if (conversation != null) {
-                // TODO - change
-                //String toastMessage ="live data changed";
-                //inputMessage.setText(toastMessage.toString());
-                //Toast.makeText(getApplicationContext(), toastMessage, Toast.LENGTH_SHORT).show();
-                if (conversation.getMessages() == null) {
-                    messageAdapter.setMessages(new ArrayList<>());
-                } else {
-                    messageAdapter.setMessages(conversation.getMessages());
-                }
+                messageAdapter.setMessages(conversation.getMessages());
                 messageAdapter.notifyDataSetChanged();
             }
         });
