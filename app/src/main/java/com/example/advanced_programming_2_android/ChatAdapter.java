@@ -88,7 +88,7 @@ public class ChatAdapter extends BaseAdapter {
         String outputDateString = "";
 
         @SuppressLint("SimpleDateFormat") SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS");
-        @SuppressLint("SimpleDateFormat") SimpleDateFormat outputFormat = new SimpleDateFormat("dd.MM.yyyy, mm:ss");
+        @SuppressLint("SimpleDateFormat") SimpleDateFormat outputFormat = new SimpleDateFormat("dd.MM.yyyy, hh:mm");
 
         try {
             Date date = inputFormat.parse(timestamp);
