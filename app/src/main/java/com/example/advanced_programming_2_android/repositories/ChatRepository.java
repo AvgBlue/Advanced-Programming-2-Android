@@ -1,8 +1,4 @@
 package com.example.advanced_programming_2_android.repositories;
-
-import android.net.Uri;
-
-import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
@@ -10,10 +6,6 @@ import com.example.advanced_programming_2_android.api.ChatsAPI;
 import com.example.advanced_programming_2_android.database.AppDB;
 import com.example.advanced_programming_2_android.database.Chat;
 import com.example.advanced_programming_2_android.database.ChatDao;
-import com.example.advanced_programming_2_android.database.User;
-
-import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 
 public class ChatRepository {

@@ -8,9 +8,9 @@ import com.example.advanced_programming_2_android.database.AppDB;
 import com.example.advanced_programming_2_android.database.Conversation;
 import com.example.advanced_programming_2_android.database.ConversationDao;
 import com.example.advanced_programming_2_android.database.Message;
+import com.example.advanced_programming_2_android.database.User;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class ConversationRepository {
     private ConversationDao conversationDao;
@@ -56,17 +56,24 @@ public class ConversationRepository {
 
     public void sendMessageApi(String message, int chatId) {
         chatsAPI.createMessage(message, chatId, token);
-    }
-    public void addMessage(Message message) {
-        Conversation conversation = conversationData.getValue();
-        if (conversation != null) {
-            List<Message> messagesList = conversation.getMessages();
-            if (messagesList == null) {
-                messagesList = new ArrayList<>();
-            }
-            messagesList.add(message);
-            conversation.setMessages(messagesList);
-            conversationData.setValue(conversation);
+        String content = trimString(message);
+        // TODO - to change the username, displayname, profilePic
+        User user = new User("username", "displayname", "pic");
+        // maybe not necessary
+        if (conversationData.getValue().getMessages() == null) {
+            conversationData.getValue().setMessages(new ArrayList<>());
         }
+        conversationData.getValue().getMessages().add(new Message(1, "createdDate", user, message));
+    }
+
+    public static String trimString(String input) {
+        if (input == null) {
+            return null;
+        }
+
+        String trimmedString = input.trim();
+        trimmedString = trimmedString.replaceAll("(^\\n+)|(\\n+$)", "");
+
+        return trimmedString;
     }
 }

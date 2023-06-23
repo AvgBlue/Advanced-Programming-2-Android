@@ -67,7 +67,7 @@ public class AddChatActivity extends AppCompatActivity {
 
         btnAddChat.setOnClickListener(view -> {
             String chatWithUsername = etUsername.getText().toString();
-            Boolean isUsernameAlreadyExistInChat = false;
+            boolean isUsernameAlreadyExistInChat = false;
             for (Chat chatWith : chats) {
                 if (chatWith.getUser().getUsername().equals(chatWithUsername)) {
                     isUsernameAlreadyExistInChat = true;
