@@ -69,15 +69,6 @@ public class MessageActivity extends AppCompatActivity {
         messagesRecycleView.setAdapter(messageAdapter);
         messagesRecycleView.setLayoutManager(new LinearLayoutManager(this));
 
-        if (conversationViewModel.getConversation().getValue() != null) {
-            List<Message> messages = conversationViewModel.getConversation().getValue().getMessages();
-            if (messages != null) {
-                messageAdapter = new MessageAdapter(messages, username);
-                messagesRecycleView.setAdapter(messageAdapter);
-                messagesRecycleView.setLayoutManager(new LinearLayoutManager(this));
-            }
-        }
-
         // Load the profile picture into the RoundedImageView using Glide library
         Glide.with(this)
                 .load(profilePic)
