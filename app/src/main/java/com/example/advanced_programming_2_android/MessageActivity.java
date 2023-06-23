@@ -49,8 +49,6 @@ public class MessageActivity extends AppCompatActivity {
 
     private MessageViewModel messageViewModel;
 
-    private  PreferencesViewModel preferencesViewModel;
-
     private MessageAdapter messageAdapter;
 
     @Override
@@ -115,7 +113,7 @@ public class MessageActivity extends AppCompatActivity {
         });
 
         sendButton.setOnClickListener(view -> {
-            String messageToSend = etInput.getText().toString();
+            String messageToSend = inputMessage.getText().toString();
             conversationViewModel.sendMessageApi(messageToSend, chatId);
         });
 

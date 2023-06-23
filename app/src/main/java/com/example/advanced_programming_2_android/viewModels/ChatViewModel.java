@@ -30,6 +30,10 @@ public class ChatViewModel extends ViewModel {
         return chats; // Return the MutableLiveData object
     }
     */
+
+    public LiveData<List<Chat>> getChat() {
+        return chats;
+    }
     public LiveData<Boolean> getIsAddChatSucceeded() {
         return isAddChatSucceeded;
     }
