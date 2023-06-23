@@ -7,6 +7,10 @@ import com.example.advanced_programming_2_android.api.ChatsAPI;
 import com.example.advanced_programming_2_android.database.AppDB;
 import com.example.advanced_programming_2_android.database.Conversation;
 import com.example.advanced_programming_2_android.database.ConversationDao;
+import com.example.advanced_programming_2_android.database.Message;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class ConversationRepository {
     private ConversationDao conversationDao;
@@ -52,5 +56,17 @@ public class ConversationRepository {
 
     public void sendMessageApi(String message, int chatId) {
         chatsAPI.createMessage(message, chatId, token);
+    }
+    public void addMessage(Message message) {
+        Conversation conversation = conversationData.getValue();
+        if (conversation != null) {
+            List<Message> messagesList = conversation.getMessages();
+            if (messagesList == null) {
+                messagesList = new ArrayList<>();
+            }
+            messagesList.add(message);
+            conversation.setMessages(messagesList);
+            conversationData.setValue(conversation);
+        }
     }
 }

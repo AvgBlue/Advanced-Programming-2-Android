@@ -30,20 +30,4 @@ public class ConversationViewModel extends ViewModel {
     public void sendMessageApi(String message, int chatId){
         conversationRepository.sendMessageApi(message, chatId);
     }
-
-    /*
-    public void addMessage(Message message) {
-        Conversation conversation = conversation.getValue();
-        if (conversation != null) {
-            List<Message> messagesList = conversation.getMessages();
-            if (messagesList == null) {
-                messagesList = new ArrayList<>();
-            }
-            messagesList.add(message);
-            conversation.setMessages(messagesList);
-            conversation.setValue(conversation);
-        }
-    }
-
-     */
 }
