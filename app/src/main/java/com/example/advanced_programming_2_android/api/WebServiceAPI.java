@@ -2,7 +2,10 @@ package com.example.advanced_programming_2_android.api;
 
 import com.example.advanced_programming_2_android.classes.LoginRequest;
 import com.example.advanced_programming_2_android.classes.FullUser;
+import com.example.advanced_programming_2_android.classes.Msg;
+import com.example.advanced_programming_2_android.classes.Username;
 import com.example.advanced_programming_2_android.database.Chat;
+import com.example.advanced_programming_2_android.database.Conversation;
 import com.example.advanced_programming_2_android.database.User;
 
 import retrofit2.Call;
@@ -20,16 +23,16 @@ public interface WebServiceAPI {
     Call<List<Chat>> getChats(@Header("authorization") String authorization);
 
     @POST("api/Chats")
-    Call<Void> createChat(@Body String username, @Header("authorization") String authorization);
+    Call<Void> createChat(@Body Username username, @Header("authorization") String authorization);
 
     @GET("api/Chats/{id}")
-    Call<Chat> getChatById(@Path("id") int id, @Header("authorization") String authorization);
+    Call<Conversation> getChatById(@Path("id") int id, @Header("authorization") String authorization);
 
     @DELETE("api/Chats/{id}")
     Call<Void> deleteChat(@Path("id") int id, @Header("authorization") String authorization);
 
     @POST("api/Chats/{id}/messages")
-    Call<Void> createMessage(@Body String message, @Path("id") int id, @Header("authorization") String authorization);
+    Call<Void> createMessage(@Body Msg msg, @Path("id") int id, @Header("authorization") String authorization);
 
     @GET("api/Chats/{id}/messages")
     Call<Chat> getMessagesByChatId(@Path("id") int id, @Header("authorization") String authorization);

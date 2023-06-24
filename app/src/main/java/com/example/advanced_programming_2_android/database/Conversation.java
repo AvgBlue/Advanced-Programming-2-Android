@@ -47,4 +47,21 @@ public class Conversation {
     public void setMessages(List<Message> messages) {
         this.messages = messages;
     }
+
+    @Override
+    public String toString() {
+        StringBuilder usersString = new StringBuilder();
+        for (User user: users) {
+            usersString.append(user.toString());
+        }
+        StringBuilder massagesString = new StringBuilder();
+        for (Message massage: messages) {
+            massagesString.append(massage.toString());
+        }
+        return "Conversation: {" +
+                "id = " + id +
+                ", users =" + usersString +
+                ", messages=" + massagesString +
+                '}';
+    }
 }

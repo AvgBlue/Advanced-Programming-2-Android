@@ -1,5 +1,7 @@
 package com.example.advanced_programming_2_android;
 
+import android.annotation.SuppressLint;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,8 +10,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.example.advanced_programming_2_android.classes.Chat;
+import com.example.advanced_programming_2_android.database.Chat;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class ChatAdapter extends BaseAdapter {
@@ -61,13 +67,13 @@ public class ChatAdapter extends BaseAdapter {
         Chat c = chats.get(position);
         ViewHolder viewHolder = (ViewHolder) convertView.getTag();
         Glide.with(parent.getContext())
-                .load(c.getProfilePic())
+                .load(c.getUser().getProfilePic())
                 .into(viewHolder.ivProfilePic);
-        viewHolder.tvDisplayName.setText(c.getDisplayName());
-        viewHolder.tvLastMessage.setText(c.getLastMessage());
-        viewHolder.tvTimestamp.setText(c.getTimestamp());
-
-
+        viewHolder.tvDisplayName.setText(c.getUser().getDisplayName());
+        if (c.getLastMessage() != null) {
+            viewHolder.tvLastMessage.setText(c.getLastMessage().getContent());
+            viewHolder.tvTimestamp.setText(changeStringToDate(c.getLastMessage().getCreated()));
+        }
 
         return convertView;
     }
@@ -76,5 +82,21 @@ public class ChatAdapter extends BaseAdapter {
         chats.clear();
         chats.addAll(filteredChats);
         notifyDataSetChanged();
+    }
+
+    public String changeStringToDate(String timestamp) {
+        String outputDateString = "";
+
+        @SuppressLint("SimpleDateFormat") SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS");
+        @SuppressLint("SimpleDateFormat") SimpleDateFormat outputFormat = new SimpleDateFormat("dd.MM.yyyy, hh:mm");
+
+        try {
+            Date date = inputFormat.parse(timestamp);
+            outputDateString = outputFormat.format(date);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        return outputDateString;
     }
 }

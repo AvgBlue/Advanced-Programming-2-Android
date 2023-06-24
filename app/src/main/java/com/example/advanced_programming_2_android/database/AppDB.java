@@ -8,11 +8,16 @@ import androidx.room.Room;
 import androidx.room.RoomDatabase;
 import androidx.room.TypeConverters;
 
-@Database(entities = {User.class, Message.class, Chat.class,Conversation.class, Settings.class}, version = 13)
+@Database(entities = {User.class, Message.class, Chat.class,Conversation.class, Settings.class}, version = 14)
 @TypeConverters({Converters.class})
 public abstract class AppDB extends RoomDatabase {
 
+
     private static AppDB instance; // Add the instance variable
+
+    public static synchronized AppDB getInstance() {
+        return instance;
+    }
     public static synchronized AppDB getInstance(Context context) {
         if (instance == null) {
             instance = Room.databaseBuilder(context.getApplicationContext(), AppDB.class, "database-name")
