@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModelProvider;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log; // Added import statement
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -81,6 +82,7 @@ public class ChatActivity extends AppCompatActivity {
             lvChats.setAdapter(chatAdapter);
         });
 
+        Log.d("ChatActivity", "ChatActivity created"); // Debug print
 
         // Todo: work on the search
         btnSearch.setOnClickListener(view -> {
@@ -126,5 +128,17 @@ public class ChatActivity extends AppCompatActivity {
             Intent intent = new Intent(this, LogInActivity.class);
             startActivity(intent);
         });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Log.d("ChatActivity", "ChatActivity resumed"); // Debug print
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        Log.d("ChatActivity", "ChatActivity paused"); // Debug print
     }
 }
