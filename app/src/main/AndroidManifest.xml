@@ -20,14 +20,13 @@
         android:usesCleartextTraffic="true">
         <activity
             android:name=".SettingsActivity"
-
-
             android:exported="false" />
         <activity
             android:name=".AddChatActivity"
             android:exported="false" />
         <activity
             android:name=".MessageActivity"
+            android:windowSoftInputMode="adjustResize"
             android:exported="false" />
         <activity
             android:name=".ChatActivity"
