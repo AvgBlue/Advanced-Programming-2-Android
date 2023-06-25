@@ -27,7 +27,6 @@ public class ChatRepository {
             super();
             List<Chat> chats = chatDao.getAllChats();
             setValue(chats);
-
         }
 
         @Override

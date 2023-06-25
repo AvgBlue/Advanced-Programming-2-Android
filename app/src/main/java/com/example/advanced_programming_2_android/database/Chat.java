@@ -59,5 +59,14 @@ public class Chat {
     public void setLastMessage(LastMessage lastMessage) {
         this.lastMessage = lastMessage;
     }
+
+    @Override
+    public String toString(){
+        String toString="id: "+id+", user: "+user.toString()+", lastMessage: "+"''.";
+        if(this.lastMessage!=null){
+            toString="id: "+id+", user: "+user.toString()+", lastMessage: "+lastMessage.toString() +".";
+        }
+        return toString;
+    }
 }
 
