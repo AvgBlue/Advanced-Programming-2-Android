@@ -73,12 +73,17 @@ In the Chats Screen you will be able to choose a 1 of your active conversations,
 
 ### Add Chat Screen
 
-In the Add Chat Screen you will be able enter the infromations of a a user you want to start a conversations with, and if that user exists and is not in a conversation with you, a new conversation will be added to your [Chats Screen](chats-screen).
+In the Add Chat Screen you will be able enter the infromations of a a user you want to start a conversations with in the [](), and if that user exists and is not in a conversation with you, a new conversation will be added to your [Chats Screen](chats-screen).
 
 <img width="183" alt="image" src="https://github.com/AvgBlue/Advanced-Programming-2-Android/assets/72969087/e752ee36-f2ab-4dff-afc1-511ac2f0d36f">
 <img width="184" alt="image" src="https://github.com/AvgBlue/Advanced-Programming-2-Android/assets/72969087/586d5f57-31d9-4c58-a864-35bab51de923">
 
-### Add Chat Screen
+### Conversation Screen
+
+In the Conversation Screen you will be to chat with your selected friend, you will be able to write any massage you want and send it by pressing the arrow at the buttom right.
+
+<img width="185" alt="image" src="https://github.com/AvgBlue/Advanced-Programming-2-Android/assets/72969087/9e555fb7-4369-46d2-8dca-66c24702211c">
+<img width="185" alt="image" src="https://github.com/AvgBlue/Advanced-Programming-2-Android/assets/72969087/acb5d855-5acf-418d-9ec6-98ec5bcd881d">
 
 ## Website
 
