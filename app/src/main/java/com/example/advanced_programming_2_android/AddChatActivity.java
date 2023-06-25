@@ -35,6 +35,8 @@ public class AddChatActivity extends AppCompatActivity {
     private ImageView logout;
     private ChatViewModel chatViewModel;
 
+    private PreferencesViewModel preferencesViewModel;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,7 +52,12 @@ public class AddChatActivity extends AppCompatActivity {
         String token = getIntent().getStringExtra("token");
         String username = getIntent().getStringExtra("username");
 
-        UserAPI userAPI = new UserAPI();
+        MyApplication myApp = (MyApplication) getApplication();
+
+        preferencesViewModel = new ViewModelProvider(myApp).get(PreferencesViewModel.class);
+        String url = preferencesViewModel.getServerAddressLiveData(this).getValue();
+
+        UserAPI userAPI = new UserAPI(url);
         userAPI.getUserByUsername(username, token);
         MutableLiveData<User> myUser = userAPI.getUserMutableLiveData();
 
@@ -61,7 +68,7 @@ public class AddChatActivity extends AppCompatActivity {
                     .into(profilePic);
         });
 
-        chatViewModel = new ChatViewModel(token);
+        chatViewModel = new ChatViewModel(token, url);
 
         chatViewModel.getChatsApi();
         chatViewModel.getChat().observe(this, chatList -> {
@@ -98,8 +105,7 @@ public class AddChatActivity extends AppCompatActivity {
         });
 
         logout.setOnClickListener(view -> {
-            MyApplication myApp = (MyApplication) getApplication();
-            PreferencesViewModel preferencesViewModel = new ViewModelProvider(myApp).get(PreferencesViewModel.class);
+
             preferencesViewModel.setToken(this, "");
             Intent intent = new Intent(this, MainActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);

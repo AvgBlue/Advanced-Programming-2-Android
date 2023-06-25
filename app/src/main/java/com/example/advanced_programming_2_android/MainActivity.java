@@ -87,7 +87,9 @@ public class MainActivity extends AppCompatActivity {
         Log.d("MY_ACTIVITY", "1) USERNAME AGAIN: "+username);
         Log.d("MY_ACTIVITY","1) token != '' && username != '': "+((token != "" && username != "")?"ture":"false"));
         if (token != "" && username != "") {
+
             UserAPI userAPI = new UserAPI();
+            
             userAPI.getUserByUsername(username, token);
             userAPI.getUserMutableLiveData().observe(this, user->{
                 Log.d("MY_ACTIVITY","1) myUser.getValue: "+ user);

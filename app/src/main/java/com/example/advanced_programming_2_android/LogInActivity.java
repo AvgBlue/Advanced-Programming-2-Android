@@ -53,7 +53,9 @@ public class LogInActivity extends AppCompatActivity {
         btnLogin = findViewById(R.id.login_btn);
         settings = findViewById(R.id.settings_action_bar);
 
-        TokenAPI tokenAPI = new TokenAPI();
+        String url = preferencesViewModel.getServerAddressLiveData(this).getValue();
+
+        TokenAPI tokenAPI = new TokenAPI(url);
 
         btnLogin.setOnClickListener(view -> {
             String username = tvUsername.getText().toString();

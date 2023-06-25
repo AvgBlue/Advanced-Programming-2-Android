@@ -3,6 +3,7 @@ package com.example.advanced_programming_2_android.api;
 import android.widget.Toast;
 
 import androidx.lifecycle.MutableLiveData;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.example.advanced_programming_2_android.MyApplication;
 import com.example.advanced_programming_2_android.R;
@@ -10,6 +11,7 @@ import com.example.advanced_programming_2_android.classes.Msg;
 import com.example.advanced_programming_2_android.classes.Username;
 import com.example.advanced_programming_2_android.database.Chat;
 import com.example.advanced_programming_2_android.database.Conversation;
+import com.example.advanced_programming_2_android.viewModels.PreferencesViewModel;
 
 import java.util.List;
 
@@ -24,9 +26,9 @@ public class ChatsAPI {
     private Retrofit retrofit;
     private WebServiceAPI webServiceAPI;
 
-    public ChatsAPI() {
+    public ChatsAPI(String url) {
         retrofit = new Retrofit.Builder()
-                .baseUrl(MyApplication.context.getString(R.string.BaseUrl))
+                .baseUrl(url)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         webServiceAPI = retrofit.create(WebServiceAPI.class);

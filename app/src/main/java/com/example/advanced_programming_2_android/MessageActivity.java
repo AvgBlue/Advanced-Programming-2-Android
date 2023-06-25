@@ -56,7 +56,9 @@ public class MessageActivity extends AppCompatActivity {
         String displayName = getIntent().getStringExtra("displayName");
         int chatId = getIntent().getIntExtra("chatId", 0);
 
-        ConversationViewModelFactory factoryConversation = new ConversationViewModelFactory(chatId, token);
+        String url = preferencesViewModel.getServerAddressLiveData(this).getValue();
+
+        ConversationViewModelFactory factoryConversation = new ConversationViewModelFactory(chatId, token, url);
         conversationViewModel = new ViewModelProvider(this, factoryConversation).get(ConversationViewModel.class);
 
         RoundedImageView rivProfilePic = findViewById(R.id.profilePic);

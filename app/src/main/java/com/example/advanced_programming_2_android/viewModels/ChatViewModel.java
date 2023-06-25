@@ -13,8 +13,8 @@ public class ChatViewModel extends ViewModel {
     private LiveData<List<Chat>> chats;
     private LiveData<Boolean> isAddChatSucceeded;
 
-    public ChatViewModel(String token) {
-        chatRepository = new ChatRepository(token);
+    public ChatViewModel(String token, String url) {
+        chatRepository = new ChatRepository(token, url);
         chats = chatRepository.getAllChats();
         isAddChatSucceeded = chatRepository.getIsAddChatSucceeded();
     }
