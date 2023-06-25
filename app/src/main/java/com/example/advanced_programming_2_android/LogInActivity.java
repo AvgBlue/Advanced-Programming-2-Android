@@ -38,6 +38,8 @@ public class LogInActivity extends AppCompatActivity {
     public static final int PERMISSION_REQUEST_CODE = 1;
     public static final String POST_NOTIFICATION_PERMISSION = "android.permission.POST_NOTIFICATIONS";
 
+    String url;
+
     @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,7 +55,7 @@ public class LogInActivity extends AppCompatActivity {
         btnLogin = findViewById(R.id.login_btn);
         settings = findViewById(R.id.settings_action_bar);
 
-        String url = preferencesViewModel.getServerAddressLiveData(this).getValue();
+        url = preferencesViewModel.getServerAddressLiveData(this).getValue();
 
         TokenAPI tokenAPI = new TokenAPI(url);
 
@@ -68,19 +70,12 @@ public class LogInActivity extends AppCompatActivity {
             tokenLiveData.observe(this, token -> {
 
                 if (token != null) {
-                    if(true){
-                        preferencesViewModel.setToken(this, token);
-                        preferencesViewModel.setUsername(this, username);
-                        retrieveFCMToken(username);
-                        Intent intent = new Intent(this, ChatActivity.class);
-                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                        startActivity(intent);
-                    }
-                    else{
-                        String message = "We're sorry, but we cannot continue without the necessary permissions. Please grant the required permissions in the device settings to proceed.";
-
-                        Toast.makeText(this, message, Toast.LENGTH_LONG).show();
-                    }
+                    preferencesViewModel.setToken(this, token);
+                    preferencesViewModel.setUsername(this, username);
+                    retrieveFCMToken(username, url);
+                    Intent intent = new Intent(this, ChatActivity.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    startActivity(intent);
                 } else {
                     Toast.makeText(this, "Invalid username or password", Toast.LENGTH_SHORT).show();
                 }
@@ -94,7 +89,7 @@ public class LogInActivity extends AppCompatActivity {
         });
     }
 
-    private void retrieveFCMToken(String username) {
+    private void retrieveFCMToken(String username, String url) {
         FirebaseMessaging.getInstance().getToken().addOnCompleteListener(task -> {
             if (!task.isSuccessful()) {
                 Log.w("TAG", "Fetching FCM registration token failed", task.getException());
@@ -103,7 +98,7 @@ public class LogInActivity extends AppCompatActivity {
 
             // Get the token
             String token = task.getResult();
-            FirebaseTokenAPI firebaseTokenAPI = new FirebaseTokenAPI();
+            FirebaseTokenAPI firebaseTokenAPI = new FirebaseTokenAPI(url);
             firebaseTokenAPI.postFirebaseToken(token, username);
             Log.d("TAG", "FCM registration token: " + token);
 
