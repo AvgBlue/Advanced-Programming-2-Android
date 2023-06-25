@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatDelegate;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModelProvider;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
@@ -84,7 +85,9 @@ public class SettingsActivity extends AppCompatActivity {
 
             if(!editTextValue.equals(preferencesViewModel.getServerAddressLiveData(this).getValue())){
                 preferencesViewModel.setServerAddress(this, editTextValue);
-                // TODO - to log out the user
+                Intent intent = new Intent(this, MainActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
             }
             else{
                  toastMessage = "Server address is unchanged";
