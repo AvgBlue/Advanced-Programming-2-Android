@@ -5,9 +5,11 @@ import static java.lang.Integer.parseInt;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
+import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
@@ -22,15 +24,45 @@ public class SettingsActivity extends AppCompatActivity {
 
     private PreferencesViewModel preferencesViewModel;
 
+    private EditText serverAddressInput;
+
+    private RadioButton[] radioButtons;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
 
-        PreferencesViewModelFactory factory = new PreferencesViewModelFactory(getApplicationContext());
-        preferencesViewModel = new ViewModelProvider(this, factory).get(PreferencesViewModel.class);
-        setServerAddress();
-        setTheme();
+        serverAddressInput = findViewById(R.id.edHttp);
+
+        radioButtons = new RadioButton[2];
+        radioButtons[0] = findViewById(R.id.rbLight);
+        radioButtons[1] = findViewById(R.id.rbDark);
+
+        //PreferencesViewModelFactory factory = new PreferencesViewModelFactory(getApplicationContext());
+        MyApplication myApp = (MyApplication) getApplication();
+        preferencesViewModel = new ViewModelProvider(myApp).get(PreferencesViewModel.class);
+
+        preferencesViewModel.getThemeLiveData(this).observe(this, theme -> {
+            applyTheme(theme);
+            radioButtons[theme - 1].setChecked(true);
+        });
+
+        preferencesViewModel.getServerAddressLiveData(this).observe(this, address ->{
+            EditText addressEditText = serverAddressInput;
+            addressEditText.setText(preferencesViewModel.getServerAddressLiveData(this).getValue());
+        });
+
+        MutableLiveData<Integer> themeLiveData = preferencesViewModel.getThemeLiveData(this);
+        assert themeLiveData.getValue() != null;
+        radioButtons[themeLiveData.getValue() - 1].setChecked(true);
+
+        serverAddressInput.setText(preferencesViewModel.getServerAddressLiveData(this).getValue());
+
+        Log.d("MY_ACTIVITY", "2) PREFERENCES: "+ preferencesViewModel.toString());
+        Log.d("MY_ACTIVITY", "2) THEME: "+preferencesViewModel.getThemeLiveData(this).getValue());
+        Log.d("MY_ACTIVITY", "2) ADDRESS: "+preferencesViewModel.getServerAddressLiveData(this).getValue());
+
 
         Button applyButton = findViewById(R.id.btnApply);
         applyButton.setOnClickListener(view ->{
@@ -43,37 +75,22 @@ public class SettingsActivity extends AppCompatActivity {
             int radioButtonTag = parseInt(selectedRadioButton.getTag().toString());
 
             // Get the text from the EditText
-            EditText editText = findViewById(R.id.edHttp);
-            String editTextValue = editText.getText().toString();
+            String editTextValue = serverAddressInput.getText().toString();
 
             // Display a Toast with the selected radio button and EditText values
             String toastMessage = "Applied";
             Toast.makeText(getApplicationContext(), toastMessage, Toast.LENGTH_SHORT).show();
 
-            preferencesViewModel.setServerAddress(editTextValue);
-            preferencesViewModel.setTheme(radioButtonTag);
 
-            setServerAddress();
-            setTheme();
-        });
-    }
-
-    private void setServerAddress() {
-        EditText addressEditText = findViewById(R.id.edHttp);
-        addressEditText.setText(preferencesViewModel.getServerAddressLiveData().getValue());
-    }
-
-    private void setTheme() {
-        RadioButton button = findViewById(R.id.rbLight);
-        Integer theme = preferencesViewModel.getThemeLiveData().getValue();
-        if (theme != null) {
-            if (theme == 2) {
-                button = findViewById(R.id.rbDark);
-
+            if(!editTextValue.equals(preferencesViewModel.getServerAddressLiveData(this).getValue())){
+                preferencesViewModel.setServerAddress(this, editTextValue);
+                // TODO - to log out the user
             }
-            button.setChecked(true);
-        }
-
-        applyTheme(theme);
+            else{
+                 toastMessage = "Server address is unchanged";
+                Toast.makeText(getApplicationContext(), toastMessage, Toast.LENGTH_SHORT).show();
+            }
+            preferencesViewModel.setTheme(this, radioButtonTag);
+        });
     }
 }

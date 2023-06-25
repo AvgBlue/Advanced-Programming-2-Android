@@ -1,6 +1,6 @@
 package com.example.advanced_programming_2_android.viewModels;
 
-import static com.example.advanced_programming_2_android.viewModels.PreferencesViewModel.createPreferencesViewModel;
+//import static com.example.advanced_programming_2_android.viewModels.PreferencesViewModel.createPreferencesViewModel;
 
 import android.content.Context;
 
@@ -21,7 +21,7 @@ public class PreferencesViewModelFactory implements ViewModelProvider.Factory {
     @Override
     public <T extends ViewModel> T create(@NonNull Class<T> modelClass) {
         if (modelClass.isAssignableFrom(PreferencesViewModel.class)) {
-            return (T) createPreferencesViewModel(context);
+            return (T) new PreferencesViewModel();
         }
         throw new IllegalArgumentException("Unknown ViewModel class: " + modelClass.getName());
     }
