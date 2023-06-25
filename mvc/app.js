@@ -14,15 +14,12 @@ mongoose.connect(process.env.CONNECTION_STRING, {
 
 const io = require('socket.io')(7000, { cors: { origin: '*' } });
 
-
-
 io.on('connection', socket => {
     socket.on('UserConnect', username => {
         socket.join(username);
     });
     socket.on('addMessage', (sentTo) => {
         socket.broadcast.to(sentTo).emit('newMessage');
-
     });
     socket.on('addChat', (sentTo) => {
         socket.broadcast.to(sentTo).emit('newChat');
@@ -34,7 +31,7 @@ io.on('connection', socket => {
 const routerUsers = require('./routes/users.js');
 const routerTokens = require('./routes/tokens.js');
 const routerChats = require('./routes/chats.js');
-const routerFireBase = require('./routes/firebase.js');
+const routerFirebase = require('./routes/firebase.js');
 
 const server = express();
 
@@ -51,6 +48,6 @@ server.use('/register', build);
 server.use('/api/Users', routerUsers);
 server.use('/api/Tokens', routerTokens);
 server.use('/api/Chats', routerChats);
-server.use('/api/fireBaseTokens', routerFireBase);
+server.use('/api/fireBaseTokens', routerFirebase);
 
 server.listen(process.env.PORT);
