@@ -20,6 +20,7 @@ public class PreferencesViewModelFactory implements ViewModelProvider.Factory {
     @NonNull
     @Override
     public <T extends ViewModel> T create(@NonNull Class<T> modelClass) {
+
         if (modelClass.isAssignableFrom(PreferencesViewModel.class)) {
             return (T) new PreferencesViewModel();
         }

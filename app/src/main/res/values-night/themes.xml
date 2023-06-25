@@ -31,4 +31,9 @@
         <item name="android:backgroundTint">@color/dark_blue</item>
     </style>
 
+    <style name="connectAsButton" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- Customize your light theme here. -->
+        <item name="android:backgroundTint">@color/light_gray_green</item>=
+    </style>
+
 </resources>
