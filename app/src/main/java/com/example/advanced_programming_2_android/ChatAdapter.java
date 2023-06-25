@@ -75,6 +75,7 @@ public class ChatAdapter extends BaseAdapter {
         viewHolder.tvDisplayName.setText(c.getUser().getDisplayName());
         if (c.getLastMessage() != null) {
             viewHolder.tvLastMessage.setText(c.getLastMessage().getContent());
+            viewHolder.tvLastMessage.setTextColor(Color.BLACK);
             viewHolder.tvTimestamp.setText(changeStringToDate(c.getLastMessage().getCreated()));
         } else {
             viewHolder.tvLastMessage.setText("No massages");
