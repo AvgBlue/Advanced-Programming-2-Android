@@ -1,5 +1,6 @@
 package com.example.advanced_programming_2_android.api;
 
+import com.example.advanced_programming_2_android.classes.FireBaseRequest;
 import com.example.advanced_programming_2_android.classes.LoginRequest;
 import com.example.advanced_programming_2_android.classes.FullUser;
 import com.example.advanced_programming_2_android.classes.Msg;
@@ -45,4 +46,7 @@ public interface WebServiceAPI {
 
     @POST("api/Users")
     Call<FullUser> createUser(@Body FullUser user);
+
+    @POST("api/fireBaseTokens")
+    Call<String> postFireBaseToken(@Body FireBaseRequest fireBaseToken);
 }
