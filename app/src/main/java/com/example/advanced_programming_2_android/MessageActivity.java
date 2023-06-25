@@ -50,7 +50,7 @@ public class MessageActivity extends AppCompatActivity {
         PreferencesViewModelFactory factory = new PreferencesViewModelFactory(getApplicationContext());
         preferencesViewModel = new ViewModelProvider(this, factory).get(PreferencesViewModel.class);
 
-        String token = preferencesViewModel.getTokenLiveData().getValue();
+        String token = preferencesViewModel.getTokenLiveData(this).getValue();
         Uri profilePic = Uri.parse(getIntent().getStringExtra("profilePic"));
         String displayName = getIntent().getStringExtra("displayName");
         int chatId = getIntent().getIntExtra("chatId", 0);
@@ -68,7 +68,7 @@ public class MessageActivity extends AppCompatActivity {
 
 
 
-        String username = preferencesViewModel.getUsernameLiveData().getValue();
+        String username = preferencesViewModel.getUsernameLiveData(this).getValue();
         messageAdapter = new MessageAdapter(new ArrayList<>(), username);
         messagesRecycleView.setAdapter(messageAdapter);
         messagesRecycleView.setLayoutManager(new LinearLayoutManager(this));

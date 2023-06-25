@@ -64,8 +64,8 @@ public class LogInActivity extends AppCompatActivity {
 
                 if (token != null) {
                     if(true){
-                        preferencesViewModel.setToken(token);
-                        preferencesViewModel.setUsername(username);
+                        preferencesViewModel.setToken(this, token);
+                        preferencesViewModel.setUsername(this, username);
                         Intent intent = new Intent(this, ChatActivity.class);
                         startActivity(intent);
                     }

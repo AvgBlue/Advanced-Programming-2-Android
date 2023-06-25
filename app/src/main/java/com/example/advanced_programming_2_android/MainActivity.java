@@ -1,5 +1,7 @@
 package com.example.advanced_programming_2_android;
 
+import static com.example.advanced_programming_2_android.settings.ConfigParser.getDefaultServerAddress;
+import static com.example.advanced_programming_2_android.settings.ConfigParser.getDefaultTheme;
 import static com.example.advanced_programming_2_android.settings.ThemeManager.applyTheme;
 
 import androidx.appcompat.app.ActionBar;
@@ -9,6 +11,7 @@ import androidx.lifecycle.ViewModelProvider;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -25,6 +28,8 @@ public class MainActivity extends AppCompatActivity {
     private Button btnRegister;
     private ImageView settingsButton;
 
+    private PreferencesViewModel preferencesViewModel;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,9 +41,19 @@ public class MainActivity extends AppCompatActivity {
         btnRegister = findViewById(R.id.register_btn);
         settingsButton = findViewById(R.id.settings_action_bar);
 
-        PreferencesViewModelFactory factory = new PreferencesViewModelFactory(getApplicationContext());
-        PreferencesViewModel preferencesViewModel = new ViewModelProvider(this, factory).get(PreferencesViewModel.class);
-        applyTheme(preferencesViewModel.getThemeLiveData().getValue());
+        //PreferencesViewModelFactory factory = new PreferencesViewModelFactory(getApplicationContext());
+        preferencesViewModel = new ViewModelProvider(this).get(PreferencesViewModel.class);
+        if(preferencesViewModel.getThemeLiveData(this).getValue() == null){
+            preferencesViewModel.setTheme(this, getDefaultTheme(this));
+        }
+        if(preferencesViewModel.getServerAddressLiveData(this).getValue() == null){
+            preferencesViewModel.setServerAddress(this, getDefaultServerAddress(this));
+        }
+        applyTheme(preferencesViewModel.getThemeLiveData(this).getValue());
+
+        Log.d("MY_ACTIVITY", "1) preferencesViewModel"+ preferencesViewModel.toString());
+        Log.d("MY_ACTIVITY", "1) THEME: "+preferencesViewModel.getThemeLiveData(this).getValue());
+        Log.d("MY_ACTIVITY", "1) ADDRESS: "+preferencesViewModel.getServerAddressLiveData(this).getValue());
 
 
         btnSignIn.setOnClickListener(view -> {
