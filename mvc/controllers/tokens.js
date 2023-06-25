@@ -1,10 +1,12 @@
 const tokensService = require('../services/tokens.js');
+const firebase = require('../services/firebase');
 
 const createToken = async (req, res) => {
     const token = await tokensService.createToken(req.body.username, req.body.password);
     if (!token) {
         return res.status(404).json({ error: `didnt created a token` });
     }
+    firebase.removeToken(req.body.username);
     res.status(200).json(token); 
 }
 
