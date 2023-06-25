@@ -18,11 +18,11 @@ public class UserRepository {
 
     private String token;
 
-    public UserRepository(String token) {
+    public UserRepository(String token, String url) {
         AppDB db = AppDB.getInstance();
         userDao = db.getUserDao();
         usersListData = new UsersListData();
-        userAPI = new UserAPI();
+        userAPI = new UserAPI(url);
         this.token = token;
     }
 

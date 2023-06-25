@@ -11,8 +11,8 @@ public class ConversationViewModel extends ViewModel {
     private ConversationRepository conversationRepository;
     private LiveData<Conversation> conversation;
 
-    public ConversationViewModel(int conversationId, String token) {
-        conversationRepository = new ConversationRepository(conversationId, token);
+    public ConversationViewModel(int conversationId, String token, String url) {
+        conversationRepository = new ConversationRepository(conversationId, token, url);
         conversation = conversationRepository.getConversation();
     }
 

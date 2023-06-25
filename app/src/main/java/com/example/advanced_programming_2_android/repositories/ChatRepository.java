@@ -14,11 +14,11 @@ public class ChatRepository {
     private ChatsAPI chatsAPI;
     private String token;
 
-    public ChatRepository(String token) {
+    public ChatRepository(String token, String url) {
         AppDB db = AppDB.getInstance();
         chatDao = db.getChatDao();
         chatListData = new ChatListData();
-        chatsAPI = new ChatsAPI();
+        chatsAPI = new ChatsAPI(url);
         this.token = token;
     }
 

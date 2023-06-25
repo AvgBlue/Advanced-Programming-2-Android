@@ -22,11 +22,11 @@ public class ConversationRepository {
     private String token;
     private int conversationId;
 
-    public ConversationRepository(int conversationId, String token) {
+    public ConversationRepository(int conversationId, String token, String url) {
         AppDB db = AppDB.getInstance();
         conversationDao = db.getConversationDao();
         conversationData = new ConversationData();
-        chatsAPI = new ChatsAPI();
+        chatsAPI = new ChatsAPI(url);
         this.token = token;
         this.conversationId = conversationId;
     }

@@ -1,6 +1,5 @@
 package com.example.advanced_programming_2_android.viewModels;
 
-import static java.lang.Integer.parseInt;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -9,12 +8,6 @@ import androidx.lifecycle.ViewModel;
 
 import com.example.advanced_programming_2_android.R;
 
-import com.example.advanced_programming_2_android.database.AppDB;
-import com.example.advanced_programming_2_android.database.Settings;
-import com.example.advanced_programming_2_android.database.SettingsDao;
-import com.example.advanced_programming_2_android.settings.ConfigParser;
-
-import java.util.Map;
 
 
 public class PreferencesViewModel extends ViewModel {
