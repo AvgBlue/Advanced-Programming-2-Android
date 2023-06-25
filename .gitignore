@@ -1,17 +1,28 @@
-*.iml
-.gradle
-/local.properties
-/.idea/caches
-/.idea/libraries
-/.idea/modules.xml
-/.idea/workspace.xml
-/.idea/navEditor.xml
-/.idea/assetWizardSettings.xml
-.DS_Store
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+# dependencies
+/client/build
+/client/node_modules
+/final
+/.pnp
+.pnp.js
+
+# testing
+/coverage
+
+# production
 /build
-/captures
-.externalNativeBuild
-.cxx
-local.properties
-local.properties
-/.idea/deploymentTargetDropDown.xml
+
+# misc
+.DS_Store
+.env.development.local
+.env.test.local
+.env.production.local
+
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.vscode/settings.json
+.gitignore
+mvc/node_modules
+node_modules
