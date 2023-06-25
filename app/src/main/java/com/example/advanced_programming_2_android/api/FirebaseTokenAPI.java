@@ -15,9 +15,9 @@ public class FirebaseTokenAPI {
     private Retrofit retrofit;
     private WebServiceAPI webServiceAPI;
 
-    public FirebaseTokenAPI() {
+    public FirebaseTokenAPI(String url) {
         retrofit = new Retrofit.Builder()
-                .baseUrl(MyApplication.context.getString(R.string.BaseUrl))
+                .baseUrl(url)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         webServiceAPI = retrofit.create(WebServiceAPI.class);

@@ -92,7 +92,9 @@ public class MainActivity extends AppCompatActivity {
         Log.d("MY_ACTIVITY","1) token != '' && username != '': "+((token != "" && username != "")?"ture":"false"));
         if (token != "" && username != "") {
             boolean tokenIsValid = false;
-            UserAPI userAPI = new UserAPI();
+
+            String url = preferencesViewModel.getServerAddressLiveData(this).getValue();
+            UserAPI userAPI = new UserAPI(url);
             userAPI.getUserByUsername(username, token);
             userAPI.getUserMutableLiveData().observe(this, user->{
                 Log.d("MY_ACTIVITY","1) myUser.getValue: "+ user);

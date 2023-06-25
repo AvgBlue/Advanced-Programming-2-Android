@@ -4,6 +4,7 @@ import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.MutableLiveData;
+import androidx.lifecycle.ViewModelProvider;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -16,6 +17,8 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.example.advanced_programming_2_android.api.UserAPI;
 import com.example.advanced_programming_2_android.classes.FullUser;
+import com.example.advanced_programming_2_android.viewModels.PreferencesViewModel;
+import com.example.advanced_programming_2_android.viewModels.PreferencesViewModelFactory;
 
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicReference;
@@ -28,6 +31,8 @@ public class RegisterActivity extends AppCompatActivity {
     private EditText edDisplayName;
     private Button btnRegister;
     private ImageView settings;
+
+    private PreferencesViewModel preferencesViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,7 +49,12 @@ public class RegisterActivity extends AppCompatActivity {
         AtomicBoolean imageWasChosen = new AtomicBoolean(false);
         AtomicReference<String> profilePic = new AtomicReference<>("");
 
-        UserAPI userAPI = new UserAPI();
+        MyApplication myApp = (MyApplication) getApplication();
+        preferencesViewModel = new ViewModelProvider(myApp).get(PreferencesViewModel.class);
+
+        String url = preferencesViewModel.getServerAddressLiveData(this).getValue();
+
+        UserAPI userAPI = new UserAPI(url);
 
         btnRegister.setOnClickListener(view -> {
             String username = edUsername.getText().toString();

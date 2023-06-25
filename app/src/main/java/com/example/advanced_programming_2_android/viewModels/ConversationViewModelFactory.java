@@ -13,16 +13,19 @@ public class ConversationViewModelFactory implements ViewModelProvider.Factory {
     private final int conversationId;
     private final String token;
 
-    public ConversationViewModelFactory(int conversationId, String token) {
+    private final String url;
+
+    public ConversationViewModelFactory(int conversationId, String token, String url) {
         this.conversationId = conversationId;
         this.token = token;
+        this.url = url;
     }
 
     @NonNull
     @Override
     public <T extends ViewModel> T create(@NonNull Class<T> modelClass) {
         if (modelClass.isAssignableFrom(ConversationViewModel.class)) {
-            ConversationViewModel conversationViewModel = new ConversationViewModel(conversationId, token);
+            ConversationViewModel conversationViewModel = new ConversationViewModel(conversationId, token, url);
             return Objects.requireNonNull(modelClass.cast(conversationViewModel));
         }
         throw new IllegalArgumentException("Unknown ViewModel class: " + modelClass.getName());

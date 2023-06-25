@@ -53,10 +53,12 @@ public class ChatActivity extends AppCompatActivity {
         String token = preferencesViewModel.getTokenLiveData(this).getValue();
         String username = preferencesViewModel.getUsernameLiveData(this).getValue();
 
-        ChatViewModelFactory factoryChat = new ChatViewModelFactory(token);
+        String url = preferencesViewModel.getServerAddressLiveData(this).getValue();
+
+        ChatViewModelFactory factoryChat = new ChatViewModelFactory(token, url);
         chatViewModel = new ViewModelProvider(this, factoryChat).get(ChatViewModel.class);
 
-        UserAPI userAPI = new UserAPI();
+        UserAPI userAPI = new UserAPI(url);
         userAPI.getUserByUsername(username, token);
         MutableLiveData<User> myUser = userAPI.getUserMutableLiveData();
 
