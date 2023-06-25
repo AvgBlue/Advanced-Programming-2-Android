@@ -51,3 +51,5 @@ server.use('/api/Chats', routerChats);
 server.use('/api/fireBaseTokens', routerFirebase);
 
 server.listen(process.env.PORT);
+
+module.exports = { io };

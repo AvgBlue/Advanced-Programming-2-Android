@@ -1,7 +1,7 @@
 var tokens = [];
 
 
-const replaceToken = ((username, token) => {
+const addNewToken = ((username, token) => {
     const existingIndex = tokens.findIndex((item) => item.token === token);
 
     if (existingIndex !== -1) {
