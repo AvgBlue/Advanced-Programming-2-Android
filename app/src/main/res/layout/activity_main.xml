@@ -15,7 +15,8 @@
             android:layout_centerHorizontal="true"
             android:layout_marginTop="50dp"
             android:src="@drawable/chit_chat_logo"
-            android:padding="10dp" />
+            android:padding="10dp"
+            android:contentDescription="@string/logo"/>
 
         <Button
             style="@style/primaryButton"
@@ -36,7 +37,8 @@
             android:layout_height="60dp"
             android:textSize="20sp"
             android:layout_centerHorizontal="true"
-            android:text="@string/register"
- />
+            android:layout_marginBottom="20dp"
+            android:text="@string/register" />
+
 
 </RelativeLayout>

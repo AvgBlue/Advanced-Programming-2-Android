@@ -16,4 +16,5 @@
     <string name="BaseUrl">http://10.0.2.2:5000/</string>
     <string name="lorem_impsum">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent feugiat luctus mauris, id eleifend nulla ultrices non. Aenean quis malesuada sapien. Maecenas nec sollicitudin ex. Vestibulum sit amet pulvinar nibh. Nullam lectus massa, auctor sed sem id, tincidunt porttitor quam. Suspendisse non auctor quam. Phasellus eget iaculis risus, rhoncus tristique nisl.</string>
     <string name="note">Note that changing the URL Address while logged-in will result in a logout</string>
+    <string name="logo">Logo</string>
 </resources>
