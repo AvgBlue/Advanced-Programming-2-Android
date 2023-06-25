@@ -40,7 +40,8 @@ public class SettingsActivity extends AppCompatActivity {
         radioButtons[1] = findViewById(R.id.rbDark);
 
         //PreferencesViewModelFactory factory = new PreferencesViewModelFactory(getApplicationContext());
-        preferencesViewModel = new ViewModelProvider(this).get(PreferencesViewModel.class);
+        MyApplication myApp = (MyApplication) getApplication();
+        preferencesViewModel = new ViewModelProvider(myApp).get(PreferencesViewModel.class);
 
         preferencesViewModel.getThemeLiveData(this).observe(this, theme -> {
             applyTheme(theme);
@@ -52,15 +53,16 @@ public class SettingsActivity extends AppCompatActivity {
             addressEditText.setText(preferencesViewModel.getServerAddressLiveData(this).getValue());
         });
 
-        Log.d("MY_ACTIVITY", "2) PREFRENCES"+ preferencesViewModel.toString());
+        MutableLiveData<Integer> themeLiveData = preferencesViewModel.getThemeLiveData(this);
+        assert themeLiveData.getValue() != null;
+        radioButtons[themeLiveData.getValue() - 1].setChecked(true);
+
+        serverAddressInput.setText(preferencesViewModel.getServerAddressLiveData(this).getValue());
+
+        Log.d("MY_ACTIVITY", "2) PREFERENCES: "+ preferencesViewModel.toString());
         Log.d("MY_ACTIVITY", "2) THEME: "+preferencesViewModel.getThemeLiveData(this).getValue());
         Log.d("MY_ACTIVITY", "2) ADDRESS: "+preferencesViewModel.getServerAddressLiveData(this).getValue());
 
-        MutableLiveData<Integer> theme = preferencesViewModel.getThemeLiveData(this);
-        assert theme.getValue() != null;
-        radioButtons[theme.getValue() - 1].setChecked(true);
-
-        serverAddressInput.setText(preferencesViewModel.getServerAddressLiveData(this).getValue());
 
         Button applyButton = findViewById(R.id.btnApply);
         applyButton.setOnClickListener(view ->{
@@ -79,7 +81,15 @@ public class SettingsActivity extends AppCompatActivity {
             String toastMessage = "Applied";
             Toast.makeText(getApplicationContext(), toastMessage, Toast.LENGTH_SHORT).show();
 
-            preferencesViewModel.setServerAddress(this, editTextValue);
+
+            if(!editTextValue.equals(preferencesViewModel.getServerAddressLiveData(this).getValue())){
+                preferencesViewModel.setServerAddress(this, editTextValue);
+                // TODO - to log out the user
+            }
+            else{
+                 toastMessage = "Server address is unchanged";
+                Toast.makeText(getApplicationContext(), toastMessage, Toast.LENGTH_SHORT).show();
+            }
             preferencesViewModel.setTheme(this, radioButtonTag);
         });
     }

@@ -42,7 +42,8 @@ public class MainActivity extends AppCompatActivity {
         settingsButton = findViewById(R.id.settings_action_bar);
 
         //PreferencesViewModelFactory factory = new PreferencesViewModelFactory(getApplicationContext());
-        preferencesViewModel = new ViewModelProvider(this).get(PreferencesViewModel.class);
+        MyApplication myApp = (MyApplication) getApplication();
+        preferencesViewModel = new ViewModelProvider(myApp).get(PreferencesViewModel.class);
         if(preferencesViewModel.getThemeLiveData(this).getValue() == null){
             preferencesViewModel.setTheme(this, getDefaultTheme(this));
         }
@@ -51,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
         }
         applyTheme(preferencesViewModel.getThemeLiveData(this).getValue());
 
-        Log.d("MY_ACTIVITY", "1) preferencesViewModel"+ preferencesViewModel.toString());
+        Log.d("MY_ACTIVITY", "1) PREFERENCES: "+ preferencesViewModel.toString());
         Log.d("MY_ACTIVITY", "1) THEME: "+preferencesViewModel.getThemeLiveData(this).getValue());
         Log.d("MY_ACTIVITY", "1) ADDRESS: "+preferencesViewModel.getServerAddressLiveData(this).getValue());
 

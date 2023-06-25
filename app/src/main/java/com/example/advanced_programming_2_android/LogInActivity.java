@@ -42,8 +42,9 @@ public class LogInActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_log_in);
 
+        MyApplication myApp = (MyApplication) getApplication();
         PreferencesViewModelFactory factory = new PreferencesViewModelFactory(getApplicationContext());
-        preferencesViewModel = new ViewModelProvider(this, factory).get(PreferencesViewModel.class);
+        preferencesViewModel = new ViewModelProvider(myApp, factory).get(PreferencesViewModel.class);
 
         tvUsername = findViewById(R.id.usernameLogin);
         tvPassword = findViewById(R.id.passwordLogin);
