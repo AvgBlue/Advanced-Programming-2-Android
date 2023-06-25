@@ -42,4 +42,13 @@ public class LastMessage {
     public void setContent(String content) {
         this.content = content;
     }
+
+    @Override
+    public String toString() {
+        return "LastMessage{" +
+                "id='" + id + '\'' +
+                ", created='" + created + '\'' +
+                ", content='" + content + '\'' +
+                "}\n";
+    }
 }
