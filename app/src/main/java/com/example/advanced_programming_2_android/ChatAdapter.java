@@ -1,6 +1,7 @@
 package com.example.advanced_programming_2_android;
 
 import android.annotation.SuppressLint;
+import android.graphics.Color;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -49,6 +50,7 @@ public class ChatAdapter extends BaseAdapter {
         return 0;
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
 
@@ -73,7 +75,12 @@ public class ChatAdapter extends BaseAdapter {
         viewHolder.tvDisplayName.setText(c.getUser().getDisplayName());
         if (c.getLastMessage() != null) {
             viewHolder.tvLastMessage.setText(c.getLastMessage().getContent());
+            viewHolder.tvLastMessage.setTextColor(Color.BLACK);
             viewHolder.tvTimestamp.setText(changeStringToDate(c.getLastMessage().getCreated()));
+        } else {
+            viewHolder.tvLastMessage.setText("No massages");
+            viewHolder.tvLastMessage.setTextColor(Color.GRAY);
+            viewHolder.tvTimestamp.setText("");
         }
 
         return convertView;

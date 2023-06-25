@@ -69,8 +69,6 @@ public class MessageActivity extends AppCompatActivity {
         inputMessage = findViewById(R.id.inputMessage);
         messagesRecycleView =  findViewById(R.id.chatRecycleView);
 
-
-
         String username = preferencesViewModel.getUsernameLiveData(this).getValue();
         messageAdapter = new MessageAdapter(new ArrayList<>(), username);
         messagesRecycleView.setAdapter(messageAdapter);
@@ -89,7 +87,9 @@ public class MessageActivity extends AppCompatActivity {
             if(conversation != null){
                 messageAdapter.setMessages(conversation.getMessages());
                 messageAdapter.notifyDataSetChanged();
-                messagesRecycleView.smoothScrollToPosition(messageAdapter.getItemCount() - 1);
+                if (messageAdapter.getItemCount() > 0) {
+                    messagesRecycleView.smoothScrollToPosition(messageAdapter.getItemCount() - 1);
+                }
             }
         });
 
@@ -100,7 +100,10 @@ public class MessageActivity extends AppCompatActivity {
                 inputMessage.setText("");
             }
             // scroll to the bottom of the list
-            messagesRecycleView.smoothScrollToPosition(messageAdapter.getItemCount() - 1);
+            if (messageAdapter.getItemCount() > 0) {
+                messagesRecycleView.smoothScrollToPosition(messageAdapter.getItemCount() - 1);
+            }
+            messageAdapter.notifyDataSetChanged();
         });
 
 
