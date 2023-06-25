@@ -101,6 +101,7 @@ public class MessageActivity extends AppCompatActivity {
             if (messageAdapter.getItemCount() > 0) {
                 messagesRecycleView.smoothScrollToPosition(messageAdapter.getItemCount() - 1);
             }
+            messageAdapter.notifyDataSetChanged();
         });
 
 
