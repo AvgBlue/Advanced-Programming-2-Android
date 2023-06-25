@@ -5,9 +5,15 @@ Welcome to ChitChat are Last assignment chat website/app.
 ## Table of Contents
 
 - [How to Run](#how-to-run)
-- [Login Screen](#login-screen)
-- [Registration Screen](#registration-screen)
-- [Chat Screen](#chat-screen)
+- [App](#app)
+> - [Main Screen](main-screen)
+> - [Setting](setting)
+> - [Login Screen](login-screen)
+> - [Login Screen](login-screen)
+- [Website](#website)
+> - [Login Screen](#login-screen)
+> - [Registration Screen](#registration-screen)
+> - [Chat Screen](#chat-screen)
 - [Credits](#credits)
 
 ## How to Run
@@ -36,13 +42,43 @@ Now you can enter [http://localhost:5000/](http://localhost:5000/) to browse our
 ### Main Screen
 In the Main Screen you can choose if you want to login or to register, also you can press the ⚙️ to get into the [Chat Screen](#Setting). to change the theme or the server address.
 
-
+<img width="185" alt="image" src="https://github.com/AvgBlue/Advanced-Programming-2-Android/assets/72969087/9bcd1379-ed84-44e8-9c7a-9f569500572a">
+<img width="186" alt="image" src="https://github.com/AvgBlue/Advanced-Programming-2-Android/assets/72969087/e41646f7-ab53-4f98-bdfa-b2662a2e6b50">
 
 ### Setting
 Here you can change the settings of the app which are the change the server address and or the theme, to see the changes in action you need to press "Apply".
-Note that if you change the server address you will be kickout to the main screen, and logged out.
+Corrently we have 2 themes: light and dark. Note that if you change the server address you will be kickout to the main screen, and logged out.
+To get out of the Settings screen press the back button.
 
+<img width="186" alt="image" src="https://github.com/AvgBlue/Advanced-Programming-2-Android/assets/72969087/8e4c58f7-93db-471b-8d59-6b3b2206101f">
+<img width="185" alt="image" src="https://github.com/AvgBlue/Advanced-Programming-2-Android/assets/72969087/cee2285f-c65f-44d3-b0c1-0914f20a71c9">
 
+### Login Screen
+In the Login Screen you will be able to log into your user with your password, if the login is secsessful you will enter the up, if there is an error with your username or password, or the server is not available, a toast message will be printed with the appropriate information.
+
+<img width="183" alt="image" src="https://github.com/AvgBlue/Advanced-Programming-2-Android/assets/72969087/c2f4768a-b025-47a8-94df-63f8f2d8eeee">
+<img width="186" alt="image" src="https://github.com/AvgBlue/Advanced-Programming-2-Android/assets/72969087/2461bd5c-aa7a-4033-abbf-d597ea4a7df9">
+
+### Registration Screen
+In the Registration Screen you will be able to open an account, note that you need to provide a username, a display name, a password 8 characters long with at least one letter and one number, and an very cool image. After that press register. If everything went ok, you now will be able to navigate back to the [Login Screen](login-screen) and get into the app with your new user.
+
+<img width="183" alt="image" src="https://github.com/AvgBlue/Advanced-Programming-2-Android/assets/72969087/70410cd6-c852-4dc3-b054-317379ad8a8f">
+<img width="184" alt="image" src="https://github.com/AvgBlue/Advanced-Programming-2-Android/assets/72969087/7180e85a-313d-4fa2-bcb8-ff514b9c2eee">
+
+### Chats Screen
+In the Chats Screen you will be able to choose a 1 of your active conversations, and start talking with 1 of your friends. Alternatively you can press the ➕ button at the bottom right and add a new user to your conversations at the [Add Chat Screen](add-chat-screen). Also now you can see our logout button that will log you out of our app, so you can enter with a new user.
+
+<img width="182" alt="image" src="https://github.com/AvgBlue/Advanced-Programming-2-Android/assets/72969087/3079f3d6-0851-491d-90dc-73cfd735c52c">
+<img width="185" alt="image" src="https://github.com/AvgBlue/Advanced-Programming-2-Android/assets/72969087/7f3292ec-c11e-4037-a16c-824def66bb1f">
+
+### Add Chat Screen
+
+In the Add Chat Screen you will be able enter the infromations of a a user you want to start a conversations with, and if that user exists and is not in a conversation with you, a new conversation will be added to your [Chats Screen](chats-screen).
+
+<img width="183" alt="image" src="https://github.com/AvgBlue/Advanced-Programming-2-Android/assets/72969087/e752ee36-f2ab-4dff-afc1-511ac2f0d36f">
+<img width="184" alt="image" src="https://github.com/AvgBlue/Advanced-Programming-2-Android/assets/72969087/586d5f57-31d9-4c58-a864-35bab51de923">
+
+### Add Chat Screen
 
 ## Website
 
