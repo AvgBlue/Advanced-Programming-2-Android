@@ -100,8 +100,9 @@ public class AddChatActivity extends AppCompatActivity {
         logout.setOnClickListener(view -> {
             MyApplication myApp = (MyApplication) getApplication();
             PreferencesViewModel preferencesViewModel = new ViewModelProvider(myApp).get(PreferencesViewModel.class);
-            preferencesViewModel.setToken(this, null);
-            Intent intent = new Intent(this, LogInActivity.class);
+            preferencesViewModel.setToken(this, "");
+            Intent intent = new Intent(this, MainActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(intent);
         });
     }
