@@ -1,8 +1,13 @@
 package com.example.advanced_programming_2_android.settings;
 
+import static java.lang.Integer.parseInt;
+
 import android.content.Context;
 import android.content.res.XmlResourceParser;
 import android.util.Log;
+
+import com.example.advanced_programming_2_android.R;
+
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 import java.io.IOException;
@@ -44,5 +49,17 @@ public class ConfigParser {
         }
 
         return configMap;
+    }
+
+    public static String getDefaultServerAddress(Context context) {
+        Map<String, String> configMap = ConfigParser.parseConfig(context, R.xml.config);
+        return configMap.get("server_address");
+    }
+
+    public static int getDefaultTheme(Context context){
+        Map<String, String> configMap = ConfigParser.parseConfig(context, R.xml.config);
+        String theme = configMap.get("theme");
+        assert theme != null;
+        return parseInt(theme);
     }
 }

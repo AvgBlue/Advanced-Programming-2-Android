@@ -25,13 +25,15 @@
             android:dividerHeight="5dp" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
+            style="@style/addButton"
             android:id="@+id/btnAddChat"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|end"
+            android:layout_margin="10dp"
             android:src="@drawable/ic_add"
-            android:backgroundTint="@color/light_blue"
-            android:layout_margin="10dp" />
+            android:contentDescription="Add Chat"
+            />
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
