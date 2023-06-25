@@ -57,8 +57,7 @@ public class RegisterActivity extends AppCompatActivity {
                 MutableLiveData<Boolean> tokenLiveData = userAPI.getIsUsernameExist();
                 tokenLiveData.observe(this, isUsernameExist -> {
                     if (!isUsernameExist) {
-                        Intent intent = new Intent(this, LogInActivity.class);
-                        startActivity(intent);
+                        finish();
                     }
                 });
             }
