@@ -8,6 +8,9 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.advanced_programming_2_android.database.Message;
 
+import org.threeten.bp.LocalDateTime;
+import org.threeten.bp.format.DateTimeFormatter;
+
 import java.util.List;
 
 public class MessageAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
@@ -46,12 +49,22 @@ public class MessageAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         if (holder instanceof ReceivedMessageViewHolder) {
             ReceivedMessageViewHolder receivedHolder = (ReceivedMessageViewHolder) holder;
             receivedHolder.tvContent.setText(message.getContact());
-            receivedHolder.tvTime.setText(message.getCreatedDate());
+            String iso8601String = message.getCreatedDate(); // ISO 8601 string
+            String formattedTime = formatISO8601ToTime(iso8601String); // Format the time
+            receivedHolder.tvTime.setText(formattedTime);
         } else if (holder instanceof SentMessageViewHolder) {
             SentMessageViewHolder sentHolder = (SentMessageViewHolder) holder;
             sentHolder.tvContent.setText(message.getContact());
-            sentHolder.tvTime.setText(message.getCreatedDate());
+            String iso8601String = message.getCreatedDate(); // ISO 8601 string
+            String formattedTime = formatISO8601ToTime(iso8601String); // Format the time
+            sentHolder.tvTime.setText(formattedTime);
         }
+    }
+
+    private String formatISO8601ToTime(String iso8601String) {
+        LocalDateTime dateTime = LocalDateTime.parse(iso8601String);
+        DateTimeFormatter targetFormatter = DateTimeFormatter.ofPattern("HH:mm");
+        return dateTime.format(targetFormatter);
     }
 
     @Override

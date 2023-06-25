@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.example.advanced_programming_2_android.database.Conversation;
+import com.example.advanced_programming_2_android.database.User;
 import com.example.advanced_programming_2_android.repositories.ConversationRepository;
 
 public class ConversationViewModel extends ViewModel {
@@ -24,7 +25,9 @@ public class ConversationViewModel extends ViewModel {
     }
 
     public void sendMessageApi(String message, int chatId){
-        conversationRepository.sendMessageApi(message, chatId);
-
+        Conversation conversation = this.conversation.getValue();
+        assert conversation != null;
+        User user = conversation.getUsers().get(0);
+        conversationRepository.sendMessageApi(message, chatId, user);
     }
 }

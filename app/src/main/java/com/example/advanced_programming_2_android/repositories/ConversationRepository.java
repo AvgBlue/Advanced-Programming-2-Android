@@ -3,6 +3,9 @@ package com.example.advanced_programming_2_android.repositories;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
+import org.threeten.bp.LocalDateTime;
+import org.threeten.bp.format.DateTimeFormatter;
+
 import com.example.advanced_programming_2_android.api.ChatsAPI;
 import com.example.advanced_programming_2_android.database.AppDB;
 import com.example.advanced_programming_2_android.database.Conversation;
@@ -54,16 +57,22 @@ public class ConversationRepository {
         chatsAPI.getChatById(conversationData, conversationId, token);
     }
 
-    public void sendMessageApi(String message, int chatId) {
+    public void sendMessageApi(String message, int chatId, User user) {
         chatsAPI.createMessage(message, chatId, token);
         String content = trimString(message);
-        // TODO - to change the username, displayname, profilePic
-        User user = new User("username", "displayname", "pic");
+        //Date
+        // Get the current date and time
+        LocalDateTime currentDateTime = LocalDateTime.now();
+        // Create a formatter for ISO 8601 format
+        DateTimeFormatter formatter = DateTimeFormatter.ISO_DATE_TIME;
+        // Format the current date and time using the formatter
+        String formattedDateTime = currentDateTime.format(formatter);
+
         // maybe not necessary
         if (conversationData.getValue().getMessages() == null) {
             conversationData.getValue().setMessages(new ArrayList<>());
         }
-        conversationData.getValue().getMessages().add(new Message(1, "createdDate", user, message));
+        conversationData.getValue().getMessages().add(new Message(chatId, formattedDateTime, user, message));
     }
 
     public static String trimString(String input) {

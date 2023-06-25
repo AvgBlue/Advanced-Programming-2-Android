@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -15,6 +16,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.example.advanced_programming_2_android.database.Message;
+import com.example.advanced_programming_2_android.database.User;
 import com.example.advanced_programming_2_android.viewModels.ConversationViewModel;
 import com.example.advanced_programming_2_android.viewModels.ConversationViewModelFactory;
 import com.example.advanced_programming_2_android.viewModels.PreferencesViewModel;
@@ -64,6 +66,8 @@ public class MessageActivity extends AppCompatActivity {
         inputMessage = findViewById(R.id.inputMessage);
         messagesRecycleView =  findViewById(R.id.chatRecycleView);
 
+
+
         String username = preferencesViewModel.getUsernameLiveData().getValue();
         messageAdapter = new MessageAdapter(new ArrayList<>(), username);
         messagesRecycleView.setAdapter(messageAdapter);
@@ -79,9 +83,10 @@ public class MessageActivity extends AppCompatActivity {
 
         conversationViewModel.getChatByIdApi();
         conversationViewModel.getConversation().observe(this, conversation -> {
-            if (conversation != null) {
+            if(conversation != null){
                 messageAdapter.setMessages(conversation.getMessages());
                 messageAdapter.notifyDataSetChanged();
+                messagesRecycleView.smoothScrollToPosition(messageAdapter.getItemCount() - 1);
             }
         });
 
@@ -91,7 +96,10 @@ public class MessageActivity extends AppCompatActivity {
                 conversationViewModel.sendMessageApi(messageToSend, chatId);
                 inputMessage.setText("");
             }
+            // scroll to the bottom of the list
+            messagesRecycleView.smoothScrollToPosition(messageAdapter.getItemCount() - 1);
         });
+
 
         settingsButton.setOnClickListener(view -> {
             Intent intent = new Intent(this, SettingsActivity.class);
@@ -103,4 +111,5 @@ public class MessageActivity extends AppCompatActivity {
             startActivity(intent);
         });
     }
+
 }

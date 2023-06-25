@@ -13,27 +13,26 @@
         android:layout_alignParentTop="true" />
 
     <!-- Message List -->
-    <ScrollView
+    <!--<ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/action_bar"
-        android:layout_above="@id/inputLayout">
+        android:layout_above="@id/inputLayout"> -->
 
 
         <androidx.recyclerview.widget.RecyclerView
+            android:layout_below="@id/action_bar"
+            android:layout_above="@id/inputLayout"
             android:id="@+id/chatRecycleView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
             android:layout_marginTop="8dp"
-            android:layout_marginEnd="20dp"
             android:layout_marginBottom="8dp"
             android:clipToPadding="false"
             android:orientation="vertical"
             android:overScrollMode="never"
-            android:padding="20dp"
             android:visibility="visible" />
-    </ScrollView>
+    <!-- </ScrollView>-->
     <!-- Input Layout -->
     <LinearLayout
         android:id="@+id/inputLayout"
