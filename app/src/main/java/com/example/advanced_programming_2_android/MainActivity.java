@@ -9,6 +9,7 @@ import androidx.lifecycle.ViewModelProvider;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -17,8 +18,12 @@ import com.example.advanced_programming_2_android.api.UserAPI;
 import com.example.advanced_programming_2_android.database.AppDB;
 import com.example.advanced_programming_2_android.database.Settings;
 import com.example.advanced_programming_2_android.database.SettingsDao;
+import com.example.advanced_programming_2_android.database.User;
+import com.example.advanced_programming_2_android.database.UserDao;
 import com.example.advanced_programming_2_android.viewModels.PreferencesViewModel;
 import com.example.advanced_programming_2_android.viewModels.PreferencesViewModelFactory;
+
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
     private Button btnSignIn;
@@ -55,6 +60,18 @@ public class MainActivity extends AppCompatActivity {
             Intent intent = new Intent(this, SettingsActivity.class);
             startActivity(intent);
         });
+
+        /*
+
+        UserDao userDao = appdb.getUserDao();
+        List<User> users = userDao.getAllUsers();
+        for (User user : users) {
+            Log.d("Room", "user ID: " + user.getUsername());
+            Log.d("Room", "user User: " + user.getDisplayName());
+            // Log other relevant properties
+        }
+        
+         */
     }
 }
 

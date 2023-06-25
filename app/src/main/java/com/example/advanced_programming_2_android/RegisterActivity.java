@@ -16,6 +16,8 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.example.advanced_programming_2_android.api.UserAPI;
 import com.example.advanced_programming_2_android.classes.FullUser;
+import com.example.advanced_programming_2_android.database.User;
+import com.example.advanced_programming_2_android.repositories.UserRepository;
 
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicReference;
@@ -28,6 +30,7 @@ public class RegisterActivity extends AppCompatActivity {
     private EditText edDisplayName;
     private Button btnRegister;
     private ImageView settings;
+    private UserRepository userRepository;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,7 +47,7 @@ public class RegisterActivity extends AppCompatActivity {
         AtomicBoolean imageWasChosen = new AtomicBoolean(false);
         AtomicReference<String> profilePic = new AtomicReference<>("");
 
-        UserAPI userAPI = new UserAPI();
+        userRepository = new UserRepository();
 
         btnRegister.setOnClickListener(view -> {
             String username = edUsername.getText().toString();
@@ -53,12 +56,12 @@ public class RegisterActivity extends AppCompatActivity {
 
             if (allIsValid(username, password, displayName, imageWasChosen)) {
                 FullUser fullUser = new FullUser(username, password, displayName, profilePic.get());
-                userAPI.createUser(fullUser);
-                MutableLiveData<Boolean> tokenLiveData = userAPI.getIsUsernameExist();
+                userRepository.getUserAPI().createUser(fullUser);
+                MutableLiveData<Boolean> tokenLiveData = userRepository.getUserAPI().getIsUsernameExist();
                 tokenLiveData.observe(this, isUsernameExist -> {
                     if (!isUsernameExist) {
-                        Intent intent = new Intent(this, LogInActivity.class);
-                        startActivity(intent);
+                        userRepository.createUserRoom(new User(username, displayName, profilePic.get()));
+                        finish();
                     }
                 });
             }
