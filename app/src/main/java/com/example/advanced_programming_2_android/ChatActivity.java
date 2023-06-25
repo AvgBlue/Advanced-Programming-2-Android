@@ -46,11 +46,12 @@ public class ChatActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat);
 
+        MyApplication myApp = (MyApplication) getApplication();
         PreferencesViewModelFactory factory = new PreferencesViewModelFactory(getApplicationContext());
-        preferencesViewModel = new ViewModelProvider(this, factory).get(PreferencesViewModel.class);
+        preferencesViewModel = new ViewModelProvider(myApp, factory).get(PreferencesViewModel.class);
 
-        String token = preferencesViewModel.getTokenLiveData().getValue();
-        String username = preferencesViewModel.getUsernameLiveData().getValue();
+        String token = preferencesViewModel.getTokenLiveData(this).getValue();
+        String username = preferencesViewModel.getUsernameLiveData(this).getValue();
 
         ChatViewModelFactory factoryChat = new ChatViewModelFactory(token);
         chatViewModel = new ViewModelProvider(this, factoryChat).get(ChatViewModel.class);
