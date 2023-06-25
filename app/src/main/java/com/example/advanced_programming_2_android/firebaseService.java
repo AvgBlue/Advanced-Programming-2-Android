@@ -5,11 +5,18 @@ import android.app.NotificationManager;
         import android.content.Context;
         import android.content.Intent;
 
-        import androidx.annotation.NonNull;
+import android.util.Log;
+
+
+
+import androidx.annotation.NonNull;
         import androidx.core.app.NotificationCompat;
 
         import com.google.firebase.messaging.FirebaseMessagingService;
         import com.google.firebase.messaging.RemoteMessage;
+
+import java.util.logging.Handler;
+import java.util.logging.LogRecord;
 
 public class firebaseService extends FirebaseMessagingService {
     private static final int NOTIFICATION_ID = 123;
@@ -19,6 +26,7 @@ public class firebaseService extends FirebaseMessagingService {
         // Retrieve the message data
         String title = remoteMessage.getNotification().getTitle();
         String body = remoteMessage.getNotification().getBody();
+
 
         // Create an intent for the notification's click action
         Intent intent = new Intent(this, MainActivity.class);
