@@ -67,6 +67,7 @@ public class LogInActivity extends AppCompatActivity {
                         preferencesViewModel.setToken(token);
                         preferencesViewModel.setUsername(username);
                         Intent intent = new Intent(this, ChatActivity.class);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
                         startActivity(intent);
                     }
                     else{
