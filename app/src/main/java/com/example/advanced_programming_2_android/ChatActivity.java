@@ -75,20 +75,20 @@ public class ChatActivity extends AppCompatActivity {
                     .into(profilePic);
         });
 
-        ListView lvChats =  findViewById(R.id.lvChats);
-        chatViewModel.getChatsApi();
-        chatViewModel.getChat().observe(this, chatList -> {
-            chats = chatList;
-            chatAdapter = new ChatAdapter(chats);
-            lvChats.setAdapter(chatAdapter);
-        });
+        ListView lvChats = findViewById(R.id.lvChats);
+        chatAdapter = new ChatAdapter(new ArrayList<>());
+        lvChats.setAdapter(chatAdapter);
 
         Log.d("ChatActivity", "ChatActivity created"); // Debug print
 
-        // Todo: work on the search
+        chatViewModel.getChat().observe(this, chatList -> {
+            chats = chatList;
+            chatAdapter.updateChats(chats);
+        });
+
         btnSearch.setOnClickListener(view -> {
             String nameToSearch = etSearch.getText().toString();
-            if (!nameToSearch.equals("")) {
+            if (!nameToSearch.isEmpty()) {
                 List<Chat> filteredChats = new ArrayList<>();
                 for (Chat chat : chats) {
                     if (chat.getUser().getDisplayName().toLowerCase().startsWith(nameToSearch.toLowerCase())) {
@@ -97,13 +97,12 @@ public class ChatActivity extends AppCompatActivity {
                 }
                 chatAdapter.updateChats(filteredChats);
             } else {
-                chatAdapter.updateChats(chats);
+                chatAdapter.updateChats(chats); // Update with the original chat list
             }
         });
 
         lvChats.setOnItemClickListener((parent, view, position, id) -> {
-            Chat c = chats.get(position);
-            chatAdapter.notifyDataSetChanged();
+            Chat c = (Chat) chatAdapter.getItem(position);
 
             // for now not for later
             Intent intent = new Intent(this, MessageActivity.class);
@@ -130,6 +129,8 @@ public class ChatActivity extends AppCompatActivity {
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(intent);
         });
+
+        chatViewModel.getChatsApi();
     }
 
     @Override
