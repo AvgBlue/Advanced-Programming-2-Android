@@ -95,12 +95,26 @@
                 android:textStyle="bold"/>
         </RadioGroup>
 
+        <TextView
+            style="@style/textColor"
+            android:id="@+id/tvWarning"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/rgTheme"
+            android:layout_marginStart="10dp"
+            android:gravity="center"
+            android:text="@string/note"
+            android:textSize="25sp"
+            android:textStyle="bold"
+            android:background="@drawable/note_background"
+            />
+
         <Button
             style="@style/primaryButton"
             android:id="@+id/btnApply"
             android:layout_width="180dp"
             android:layout_height="60dp"
-            android:layout_below="@id/rgTheme"
+            android:layout_below="@id/tvWarning"
             android:layout_centerHorizontal="true"
             android:layout_marginStart="20dp"
             android:layout_marginTop="20dp"

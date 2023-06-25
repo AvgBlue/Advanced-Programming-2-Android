@@ -42,8 +42,9 @@ public class LogInActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_log_in);
 
+        MyApplication myApp = (MyApplication) getApplication();
         PreferencesViewModelFactory factory = new PreferencesViewModelFactory(getApplicationContext());
-        preferencesViewModel = new ViewModelProvider(this, factory).get(PreferencesViewModel.class);
+        preferencesViewModel = new ViewModelProvider(myApp, factory).get(PreferencesViewModel.class);
 
         tvUsername = findViewById(R.id.usernameLogin);
         tvPassword = findViewById(R.id.passwordLogin);
@@ -64,9 +65,10 @@ public class LogInActivity extends AppCompatActivity {
 
                 if (token != null) {
                     if(true){
-                        preferencesViewModel.setToken(token);
-                        preferencesViewModel.setUsername(username);
+                        preferencesViewModel.setToken(this, token);
+                        preferencesViewModel.setUsername(this, username);
                         Intent intent = new Intent(this, ChatActivity.class);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
                         startActivity(intent);
                     }
                     else{

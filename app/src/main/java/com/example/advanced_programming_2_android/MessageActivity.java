@@ -47,10 +47,11 @@ public class MessageActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_message);
 
+        MyApplication myApp = (MyApplication) getApplication();
         PreferencesViewModelFactory factory = new PreferencesViewModelFactory(getApplicationContext());
-        preferencesViewModel = new ViewModelProvider(this, factory).get(PreferencesViewModel.class);
+        preferencesViewModel = new ViewModelProvider(myApp, factory).get(PreferencesViewModel.class);
 
-        String token = preferencesViewModel.getTokenLiveData().getValue();
+        String token = preferencesViewModel.getTokenLiveData(this).getValue();
         Uri profilePic = Uri.parse(getIntent().getStringExtra("profilePic"));
         String displayName = getIntent().getStringExtra("displayName");
         int chatId = getIntent().getIntExtra("chatId", 0);
@@ -68,7 +69,7 @@ public class MessageActivity extends AppCompatActivity {
 
 
 
-        String username = preferencesViewModel.getUsernameLiveData().getValue();
+        String username = preferencesViewModel.getUsernameLiveData(this).getValue();
         messageAdapter = new MessageAdapter(new ArrayList<>(), username);
         messagesRecycleView.setAdapter(messageAdapter);
         messagesRecycleView.setLayoutManager(new LinearLayoutManager(this));
@@ -106,8 +107,9 @@ public class MessageActivity extends AppCompatActivity {
             startActivity(intent);
         });
 
-         logout.setOnClickListener(view -> {
-            Intent intent = new Intent(this, LogInActivity.class);
+        logout.setOnClickListener(view -> {
+            Intent intent = new Intent(this, MainActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(intent);
         });
     }
