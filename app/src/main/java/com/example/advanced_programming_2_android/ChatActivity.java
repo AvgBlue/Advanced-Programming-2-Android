@@ -23,6 +23,7 @@ import com.example.advanced_programming_2_android.viewModels.ChatViewModelFactor
 import com.example.advanced_programming_2_android.viewModels.PreferencesViewModel;
 import com.example.advanced_programming_2_android.viewModels.PreferencesViewModelFactory;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.messaging.FirebaseMessaging;
 import com.makeramen.roundedimageview.RoundedImageView;
 
 import java.util.ArrayList;
