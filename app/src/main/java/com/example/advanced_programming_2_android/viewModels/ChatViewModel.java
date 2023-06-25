@@ -33,4 +33,8 @@ public class ChatViewModel extends ViewModel {
     public void createChatApi(String chatWithUsername){
         chatRepository.createChatApi(chatWithUsername);
     }
+
+    public void createChatRoom(String myUsername, String chatWithUsername){
+        chatRepository.createChatRoom(myUsername, chatWithUsername);
+    }
 }

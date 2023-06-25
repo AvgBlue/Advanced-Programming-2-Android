@@ -6,10 +6,14 @@ import com.example.advanced_programming_2_android.api.ChatsAPI;
 import com.example.advanced_programming_2_android.database.AppDB;
 import com.example.advanced_programming_2_android.database.Chat;
 import com.example.advanced_programming_2_android.database.ChatDao;
+import com.example.advanced_programming_2_android.database.UserDao;
+
 import java.util.List;
+import java.util.concurrent.Executors;
 
 public class ChatRepository {
     private ChatDao chatDao;
+    private UserDao userDao;
     private ChatListData chatListData;
     private ChatsAPI chatsAPI;
     private String token;
@@ -17,6 +21,7 @@ public class ChatRepository {
     public ChatRepository(String token) {
         AppDB db = AppDB.getInstance();
         chatDao = db.getChatDao();
+        userDao = db.getUserDao();
         chatListData = new ChatListData();
         chatsAPI = new ChatsAPI();
         this.token = token;
@@ -27,7 +32,6 @@ public class ChatRepository {
             super();
             List<Chat> chats = chatDao.getAllChats();
             setValue(chats);
-
         }
 
         @Override
@@ -54,5 +58,15 @@ public class ChatRepository {
 
     public void createChatApi(String chatWithUsername) {
         chatsAPI.createChat(chatWithUsername, token);
+    }
+
+    public void createChatRoom(String myUsername, String chatWithUsername) {
+        Executors.newSingleThreadExecutor().execute(() -> {
+            int newChatId = chatDao.getLastChatId();
+            Chat newChat1 = new Chat(newChatId, userDao.getUserByUsername(myUsername), null);
+            Chat newChat2 = new Chat(newChatId, userDao.getUserByUsername(chatWithUsername), null);
+            chatDao.insert(newChat1);
+            chatDao.insert(newChat2);
+        });
     }
 }

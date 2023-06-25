@@ -26,5 +26,6 @@ public interface ChatDao {
     @Delete
     void delete(Chat... chat);
 
-
+    @Query("SELECT id FROM chats ORDER BY id DESC LIMIT 1")
+    int getLastChatId();
 }
