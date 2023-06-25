@@ -7,6 +7,7 @@ import androidx.lifecycle.MutableLiveData;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
@@ -16,6 +17,7 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.example.advanced_programming_2_android.api.UserAPI;
 import com.example.advanced_programming_2_android.classes.FullUser;
+import com.example.advanced_programming_2_android.classes.ImageConverter;
 
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicReference;
@@ -52,7 +54,10 @@ public class RegisterActivity extends AppCompatActivity {
             String displayName = edDisplayName.getText().toString();
 
             if (allIsValid(username, password, displayName, imageWasChosen)) {
-                FullUser fullUser = new FullUser(username, password, displayName, profilePic.get());
+                // Convert the image to Base64
+                String base64Image = ImageConverter.convertImageToBase64(RegisterActivity.this, Uri.parse(profilePic.get()));
+
+                FullUser fullUser = new FullUser(username, password, displayName, base64Image);
                 userAPI.createUser(fullUser);
                 MutableLiveData<Boolean> tokenLiveData = userAPI.getIsUsernameExist();
                 tokenLiveData.observe(this, isUsernameExist -> {
