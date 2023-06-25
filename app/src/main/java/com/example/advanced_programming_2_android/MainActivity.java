@@ -41,11 +41,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         AppDB appdb=AppDB.getInstance(this);
-
-        retrieveFCMToken();
-
         btnSignIn = findViewById(R.id.sign_in_btn);
         btnRegister = findViewById(R.id.register_btn);
         settingsButton = findViewById(R.id.settings_action_bar);
@@ -91,10 +87,9 @@ public class MainActivity extends AppCompatActivity {
         Log.d("MY_ACTIVITY", "1) USERNAME AGAIN: "+username);
         Log.d("MY_ACTIVITY","1) token != '' && username != '': "+((token != "" && username != "")?"ture":"false"));
         if (token != "" && username != "") {
-            boolean tokenIsValid = false;
 
-            String url = preferencesViewModel.getServerAddressLiveData(this).getValue();
-            UserAPI userAPI = new UserAPI(url);
+            UserAPI userAPI = new UserAPI();
+            
             userAPI.getUserByUsername(username, token);
             userAPI.getUserMutableLiveData().observe(this, user->{
                 Log.d("MY_ACTIVITY","1) myUser.getValue: "+ user);
@@ -110,32 +105,6 @@ public class MainActivity extends AppCompatActivity {
             });
         }
     }
-
-    private void retrieveFCMToken() {
-        FirebaseMessaging firebaseMessaging = FirebaseMessaging.getInstance();
-        Task<String> getTokenTask = firebaseMessaging.getToken();
-
-        getTokenTask.addOnCompleteListener(new OnCompleteListener<String>() {
-            @Override
-            public void onComplete(@NonNull Task<String> task) {
-                if (!task.isSuccessful()) {
-                    //TODO: clear the log before submission
-                    Log.e("FCM Token", "Fetching FCM registration token failed", task.getException());
-                    return;
-                }
-
-                // Get the FCM registration token
-                String token = task.getResult();
-
-                // Log the token
-                //TODO: clear the log before submission
-
-
-                // You can now use the token to send push notifications to this device
-            }
-        });
-    }
-
 }
 
 

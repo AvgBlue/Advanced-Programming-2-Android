@@ -18,11 +18,13 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.example.advanced_programming_2_android.api.FirebaseTokenAPI;
 import com.example.advanced_programming_2_android.api.TokenAPI;
 import com.example.advanced_programming_2_android.api.UserAPI;
 import com.example.advanced_programming_2_android.classes.LoginRequest;
 import com.example.advanced_programming_2_android.viewModels.PreferencesViewModel;
 import com.example.advanced_programming_2_android.viewModels.PreferencesViewModelFactory;
+import com.google.firebase.messaging.FirebaseMessaging;
 
 public class LogInActivity extends AppCompatActivity {
     private EditText tvUsername;
@@ -69,6 +71,7 @@ public class LogInActivity extends AppCompatActivity {
                     if(true){
                         preferencesViewModel.setToken(this, token);
                         preferencesViewModel.setUsername(this, username);
+                        retrieveFCMToken(username);
                         Intent intent = new Intent(this, ChatActivity.class);
                         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
                         startActivity(intent);
@@ -91,11 +94,20 @@ public class LogInActivity extends AppCompatActivity {
         });
     }
 
-    /*
-    public boolean requestNotificationPermission() {
-        ActivityCompat.requestPermissions(this,
-                new String[]{POST_NOTIFICATION_PERMISSION},
-                PERMISSION_REQUEST_CODE);
-        return (ContextCompat.checkSelfPermission(this, POST_NOTIFICATION_PERMISSION) == PackageManager.PERMISSION_GRANTED);
-    }*/
+    private void retrieveFCMToken(String username) {
+        FirebaseMessaging.getInstance().getToken().addOnCompleteListener(task -> {
+            if (!task.isSuccessful()) {
+                Log.w("TAG", "Fetching FCM registration token failed", task.getException());
+                return;
+            }
+
+            // Get the token
+            String token = task.getResult();
+            FirebaseTokenAPI firebaseTokenAPI = new FirebaseTokenAPI();
+            firebaseTokenAPI.postFirebaseToken(token, username);
+            Log.d("TAG", "FCM registration token: " + token);
+
+            // Save the token or send it to your server
+        });
+    }
 }
