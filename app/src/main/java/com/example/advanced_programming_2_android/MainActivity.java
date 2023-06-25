@@ -16,6 +16,8 @@ import android.widget.ImageView;
 
 import com.example.advanced_programming_2_android.api.UserAPI;
 import com.example.advanced_programming_2_android.database.AppDB;
+import com.example.advanced_programming_2_android.database.Chat;
+import com.example.advanced_programming_2_android.database.ChatDao;
 import com.example.advanced_programming_2_android.database.Settings;
 import com.example.advanced_programming_2_android.database.SettingsDao;
 import com.example.advanced_programming_2_android.database.User;
@@ -61,17 +63,16 @@ public class MainActivity extends AppCompatActivity {
             startActivity(intent);
         });
 
-        /*
 
-        UserDao userDao = appdb.getUserDao();
-        List<User> users = userDao.getAllUsers();
-        for (User user : users) {
-            Log.d("Room", "user ID: " + user.getUsername());
-            Log.d("Room", "user User: " + user.getDisplayName());
+        /*
+        ChatDao chatDao = appdb.getChatDao();
+        List<Chat> chats = chatDao.getAllChats();
+        for (Chat chat : chats) {
+            Log.d("Room", "user User: " + chat.getId());
+            Log.d("Room", "user ID: " + chat.getUser().getUsername());
             // Log other relevant properties
         }
-        
-         */
+        */
     }
 }
 

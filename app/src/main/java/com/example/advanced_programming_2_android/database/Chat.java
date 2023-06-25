@@ -12,8 +12,12 @@ import com.google.gson.annotations.SerializedName;
 // represent the response of GET /api/Chats
 @Entity(tableName = "chats")
 public class Chat {
-    @PrimaryKey
+
+    @PrimaryKey(autoGenerate = true)
     @NonNull
+    @SerializedName("o_id")
+    private int o_id;
+
     @SerializedName("id")
     private int id;
     @SerializedName("user")
@@ -34,7 +38,13 @@ public class Chat {
     }
 
     // Getters and Setters
+    public int getO_id() {
+        return o_id;
+    }
 
+    public void setO_id(int o_id) {
+        this.o_id = o_id;
+    }
 
     public int getId() {
         return id;
