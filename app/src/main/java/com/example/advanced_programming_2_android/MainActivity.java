@@ -4,6 +4,7 @@ import static com.example.advanced_programming_2_android.settings.ConfigParser.g
 import static com.example.advanced_programming_2_android.settings.ConfigParser.getDefaultTheme;
 import static com.example.advanced_programming_2_android.settings.ThemeManager.applyTheme;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
@@ -22,6 +23,9 @@ import com.example.advanced_programming_2_android.database.Settings;
 import com.example.advanced_programming_2_android.database.SettingsDao;
 import com.example.advanced_programming_2_android.viewModels.PreferencesViewModel;
 import com.example.advanced_programming_2_android.viewModels.PreferencesViewModelFactory;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.messaging.FirebaseMessaging;
 
 public class MainActivity extends AppCompatActivity {
     private Button btnSignIn;
@@ -36,6 +40,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         AppDB appdb=AppDB.getInstance(this);
+
+        retrieveFCMToken();
 
         btnSignIn = findViewById(R.id.sign_in_btn);
         btnRegister = findViewById(R.id.register_btn);
@@ -72,6 +78,32 @@ public class MainActivity extends AppCompatActivity {
             startActivity(intent);
         });
     }
+
+    private void retrieveFCMToken() {
+        FirebaseMessaging firebaseMessaging = FirebaseMessaging.getInstance();
+        Task<String> getTokenTask = firebaseMessaging.getToken();
+
+        getTokenTask.addOnCompleteListener(new OnCompleteListener<String>() {
+            @Override
+            public void onComplete(@NonNull Task<String> task) {
+                if (!task.isSuccessful()) {
+                    //TODO: clear the log before submission
+                    Log.e("FCM Token", "Fetching FCM registration token failed", task.getException());
+                    return;
+                }
+
+                // Get the FCM registration token
+                String token = task.getResult();
+
+                // Log the token
+                //TODO: clear the log before submission
+
+
+                // You can now use the token to send push notifications to this device
+            }
+        });
+    }
+
 }
 
 
