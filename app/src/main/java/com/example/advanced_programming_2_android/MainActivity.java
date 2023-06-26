@@ -19,6 +19,7 @@ import com.example.advanced_programming_2_android.api.UserAPI;
 import com.example.advanced_programming_2_android.database.AppDB;
 import com.example.advanced_programming_2_android.database.Storage;
 import com.example.advanced_programming_2_android.viewModels.PreferencesViewModel;
+import com.google.firebase.messaging.FirebaseMessaging;
 
 public class MainActivity extends AppCompatActivity {
     private Button btnSignIn;
