@@ -140,16 +140,12 @@ public class PreferencesViewModel extends ViewModel {
         saveServerAddressToSharedPreferences(context);
     }
 
-    /*
-    private void loadServerAddressFromSharedPreferences(Context context) {
-        String serverAddress = getSharedPreferences(context).getString("serverAddress", "");
-        serverAddressLiveData.setValue(serverAddress);
-    }*/
 
     private void loadServerAddressFromSharedPreferences(Context context) {
         String serverAddress = getSharedPreferences(context).getString("serverAddress", "");
-        serverAddressLiveData.postValue(serverAddress); // Use postValue instead of setValue
+        serverAddressLiveData.setValue(serverAddress);
     }
+
 
     private void saveServerAddressToSharedPreferences(Context context) {
         SharedPreferences.Editor editor = getSharedPreferences(context).edit();

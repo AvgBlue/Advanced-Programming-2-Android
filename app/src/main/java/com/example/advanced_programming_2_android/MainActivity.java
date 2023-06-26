@@ -7,6 +7,7 @@ import static com.example.advanced_programming_2_android.settings.ThemeManager.a
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModelProvider;
 
@@ -38,10 +39,17 @@ public class MainActivity extends AppCompatActivity {
 
     private PreferencesViewModel preferencesViewModel;
 
+    public static final int PERMISSION_REQUEST_CODE = 1;
+
+    public static final String POST_NOTIFICATION_PERMISSION = "android.permission.POST_NOTIFICATIONS";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        requestNotificationPermission();
+
         AppDB appdb=AppDB.getInstance(this);
         btnSignIn = findViewById(R.id.sign_in_btn);
         btnRegister = findViewById(R.id.register_btn);
@@ -50,11 +58,11 @@ public class MainActivity extends AppCompatActivity {
         //PreferencesViewModelFactory factory = new PreferencesViewModelFactory(getApplicationContext());
         MyApplication myApp = (MyApplication) getApplication();
         preferencesViewModel = new ViewModelProvider(myApp).get(PreferencesViewModel.class);
-        if(preferencesViewModel.getThemeLiveData(this).getValue() == null){
+        if(preferencesViewModel.getThemeLiveData(this).getValue() == 0){
             Log.d("MY_ACTIVITY", "1) IN setTheme");
             preferencesViewModel.setTheme(this, getDefaultTheme(this));
         }
-        if(preferencesViewModel.getServerAddressLiveData(this).getValue() == null){
+        if(preferencesViewModel.getServerAddressLiveData(this).getValue() == ""){
             Log.d("MY_ACTIVITY", "1) IN setServerAddress");
             preferencesViewModel.setServerAddress(this, getDefaultServerAddress(this));
         }
@@ -110,6 +118,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+
     private void retrieveFCMToken(String username, String url) {
         FirebaseMessaging.getInstance().getToken().addOnCompleteListener(task -> {
             if (!task.isSuccessful()) {
@@ -124,6 +133,13 @@ public class MainActivity extends AppCompatActivity {
 
             // Save the token or send it to your server
         });
+}
+
+    public void requestNotificationPermission() {
+        ActivityCompat.requestPermissions (this,
+                new String[] {POST_NOTIFICATION_PERMISSION},
+                PERMISSION_REQUEST_CODE);
+
     }
 }
 
