@@ -8,7 +8,7 @@ import androidx.room.TypeConverters;
 import com.google.gson.annotations.SerializedName;
 
 @Entity(tableName = "messages")
-@TypeConverters({Converters.class})
+@TypeConverters({ConvertersStorage.class})
 public class MessageStorage {
     @PrimaryKey(autoGenerate = true)
     @NonNull
@@ -84,4 +84,6 @@ public class MessageStorage {
                 ", contact='" + contact + '\'' +
                 "}\n";
     }
+
+
 }

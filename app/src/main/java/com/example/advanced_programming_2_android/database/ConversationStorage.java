@@ -9,7 +9,7 @@ import com.google.gson.annotations.SerializedName;
 import java.util.List;
 
 @Entity(tableName = "conversations")
-@TypeConverters({Converters.class})
+@TypeConverters({ConvertersStorage.class})
 public class ConversationStorage {
     @PrimaryKey
     @SerializedName("id")

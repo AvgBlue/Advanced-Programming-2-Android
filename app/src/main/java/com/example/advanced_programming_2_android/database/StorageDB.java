@@ -8,8 +8,8 @@ import androidx.room.Room;
 import androidx.room.RoomDatabase;
 import androidx.room.TypeConverters;
 
-@Database(entities = {User.class, MessageStorage.class, ChatStorage.class,ConversationStorage.class}, version = 1)
-@TypeConverters({Converters.class})
+@Database(entities = {User.class, MessageStorage.class, ChatStorage.class,ConversationStorage.class}, version = 2, exportSchema = false)
+@TypeConverters({ConvertersStorage.class})
 public abstract class StorageDB extends RoomDatabase {
 
 

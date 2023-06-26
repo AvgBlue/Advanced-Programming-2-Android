@@ -9,7 +9,7 @@ import androidx.room.RoomDatabase;
 import androidx.room.TypeConverters;
 
 
-@Database(entities = {User.class, Message.class, Chat.class,Conversation.class}, version = 16)
+@Database(entities = {User.class, Message.class, Chat.class,Conversation.class}, version = 16, exportSchema = false)
 @TypeConverters({Converters.class})
 public abstract class AppDB extends RoomDatabase {
 
