@@ -34,8 +34,8 @@ public class ConversationRepository {
     class ConversationData extends MutableLiveData<Conversation> {
         public ConversationData() {
             super();
-            Conversation conversation = null;
-            setValue(conversation);
+            //Conversation conversation = conversationDao.getConversationById(conversationId);
+            //setValue(conversation);
         }
 
         @Override

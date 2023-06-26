@@ -1,6 +1,7 @@
 package com.example.advanced_programming_2_android;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -15,7 +16,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+
 import com.example.advanced_programming_2_android.database.Conversation;
+
+import com.example.advanced_programming_2_android.api.UserAPI;
+
 import com.example.advanced_programming_2_android.database.Message;
 import com.example.advanced_programming_2_android.database.Storage;
 import com.example.advanced_programming_2_android.database.User;
@@ -24,6 +29,9 @@ import com.example.advanced_programming_2_android.viewModels.ConversationViewMod
 import com.example.advanced_programming_2_android.viewModels.PreferencesViewModel;
 import com.example.advanced_programming_2_android.viewModels.PreferencesViewModelFactory;
 import com.makeramen.roundedimageview.RoundedImageView;
+
+import org.threeten.bp.LocalDateTime;
+import org.threeten.bp.format.DateTimeFormatter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -44,7 +52,11 @@ public class MessageActivity extends AppCompatActivity {
 
     private MessageAdapter messageAdapter;
 
+
     private Storage storage;
+
+
+    private firebaseService firebaseServiceInstance;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +66,8 @@ public class MessageActivity extends AppCompatActivity {
         MyApplication myApp = (MyApplication) getApplication();
         PreferencesViewModelFactory factory = new PreferencesViewModelFactory(getApplicationContext());
         preferencesViewModel = new ViewModelProvider(myApp, factory).get(PreferencesViewModel.class);
+
+        firebaseServiceInstance = firebaseService.getInstance();
 
         String token = preferencesViewModel.getTokenLiveData(this).getValue();
         Uri profilePic = Uri.parse(getIntent().getStringExtra("profilePic"));
@@ -144,6 +158,30 @@ public class MessageActivity extends AppCompatActivity {
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(intent);
         });
+
+        observeNotificationEvent(url, token);
+    }
+
+    private void observeNotificationEvent(String url, String token) {
+        firebaseServiceInstance.getNotificationLiveData().observe(this, notificationData -> {
+            String fromUsername = notificationData.getTitle().split(" ")[0];
+            String content = notificationData.getBody();
+            UserAPI userAPI = new UserAPI(url);
+            userAPI.getUserByUsername(fromUsername, token);
+            userAPI.getUserMutableLiveData().observe(this, user->{
+                Message newMessage = new Message(messageAdapter.getMessages().size(),
+                        makeTimestampNow(), user, content);
+                messageAdapter.addMessage(newMessage);
+                messageAdapter.notifyDataSetChanged();
+                messagesRecycleView.smoothScrollToPosition(messageAdapter.getItemCount() - 1);
+            });
+        });
+    }
+
+    private String makeTimestampNow() {
+        LocalDateTime currentDateTime = LocalDateTime.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ISO_DATE_TIME;
+        return currentDateTime.format(formatter);
     }
 
 }

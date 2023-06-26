@@ -17,7 +17,12 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.example.advanced_programming_2_android.api.UserAPI;
 import com.example.advanced_programming_2_android.database.Chat;
+
 import com.example.advanced_programming_2_android.database.Storage;
+
+import com.example.advanced_programming_2_android.database.LastMessage;
+import com.example.advanced_programming_2_android.database.Message;
+
 import com.example.advanced_programming_2_android.database.User;
 import com.example.advanced_programming_2_android.viewModels.ChatViewModel;
 import com.example.advanced_programming_2_android.viewModels.ChatViewModelFactory;
@@ -26,6 +31,9 @@ import com.example.advanced_programming_2_android.viewModels.PreferencesViewMode
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.messaging.FirebaseMessaging;
 import com.makeramen.roundedimageview.RoundedImageView;
+
+import org.threeten.bp.LocalDateTime;
+import org.threeten.bp.format.DateTimeFormatter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -42,7 +50,11 @@ public class ChatActivity extends AppCompatActivity {
     private Button btnSearch;
     private PreferencesViewModel preferencesViewModel;
     private ChatViewModel chatViewModel;
+
     private Storage storage;
+
+    private firebaseService firebaseServiceInstance;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +64,8 @@ public class ChatActivity extends AppCompatActivity {
         MyApplication myApp = (MyApplication) getApplication();
         PreferencesViewModelFactory factory = new PreferencesViewModelFactory(getApplicationContext());
         preferencesViewModel = new ViewModelProvider(myApp, factory).get(PreferencesViewModel.class);
+
+        firebaseServiceInstance = firebaseService.getInstance();
 
         String token = preferencesViewModel.getTokenLiveData(this).getValue();
         String username = preferencesViewModel.getUsernameLiveData(this).getValue();
@@ -145,6 +159,7 @@ public class ChatActivity extends AppCompatActivity {
         });
 
         chatViewModel.getChatsApi();
+        observeNotificationEvent();
     }
 
     @Override
@@ -157,5 +172,24 @@ public class ChatActivity extends AppCompatActivity {
     protected void onPause() {
         super.onPause();
         Log.d("ChatActivity", "ChatActivity paused"); // Debug print
+    }
+
+    private void observeNotificationEvent() {
+        firebaseServiceInstance.getNotificationLiveData().observe(this, notificationData -> {
+            handleNewChat();
+        });
+    }
+
+    private void handleNewChat() {
+        chatViewModel.getChat().observe(this, chats -> {
+            chatAdapter.updateChats(chats);
+            chatAdapter.notifyDataSetChanged();
+        });
+    }
+
+    private String makeTimestampNow() {
+        LocalDateTime currentDateTime = LocalDateTime.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ISO_DATE_TIME;
+        return currentDateTime.format(formatter);
     }
 }

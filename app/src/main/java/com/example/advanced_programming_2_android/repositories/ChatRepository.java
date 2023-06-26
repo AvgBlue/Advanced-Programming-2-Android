@@ -27,7 +27,9 @@ public class ChatRepository {
     class ChatListData extends MutableLiveData<List<Chat>> {
         public ChatListData() {
             super();
-            List<Chat> chats = new ArrayList<>();//chatDao.getAllChats();
+
+            //List<Chat> chats = chatDao.getAllChats();
+            List<Chat> chats = new ArrayList<>();
             setValue(chats);
         }
 
@@ -43,6 +45,7 @@ public class ChatRepository {
     }
 
     public LiveData<List<Chat>> getAllChats() {
+        chatsAPI.getChats(chatListData, token);
         return chatListData;
     }
     public LiveData<Boolean> getIsAddChatSucceeded() {

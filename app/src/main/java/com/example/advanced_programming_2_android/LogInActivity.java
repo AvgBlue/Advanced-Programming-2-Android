@@ -100,7 +100,6 @@ public class LogInActivity extends AppCompatActivity {
             String token = task.getResult();
             FirebaseTokenAPI firebaseTokenAPI = new FirebaseTokenAPI(url);
             firebaseTokenAPI.postFirebaseToken(token, username);
-            Log.d("TAG", "FCM registration token: " + token);
 
             // Save the token or send it to your server
         });

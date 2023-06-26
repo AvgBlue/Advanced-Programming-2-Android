@@ -14,17 +14,15 @@ import java.util.List;
 
 public class ChatViewModel extends ViewModel {
     private ChatRepository chatRepository;
-    private LiveData<List<Chat>> chats;
     private LiveData<Boolean> isAddChatSucceeded;
 
     public ChatViewModel(String token, String url) {
         chatRepository = new ChatRepository(token, url);
-        chats = chatRepository.getAllChats();
         isAddChatSucceeded = chatRepository.getIsAddChatSucceeded();
     }
 
     public LiveData<List<Chat>> getChat() {
-        return chats;
+        return chatRepository.getAllChats();
     }
     public LiveData<Boolean> getIsAddChatSucceeded() {
         return isAddChatSucceeded;
