@@ -143,7 +143,7 @@ public class ChatActivity extends AppCompatActivity {
         });
 
         chatViewModel.getChatsApi();
-        observeNotificationEvent(url, token);
+        observeNotificationEvent();
     }
 
     @Override
@@ -158,40 +158,15 @@ public class ChatActivity extends AppCompatActivity {
         Log.d("ChatActivity", "ChatActivity paused"); // Debug print
     }
 
-    private void observeNotificationEvent(String url, String token) {
+    private void observeNotificationEvent() {
         firebaseServiceInstance.getNotificationLiveData().observe(this, notificationData -> {
-            String title = notificationData.getTitle().split(" ")[0];
-            String content = notificationData.getBody();
-            if (title.equals("New chat had been added")) {
-                handleNewChat(title, content);
-            } else {
-                handleNewMessage(title.split(" ")[0], content, url, token);
-            }
+            handleNewChat();
         });
     }
 
-    private void handleNewChat(String title, String content) {
-
-    }
-
-    private void handleNewMessage(String fromUsername, String content, String url, String token) {
-        UserAPI userAPI = new UserAPI(url);
-        userAPI.getUserByUsername(fromUsername, token);
-        userAPI.getUserMutableLiveData().observe(this, user-> {
-            int position = 0;
-            for (Chat chat : chatAdapter.getChats()) {
-                if (chat.getUser().getUsername().equals(fromUsername)) {
-                    break;
-                }
-                position++;
-            }
-            chatAdapter.getItem(position);
-
-            LastMessage newLastMessage = new LastMessage(chatAdapter.getChats().get(position).getLastMessage().getId() + 1,
-                    makeTimestampNow(), content);
-            // Update the chat
-            Chat existingChat = (Chat) chatAdapter.getItem(position);
-            existingChat.setLastMessage(newLastMessage);
+    private void handleNewChat() {
+        chatViewModel.getChat().observe(this, chats -> {
+            chatAdapter.updateChats(chats);
             chatAdapter.notifyDataSetChanged();
         });
     }
