@@ -44,6 +44,7 @@ public class ChatRepository {
     }
 
     public LiveData<List<Chat>> getAllChats() {
+        chatsAPI.getChats(chatListData, token);
         return chatListData;
     }
     public LiveData<Boolean> getIsAddChatSucceeded() {
