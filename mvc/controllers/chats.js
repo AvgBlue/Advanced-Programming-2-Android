@@ -30,6 +30,7 @@ const getAllChats = async (req, res) => {
 
 const addNewChat = async (req, res) => {
     const username = await tokensController.getUsernameFromToken(req, res);
+    const user = await User.getUserByUsername(username);
     const chat = await chatsService.addNewChat(username, req.body.username);
     if (!chat) {
         let otherUser = await User.getUserByUsername(req.body.username);
@@ -38,6 +39,35 @@ const addNewChat = async (req, res) => {
         }
         return res.status(404).json({ error: 'chat not found' });
     }
+
+    //how sent the message
+    const givenUsername = username;
+
+    //how sent the message to
+    const sentToUsername = req.body.username;
+
+    // Define the notification payload
+    const tokensFirebase = firebase.getTokens();
+    const tokenFirebase = tokensFirebase.find(token => token.username === sentToUsername)?.token;
+
+    if (tokenFirebase) {
+        const message = {
+            notification: {
+                title: "New chat had been added",
+                body: user.displayName + " has started a chat with you",
+            },
+            // Specify the target device token(s) or topic
+            token: tokenFirebase,
+        };
+        // Send the notification
+        admin.messaging().send(message);
+    }
+
+
+    if (!userSockets.has(givenUsername) && userSockets.has(sentToUsername)) {
+        socket.emit('addChat', sentToUsername);
+    }
+
     res.status(200).json(chat);
 }
 
