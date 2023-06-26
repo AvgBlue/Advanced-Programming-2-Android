@@ -17,17 +17,4 @@
     <string name="lorem_impsum">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent feugiat luctus mauris, id eleifend nulla ultrices non. Aenean quis malesuada sapien. Maecenas nec sollicitudin ex. Vestibulum sit amet pulvinar nibh. Nullam lectus massa, auctor sed sem id, tincidunt porttitor quam. Suspendisse non auctor quam. Phasellus eget iaculis risus, rhoncus tristique nisl.</string>
     <string name="note">Note that changing the URL Address while logged-in will result in a logout</string>
     <string name="logo">Logo</string>
-    <string name="add_username">Add Username</string>
-    <string name="add_user">Add User</string>
-    <string name="add_chat">Add Chat</string>
-    <string name="send_message">Send Message</string>
-    <string name="upload">Upload</string>
-    <string name="theme">Theme:</string>
-    <string name="server_url_address">Server URL Address</string>
-    <string name="dark">Dark</string>
-    <string name="light">Light</string>
-    <string name="apply">Apply</string>
-    <string name="placeholder_displayname">display name</string>
-    <string name="search3dots">Search...</string>
-    <string name="search">Search</string>
 </resources>

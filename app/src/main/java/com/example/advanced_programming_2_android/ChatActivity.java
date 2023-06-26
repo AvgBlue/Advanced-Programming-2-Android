@@ -17,12 +17,8 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.example.advanced_programming_2_android.api.UserAPI;
 import com.example.advanced_programming_2_android.database.Chat;
-
-import com.example.advanced_programming_2_android.database.Storage;
-
 import com.example.advanced_programming_2_android.database.LastMessage;
 import com.example.advanced_programming_2_android.database.Message;
-
 import com.example.advanced_programming_2_android.database.User;
 import com.example.advanced_programming_2_android.viewModels.ChatViewModel;
 import com.example.advanced_programming_2_android.viewModels.ChatViewModelFactory;
@@ -50,11 +46,7 @@ public class ChatActivity extends AppCompatActivity {
     private Button btnSearch;
     private PreferencesViewModel preferencesViewModel;
     private ChatViewModel chatViewModel;
-
-    private Storage storage;
-
     private firebaseService firebaseServiceInstance;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -94,12 +86,8 @@ public class ChatActivity extends AppCompatActivity {
                     .into(profilePic);
         });
 
-        storage = Storage.getStorage(this);
-
-        List<Chat> dbChats = storage.getAllChats();
-
         ListView lvChats = findViewById(R.id.lvChats);
-        chatAdapter = new ChatAdapter(dbChats);
+        chatAdapter = new ChatAdapter(new ArrayList<>());
         lvChats.setAdapter(chatAdapter);
 
         Log.d("ChatActivity", "ChatActivity created"); // Debug print
@@ -107,7 +95,6 @@ public class ChatActivity extends AppCompatActivity {
         chatViewModel.getChat().observe(this, chatList -> {
             chats = chatList;
             chatAdapter.updateChats(chats);
-            storage.updateChats(chatList);
         });
 
         btnSearch.setOnClickListener(view -> {
@@ -130,7 +117,6 @@ public class ChatActivity extends AppCompatActivity {
 
             // for now not for later
             Intent intent = new Intent(this, MessageActivity.class);
-            intent.putExtra("username", c.getUser().getUsername());
             intent.putExtra("profilePic", c.getUser().getProfilePic());
             intent.putExtra("displayName", c.getUser().getDisplayName());
             intent.putExtra("chatId", c.getId());
@@ -150,8 +136,6 @@ public class ChatActivity extends AppCompatActivity {
         });
 
         logout.setOnClickListener(view -> {
-            storage.clearStorage();
-
             Intent intent = new Intent(this, MainActivity.class);
             preferencesViewModel.setToken(this, "");
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
