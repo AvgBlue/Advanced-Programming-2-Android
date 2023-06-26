@@ -2,6 +2,7 @@ const chatsService = require('../services/chats.js');
 const tokensController = require('./tokens.js');
 const firebase = require('../services/firebase.js');
 const User = require('../services/users.js');
+const userSockets = require('../services/socket.js');
 
 
 
@@ -59,9 +60,22 @@ const addNewMessageByChatId = async (req, res) => {
     if (!chat) {
         return res.status(404).json({ error: 'chat not found' });
     }
+
+    //how sent the message
+    const givenUsername = username;
+
+    const chatUsers = chat[0].users;
+
+    const sentToUsernameArray = chatUsers.map(user => user.username).filter(username => username !== givenUsername);
+    //how sent the message to
+    const sentToUsername = sentToUsernameArray[0]
+
+
     // Define the notification payload
     const tokensFirebase = firebase.getTokens();
-    const tokenFirebase = tokensFirebase.find(token => token.username === chat[0]?.users[0]?.username)?.token;
+    const tokenFirebase = tokensFirebase.find(token => token.username === sentToUsername)?.token;
+
+
 
     if (tokenFirebase) {
         const message = {
@@ -78,9 +92,17 @@ const addNewMessageByChatId = async (req, res) => {
         });
     }
 
+
+    if (!userSockets.has(givenUsername) && userSockets.has(sentToUsername)) {
+        userSockets.get(sentToUsername).to(sentToUsername).emit('newMessage');
+    }
+
+
+
     res.status(200).json(chat);
 
 }
+
 
 const getAllMessagesById = async (req, res) => {
     const username = await tokensController.getUsernameFromToken(req, res);

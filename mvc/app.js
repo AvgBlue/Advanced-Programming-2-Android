@@ -1,6 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
+const userSockets = require('./services/socket.js');
 
 const mongoose = require('mongoose');
 
@@ -16,15 +17,28 @@ const io = require('socket.io')(7000, { cors: { origin: '*' } });
 
 io.on('connection', socket => {
     socket.on('UserConnect', username => {
+        userSockets.set(username, socket);
         socket.join(username);
     });
-    socket.on('addMessage', (sentTo) => {
+
+    socket.on('addMessage', sentTo => {
         socket.broadcast.to(sentTo).emit('newMessage');
     });
-    socket.on('addChat', (sentTo) => {
+
+    socket.on('addChat', sentTo => {
         socket.broadcast.to(sentTo).emit('newChat');
     });
-})
+
+    socket.on('disconnect', () => {
+        for (const [key, value] of userSockets) {
+            if (value === socket) {
+                userSockets.delete(key);
+                break;
+            }
+        }
+    });
+});
+
 
 
 // routers
@@ -51,5 +65,3 @@ server.use('/api/Chats', routerChats);
 server.use('/api/fireBaseTokens', routerFirebase);
 
 server.listen(process.env.PORT);
-
-module.exports = { io };
