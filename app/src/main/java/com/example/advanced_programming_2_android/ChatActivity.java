@@ -20,8 +20,7 @@ import com.example.advanced_programming_2_android.database.Chat;
 
 import com.example.advanced_programming_2_android.database.Storage;
 
-import com.example.advanced_programming_2_android.database.LastMessage;
-import com.example.advanced_programming_2_android.database.Message;
+
 
 import com.example.advanced_programming_2_android.database.User;
 import com.example.advanced_programming_2_android.viewModels.ChatViewModel;
@@ -29,7 +28,7 @@ import com.example.advanced_programming_2_android.viewModels.ChatViewModelFactor
 import com.example.advanced_programming_2_android.viewModels.PreferencesViewModel;
 import com.example.advanced_programming_2_android.viewModels.PreferencesViewModelFactory;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.firebase.messaging.FirebaseMessaging;
+
 import com.makeramen.roundedimageview.RoundedImageView;
 
 import org.threeten.bp.LocalDateTime;
@@ -102,7 +101,7 @@ public class ChatActivity extends AppCompatActivity {
         chatAdapter = new ChatAdapter(dbChats);
         lvChats.setAdapter(chatAdapter);
 
-        Log.d("ChatActivity", "ChatActivity created"); // Debug print
+        //Log.d("ChatActivity", "ChatActivity created"); // Debug print
 
         chatViewModel.getChat().observe(this, chatList -> {
             chats = chatList;
@@ -165,13 +164,13 @@ public class ChatActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        Log.d("ChatActivity", "ChatActivity resumed"); // Debug print
+        //Log.d("ChatActivity", "ChatActivity resumed"); // Debug print
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        Log.d("ChatActivity", "ChatActivity paused"); // Debug print
+        //Log.d("ChatActivity", "ChatActivity paused"); // Debug print
     }
 
     private void observeNotificationEvent() {

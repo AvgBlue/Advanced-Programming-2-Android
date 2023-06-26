@@ -7,9 +7,9 @@ import org.threeten.bp.LocalDateTime;
 import org.threeten.bp.format.DateTimeFormatter;
 
 import com.example.advanced_programming_2_android.api.ChatsAPI;
-import com.example.advanced_programming_2_android.database.AppDB;
+
 import com.example.advanced_programming_2_android.database.Conversation;
-import com.example.advanced_programming_2_android.database.ConversationDao;
+
 import com.example.advanced_programming_2_android.database.Message;
 import com.example.advanced_programming_2_android.database.User;
 

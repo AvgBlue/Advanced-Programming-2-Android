@@ -20,7 +20,7 @@ import com.example.advanced_programming_2_android.api.UserAPI;
 import com.example.advanced_programming_2_android.classes.FullUser;
 
 import com.example.advanced_programming_2_android.viewModels.PreferencesViewModel;
-import com.example.advanced_programming_2_android.viewModels.PreferencesViewModelFactory;
+
 
 import com.example.advanced_programming_2_android.classes.ImageConverter;
 

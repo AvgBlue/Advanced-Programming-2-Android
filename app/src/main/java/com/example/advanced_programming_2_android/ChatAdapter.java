@@ -2,22 +2,22 @@ package com.example.advanced_programming_2_android;
 
 import android.annotation.SuppressLint;
 import android.graphics.Color;
-import android.util.Log;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
+
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.example.advanced_programming_2_android.database.Chat;
-import com.example.advanced_programming_2_android.database.Message;
+
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
+
 import java.util.Date;
 import java.util.List;
 

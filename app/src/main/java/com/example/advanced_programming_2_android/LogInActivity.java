@@ -1,18 +1,17 @@
 package com.example.advanced_programming_2_android;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
+
 import androidx.lifecycle.MutableLiveData;
-import androidx.lifecycle.Observer;
+
 import androidx.lifecycle.ViewModelProvider;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.content.pm.PackageManager;
+
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
+
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -20,7 +19,7 @@ import android.widget.Toast;
 
 import com.example.advanced_programming_2_android.api.FirebaseTokenAPI;
 import com.example.advanced_programming_2_android.api.TokenAPI;
-import com.example.advanced_programming_2_android.api.UserAPI;
+
 import com.example.advanced_programming_2_android.classes.LoginRequest;
 import com.example.advanced_programming_2_android.viewModels.PreferencesViewModel;
 import com.example.advanced_programming_2_android.viewModels.PreferencesViewModelFactory;

@@ -1,16 +1,14 @@
 package com.example.advanced_programming_2_android.api;
 
-import static com.example.advanced_programming_2_android.MyApplication.context;
 
-import android.util.Log;
 import android.widget.Toast;
 
 import androidx.lifecycle.MutableLiveData;
 
 import com.example.advanced_programming_2_android.MyApplication;
-import com.example.advanced_programming_2_android.R;
+
 import com.example.advanced_programming_2_android.classes.LoginRequest;
-import com.example.advanced_programming_2_android.settings.ConfigParser;
+
 
 import retrofit2.Call;
 import retrofit2.Callback;

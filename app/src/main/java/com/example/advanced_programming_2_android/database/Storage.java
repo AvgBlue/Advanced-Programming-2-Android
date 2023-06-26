@@ -1,7 +1,7 @@
 package com.example.advanced_programming_2_android.database;
 
 import android.content.Context;
-import android.util.Log;
+
 
 import java.util.ArrayList;
 import java.util.HashMap;

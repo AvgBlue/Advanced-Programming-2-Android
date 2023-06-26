@@ -4,13 +4,13 @@ import static com.example.advanced_programming_2_android.settings.ThemeManager.a
 import static java.lang.Integer.parseInt;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.app.AppCompatDelegate;
+
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
+
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
@@ -19,7 +19,7 @@ import android.widget.Toast;
 
 import com.example.advanced_programming_2_android.database.Storage;
 import com.example.advanced_programming_2_android.viewModels.PreferencesViewModel;
-import com.example.advanced_programming_2_android.viewModels.PreferencesViewModelFactory;
+
 
 
 public class SettingsActivity extends AppCompatActivity {
@@ -61,9 +61,9 @@ public class SettingsActivity extends AppCompatActivity {
 
         serverAddressInput.setText(preferencesViewModel.getServerAddressLiveData(this).getValue());
 
-        Log.d("MY_ACTIVITY", "2) PREFERENCES: "+ preferencesViewModel.toString());
-        Log.d("MY_ACTIVITY", "2) THEME: "+preferencesViewModel.getThemeLiveData(this).getValue());
-        Log.d("MY_ACTIVITY", "2) ADDRESS: "+preferencesViewModel.getServerAddressLiveData(this).getValue());
+        //Log.d("MY_ACTIVITY", "2) PREFERENCES: "+ preferencesViewModel.toString());
+        //Log.d("MY_ACTIVITY", "2) THEME: "+preferencesViewModel.getThemeLiveData(this).getValue());
+        //Log.d("MY_ACTIVITY", "2) ADDRESS: "+preferencesViewModel.getServerAddressLiveData(this).getValue());
 
 
         Button applyButton = findViewById(R.id.btnApply);

@@ -1,7 +1,7 @@
 package com.example.advanced_programming_2_android.settings;
 
 import androidx.appcompat.app.AppCompatDelegate;
-import androidx.lifecycle.ViewModelProvider;
+
 
 
 public class ThemeManager {

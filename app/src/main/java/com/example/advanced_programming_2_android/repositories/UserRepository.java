@@ -4,9 +4,9 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 import com.example.advanced_programming_2_android.api.UserAPI;
-import com.example.advanced_programming_2_android.database.AppDB;
+
 import com.example.advanced_programming_2_android.database.User;
-import com.example.advanced_programming_2_android.database.UserDao;
+
 
 import java.util.LinkedList;
 import java.util.List;

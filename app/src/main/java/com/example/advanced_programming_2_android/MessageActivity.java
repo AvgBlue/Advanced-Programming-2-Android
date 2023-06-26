@@ -1,7 +1,7 @@
 package com.example.advanced_programming_2_android;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.Observer;
+
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -23,7 +23,7 @@ import com.example.advanced_programming_2_android.api.UserAPI;
 
 import com.example.advanced_programming_2_android.database.Message;
 import com.example.advanced_programming_2_android.database.Storage;
-import com.example.advanced_programming_2_android.database.User;
+
 import com.example.advanced_programming_2_android.viewModels.ConversationViewModel;
 import com.example.advanced_programming_2_android.viewModels.ConversationViewModelFactory;
 import com.example.advanced_programming_2_android.viewModels.PreferencesViewModel;
@@ -35,7 +35,7 @@ import org.threeten.bp.format.DateTimeFormatter;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
+
 
 
 public class MessageActivity extends AppCompatActivity {
@@ -76,7 +76,7 @@ public class MessageActivity extends AppCompatActivity {
 
         String partnerUsername =  getIntent().getStringExtra("username");
 
-        Log.d("MY_ACTIVITY","5) displayName: "+ displayName);
+        //Log.d("MY_ACTIVITY","5) displayName: "+ displayName);
 
         String url = preferencesViewModel.getServerAddressLiveData(this).getValue();
 

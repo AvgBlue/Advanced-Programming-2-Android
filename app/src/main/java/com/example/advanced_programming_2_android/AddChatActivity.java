@@ -7,7 +7,7 @@ import androidx.lifecycle.ViewModelProvider;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.view.View;
+
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -22,7 +22,7 @@ import com.example.advanced_programming_2_android.database.User;
 import com.example.advanced_programming_2_android.viewModels.ChatViewModel;
 import com.example.advanced_programming_2_android.viewModels.ChatViewModelFactory;
 import com.example.advanced_programming_2_android.viewModels.PreferencesViewModel;
-import com.example.advanced_programming_2_android.viewModels.PreferencesViewModelFactory;
+
 import com.makeramen.roundedimageview.RoundedImageView;
 
 import java.util.List;

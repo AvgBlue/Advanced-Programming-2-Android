@@ -2,19 +2,17 @@ package com.example.advanced_programming_2_android.api;
 
 import static com.example.advanced_programming_2_android.MyApplication.context;
 
-import android.util.Log;
+
 import android.widget.Toast;
 
 import androidx.lifecycle.MutableLiveData;
-import androidx.lifecycle.ViewModelProvider;
+
 
 import com.example.advanced_programming_2_android.MyApplication;
-import com.example.advanced_programming_2_android.R;
+
 import com.example.advanced_programming_2_android.classes.FullUser;
 import com.example.advanced_programming_2_android.database.User;
-import com.example.advanced_programming_2_android.settings.ConfigParser;
-import com.example.advanced_programming_2_android.viewModels.PreferencesViewModel;
-import com.example.advanced_programming_2_android.viewModels.PreferencesViewModelFactory;
+
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -39,7 +37,7 @@ public class UserAPI {
     }
 
     public void getUserByUsername(String username, String authorization) {
-        Log.d("MY_ACTIVITY", "3) username: "+username+", authorization: "+authorization);
+        //Log.d("MY_ACTIVITY", "3) username: "+username+", authorization: "+authorization);
         Call<User> call = webServiceAPI.getUserByUsername(username, authorization);
         call.enqueue(new Callback<User>() {
             @Override
@@ -48,7 +46,7 @@ public class UserAPI {
                     User user = response.body();
                     userMutableLiveData.setValue(user);
                 } else {
-                    Toast.makeText(MyApplication.context, "Could not get your user", Toast.LENGTH_LONG).show();
+                    //Toast.makeText(MyApplication.context, "Could not get your user", Toast.LENGTH_LONG).show();
                 }
             }
 

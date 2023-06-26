@@ -1,8 +1,7 @@
 package com.example.advanced_programming_2_android.api;
 
 
-import com.example.advanced_programming_2_android.MyApplication;
-import com.example.advanced_programming_2_android.R;
+
 import com.example.advanced_programming_2_android.classes.FireBaseRequest;
 
 import retrofit2.Call;

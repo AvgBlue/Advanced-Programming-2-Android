@@ -1,9 +1,6 @@
 package com.example.advanced_programming_2_android.viewModels;
 
-import android.content.Context;
-import android.util.Log;
 
-import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModel;
 
