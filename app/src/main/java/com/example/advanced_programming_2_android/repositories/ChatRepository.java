@@ -6,17 +6,19 @@ import com.example.advanced_programming_2_android.api.ChatsAPI;
 import com.example.advanced_programming_2_android.database.AppDB;
 import com.example.advanced_programming_2_android.database.Chat;
 import com.example.advanced_programming_2_android.database.ChatDao;
+
+import java.util.ArrayList;
 import java.util.List;
 
 public class ChatRepository {
-    private ChatDao chatDao;
+    //private ChatDao chatDao;
     private ChatListData chatListData;
     private ChatsAPI chatsAPI;
     private String token;
 
     public ChatRepository(String token, String url) {
-        AppDB db = AppDB.getInstance();
-        chatDao = db.getChatDao();
+        //AppDB db = AppDB.getInstance();
+        //chatDao = db.getChatDao();
         chatListData = new ChatListData();
         chatsAPI = new ChatsAPI(url);
         this.token = token;
@@ -25,7 +27,7 @@ public class ChatRepository {
     class ChatListData extends MutableLiveData<List<Chat>> {
         public ChatListData() {
             super();
-            List<Chat> chats = chatDao.getAllChats();
+            List<Chat> chats = new ArrayList<>();//chatDao.getAllChats();
             setValue(chats);
         }
 
@@ -34,7 +36,7 @@ public class ChatRepository {
             super.onActive();
 
             new Thread(() -> {
-                chatListData.postValue(chatDao.getAllChats());
+                //chatListData.postValue(chatDao.getAllChats());
             }).start();
             chatsAPI.getChats(chatListData, token);
         }

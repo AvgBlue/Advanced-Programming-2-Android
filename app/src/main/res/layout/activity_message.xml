@@ -70,10 +70,10 @@
                 android:id="@+id/sentBtn"
                 android:layout_width="48dp"
                 android:layout_height="48dp"
-                android:backgroundTint="@color/white"
+                android:backgroundTint="@color/transparent"
                 android:padding="8dp"
                 android:src="@drawable/ic_send_2"
-                android:contentDescription="Send Message"
+                android:contentDescription="@string/send_message"
                 />
         </FrameLayout>
     </LinearLayout>

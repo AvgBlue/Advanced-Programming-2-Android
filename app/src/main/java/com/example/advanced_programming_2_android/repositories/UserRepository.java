@@ -12,15 +12,15 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class UserRepository {
-    private UserDao userDao;
+    //private UserDao userDao;
     private UsersListData usersListData;
     private UserAPI userAPI;
 
     private String token;
 
     public UserRepository(String token, String url) {
-        AppDB db = AppDB.getInstance();
-        userDao = db.getUserDao();
+        //AppDB db = AppDB.getInstance();
+        //userDao = db.getUserDao();
         usersListData = new UsersListData();
         userAPI = new UserAPI(url);
         this.token = token;
@@ -37,9 +37,11 @@ public class UserRepository {
             super.onActive();
 
             new Thread(() -> {
-                usersListData.postValue(userDao.getAllUsers());
+               //usersListData.postValue(userDao.getAllUsers());
             }).start();
         }
+
+
     }
 
     public LiveData<List<User>> getAllUsers() {

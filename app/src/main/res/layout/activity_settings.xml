@@ -13,10 +13,8 @@
         android:layout_height="match_parent"
         >
         <RelativeLayout
-            android:layout_below="@id/action_bar"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true">
+            android:layout_height="wrap_content">
             <TextView
                 style="@style/textColor"
                 android:id="@+id/tvSetting"
@@ -56,7 +54,7 @@
                 android:background="@color/light_blue"
                 android:drawableStart="@drawable/ic_http"
                 android:drawablePadding="20dp"
-                android:hint="Server URL Address"
+                android:hint="@string/server_url_address"
                 android:padding="20dp"
                 android:textColor="@color/dark_blue"
                 android:textColorHint="@color/dark_blue" />
@@ -68,7 +66,7 @@
                 android:layout_below="@id/edHttp"
                 android:layout_marginStart="10dp"
                 android:gravity="start"
-                android:text="Theme:"
+                android:text="@string/theme"
                 android:textSize="25sp"
                 android:textStyle="bold"
                 />
@@ -85,7 +83,7 @@
                     android:id="@+id/rbLight"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Light"
+                    android:text="@string/light"
                     android:tag="1"
                     android:textSize="20sp"
                     android:textStyle="bold"/>
@@ -95,25 +93,24 @@
                     android:id="@+id/rbDark"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Dark"
+                    android:text="@string/dark"
                     android:tag="2"
                     android:textSize="20sp"
                     android:textStyle="bold"/>
             </RadioGroup>
 
             <TextView
-                style="@style/textColor"
                 android:id="@+id/tvWarning"
+                style="@style/textColor"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/rgTheme"
                 android:layout_marginHorizontal="20dp"
+                android:background="@drawable/note_background"
                 android:gravity="center"
                 android:text="@string/note"
                 android:textSize="25sp"
-                android:textStyle="bold"
-                android:background="@drawable/note_background"
-                />
+                android:textStyle="bold" />
 
             <Button
                 style="@style/primaryButton"
@@ -126,7 +123,7 @@
                 android:layout_marginTop="20dp"
                 android:layout_marginEnd="20dp"
                 android:layout_marginBottom="20dp"
-                android:text="Apply"
+                android:text="@string/apply"
                 android:textSize="20sp"
                 />
         </RelativeLayout>

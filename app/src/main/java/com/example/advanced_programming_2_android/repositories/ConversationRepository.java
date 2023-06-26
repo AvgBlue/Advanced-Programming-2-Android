@@ -16,15 +16,15 @@ import com.example.advanced_programming_2_android.database.User;
 import java.util.ArrayList;
 
 public class ConversationRepository {
-    private ConversationDao conversationDao;
+    //private ConversationDao conversationDao;
     private ConversationData conversationData;
     private ChatsAPI chatsAPI;
     private String token;
     private int conversationId;
 
     public ConversationRepository(int conversationId, String token, String url) {
-        AppDB db = AppDB.getInstance();
-        conversationDao = db.getConversationDao();
+        //AppDB db = AppDB.getInstance();
+        //conversationDao = db.getConversationDao();
         conversationData = new ConversationData();
         chatsAPI = new ChatsAPI(url);
         this.token = token;
@@ -34,7 +34,7 @@ public class ConversationRepository {
     class ConversationData extends MutableLiveData<Conversation> {
         public ConversationData() {
             super();
-            Conversation conversation = conversationDao.getConversationById(conversationId);
+            Conversation conversation = null;
             setValue(conversation);
         }
 
@@ -43,7 +43,7 @@ public class ConversationRepository {
             super.onActive();
 
             new Thread(() -> {
-                conversationData.postValue(conversationDao.getConversationById(conversationId));
+                //conversationData.postValue(conversationDao.getConversationById(conversationId));
             }).start();
             chatsAPI.getChatById(conversationData, conversationId, token);
         }

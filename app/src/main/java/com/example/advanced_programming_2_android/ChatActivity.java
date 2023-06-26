@@ -116,6 +116,7 @@ public class ChatActivity extends AppCompatActivity {
 
             // for now not for later
             Intent intent = new Intent(this, MessageActivity.class);
+            intent.putExtra("username", c.getUser().getUsername());
             intent.putExtra("profilePic", c.getUser().getProfilePic());
             intent.putExtra("displayName", c.getUser().getDisplayName());
             intent.putExtra("chatId", c.getId());
