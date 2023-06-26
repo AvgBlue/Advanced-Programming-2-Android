@@ -51,6 +51,7 @@ public class MainActivity extends AppCompatActivity {
         requestNotificationPermission();
 
         AppDB appdb=AppDB.getInstance(this);
+
         btnSignIn = findViewById(R.id.sign_in_btn);
         btnRegister = findViewById(R.id.register_btn);
         settingsButton = findViewById(R.id.settings_action_bar);

@@ -10,13 +10,23 @@ import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.core.app.NotificationCompat;
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
 
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 
 public class firebaseService extends FirebaseMessagingService {
     private static final int NOTIFICATION_ID = 123;
-
+    private static MutableLiveData<NotificationData> notificationLiveData;
+    private static firebaseService instance;
+    public static synchronized firebaseService getInstance() {
+        if (instance == null) {
+            instance = new firebaseService();
+            notificationLiveData = new MutableLiveData<>();
+        }
+        return instance;
+    }
     @Override
     public void onMessageReceived(@NonNull RemoteMessage remoteMessage) {
         // Retrieve the message data
@@ -35,6 +45,10 @@ public class firebaseService extends FirebaseMessagingService {
             notificationManager.createNotificationChannel(channel);
         }
 
+        // Update the notificationLiveData with the new data
+        NotificationData notificationData = new NotificationData(title, body);
+        notificationLiveData.postValue(notificationData);
+
         // Build the notification
         NotificationCompat.Builder notificationBuilder =
                 new NotificationCompat.Builder(this, "ChitChat")  // Updated channel ID here
@@ -47,5 +61,9 @@ public class firebaseService extends FirebaseMessagingService {
         // Show the notification
         NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
         notificationManager.notify(NOTIFICATION_ID, notificationBuilder.build());
+    }
+
+    public LiveData<NotificationData> getNotificationLiveData() {
+        return notificationLiveData;
     }
 }

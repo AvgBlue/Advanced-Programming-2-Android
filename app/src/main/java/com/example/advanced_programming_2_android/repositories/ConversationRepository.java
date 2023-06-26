@@ -23,8 +23,8 @@ public class ConversationRepository {
     private int conversationId;
 
     public ConversationRepository(int conversationId, String token, String url) {
-        AppDB db = AppDB.getInstance();
-        conversationDao = db.getConversationDao();
+        //AppDB db = AppDB.getInstance();
+        //conversationDao = db.getConversationDao();
         conversationData = new ConversationData();
         chatsAPI = new ChatsAPI(url);
         this.token = token;
@@ -34,8 +34,8 @@ public class ConversationRepository {
     class ConversationData extends MutableLiveData<Conversation> {
         public ConversationData() {
             super();
-            Conversation conversation = conversationDao.getConversationById(conversationId);
-            setValue(conversation);
+            //Conversation conversation = conversationDao.getConversationById(conversationId);
+            //setValue(conversation);
         }
 
         @Override
@@ -43,7 +43,7 @@ public class ConversationRepository {
             super.onActive();
 
             new Thread(() -> {
-                conversationData.postValue(conversationDao.getConversationById(conversationId));
+                //conversationData.postValue(conversationDao.getConversationById(conversationId));
             }).start();
             chatsAPI.getChatById(conversationData, conversationId, token);
         }

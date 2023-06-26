@@ -111,4 +111,12 @@ public class MessageAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             tvTime = itemView.findViewById(R.id.tvTime);
         }
     }
+
+    public void addMessage(Message message) {
+        this.messages.add(message);
+    }
+
+    public List<Message> getMessages() {
+        return this.messages;
+    }
 }

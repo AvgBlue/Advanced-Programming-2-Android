@@ -17,6 +17,8 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.example.advanced_programming_2_android.api.UserAPI;
 import com.example.advanced_programming_2_android.database.Chat;
+import com.example.advanced_programming_2_android.database.LastMessage;
+import com.example.advanced_programming_2_android.database.Message;
 import com.example.advanced_programming_2_android.database.User;
 import com.example.advanced_programming_2_android.viewModels.ChatViewModel;
 import com.example.advanced_programming_2_android.viewModels.ChatViewModelFactory;
@@ -25,6 +27,9 @@ import com.example.advanced_programming_2_android.viewModels.PreferencesViewMode
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.messaging.FirebaseMessaging;
 import com.makeramen.roundedimageview.RoundedImageView;
+
+import org.threeten.bp.LocalDateTime;
+import org.threeten.bp.format.DateTimeFormatter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,6 +46,7 @@ public class ChatActivity extends AppCompatActivity {
     private Button btnSearch;
     private PreferencesViewModel preferencesViewModel;
     private ChatViewModel chatViewModel;
+    private firebaseService firebaseServiceInstance;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +56,8 @@ public class ChatActivity extends AppCompatActivity {
         MyApplication myApp = (MyApplication) getApplication();
         PreferencesViewModelFactory factory = new PreferencesViewModelFactory(getApplicationContext());
         preferencesViewModel = new ViewModelProvider(myApp, factory).get(PreferencesViewModel.class);
+
+        firebaseServiceInstance = firebaseService.getInstance();
 
         String token = preferencesViewModel.getTokenLiveData(this).getValue();
         String username = preferencesViewModel.getUsernameLiveData(this).getValue();
@@ -135,6 +143,7 @@ public class ChatActivity extends AppCompatActivity {
         });
 
         chatViewModel.getChatsApi();
+        observeNotificationEvent(url, token);
     }
 
     @Override
@@ -147,5 +156,49 @@ public class ChatActivity extends AppCompatActivity {
     protected void onPause() {
         super.onPause();
         Log.d("ChatActivity", "ChatActivity paused"); // Debug print
+    }
+
+    private void observeNotificationEvent(String url, String token) {
+        firebaseServiceInstance.getNotificationLiveData().observe(this, notificationData -> {
+            String title = notificationData.getTitle().split(" ")[0];
+            String content = notificationData.getBody();
+            if (title.equals("New chat had been added")) {
+                handleNewChat(title, content);
+            } else {
+                handleNewMessage(title.split(" ")[0], content, url, token);
+            }
+        });
+    }
+
+    private void handleNewChat(String title, String content) {
+
+    }
+
+    private void handleNewMessage(String fromUsername, String content, String url, String token) {
+        UserAPI userAPI = new UserAPI(url);
+        userAPI.getUserByUsername(fromUsername, token);
+        userAPI.getUserMutableLiveData().observe(this, user-> {
+            int position = 0;
+            for (Chat chat : chatAdapter.getChats()) {
+                if (chat.getUser().getUsername().equals(fromUsername)) {
+                    break;
+                }
+                position++;
+            }
+            chatAdapter.getItem(position);
+
+            LastMessage newLastMessage = new LastMessage(chatAdapter.getChats().get(position).getLastMessage().getId() + 1,
+                    makeTimestampNow(), content);
+            // Update the chat
+            Chat existingChat = (Chat) chatAdapter.getItem(position);
+            existingChat.setLastMessage(newLastMessage);
+            chatAdapter.notifyDataSetChanged();
+        });
+    }
+
+    private String makeTimestampNow() {
+        LocalDateTime currentDateTime = LocalDateTime.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ISO_DATE_TIME;
+        return currentDateTime.format(formatter);
     }
 }

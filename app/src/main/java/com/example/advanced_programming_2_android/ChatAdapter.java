@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.example.advanced_programming_2_android.database.Chat;
+import com.example.advanced_programming_2_android.database.Message;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -106,5 +107,13 @@ public class ChatAdapter extends BaseAdapter {
         }
 
         return outputDateString;
+    }
+
+    public void addChat(Chat chat) {
+        this.chats.add(chat);
+    }
+
+    public List<Chat> getChats() {
+        return chats;
     }
 }
