@@ -27,12 +27,6 @@ public class PreferencesViewModel extends ViewModel {
 
 
     public PreferencesViewModel() {
-        usernameLiveData = new MutableLiveData<>();
-        tokenLiveData = new MutableLiveData<>();
-        passwordLiveData = new MutableLiveData<>();
-        themeLiveData = new MutableLiveData<>();
-        serverAddressLiveData = new MutableLiveData<>();
-
     }
 
     private SharedPreferences getSharedPreferences(Context context){
@@ -109,6 +103,8 @@ public class PreferencesViewModel extends ViewModel {
         passwordLiveData.setValue(password);
     }
 
+
+
     private void loadThemeFromSharedPreferences(Context context) {
         int theme = getSharedPreferences(context).getInt("theme", 0);
         themeLiveData.setValue(theme);
@@ -151,9 +147,15 @@ public class PreferencesViewModel extends ViewModel {
         saveServerAddressToSharedPreferences(context);
     }
 
+    /*
     private void loadServerAddressFromSharedPreferences(Context context) {
         String serverAddress = getSharedPreferences(context).getString("serverAddress", "");
         serverAddressLiveData.setValue(serverAddress);
+    }*/
+
+    private void loadServerAddressFromSharedPreferences(Context context) {
+        String serverAddress = getSharedPreferences(context).getString("serverAddress", "");
+        serverAddressLiveData.postValue(serverAddress); // Use postValue instead of setValue
     }
 
     private void saveServerAddressToSharedPreferences(Context context) {

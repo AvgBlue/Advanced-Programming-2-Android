@@ -2,6 +2,7 @@ package com.example.advanced_programming_2_android;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.MutableLiveData;
+import androidx.lifecycle.ViewModelProvider;
 
 import android.content.Intent;
 import android.net.Uri;
@@ -18,6 +19,8 @@ import com.example.advanced_programming_2_android.api.UserAPI;
 import com.example.advanced_programming_2_android.database.Chat;
 import com.example.advanced_programming_2_android.database.User;
 import com.example.advanced_programming_2_android.viewModels.ChatViewModel;
+import com.example.advanced_programming_2_android.viewModels.PreferencesViewModel;
+import com.example.advanced_programming_2_android.viewModels.PreferencesViewModelFactory;
 import com.makeramen.roundedimageview.RoundedImageView;
 
 import java.util.List;
@@ -95,7 +98,11 @@ public class AddChatActivity extends AppCompatActivity {
         });
 
         logout.setOnClickListener(view -> {
-            Intent intent = new Intent(this, LogInActivity.class);
+            MyApplication myApp = (MyApplication) getApplication();
+            PreferencesViewModel preferencesViewModel = new ViewModelProvider(myApp).get(PreferencesViewModel.class);
+            preferencesViewModel.setToken(this, "");
+            Intent intent = new Intent(this, MainActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(intent);
         });
     }

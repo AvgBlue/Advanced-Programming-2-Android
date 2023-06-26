@@ -2,6 +2,7 @@ package com.example.advanced_programming_2_android.api;
 
 import static com.example.advanced_programming_2_android.MyApplication.context;
 
+import android.util.Log;
 import android.widget.Toast;
 
 import androidx.lifecycle.MutableLiveData;
@@ -38,6 +39,7 @@ public class UserAPI {
     }
 
     public void getUserByUsername(String username, String authorization) {
+        Log.d("MY_ACTIVITY", "3) username: "+username+", authorization: "+authorization);
         Call<User> call = webServiceAPI.getUserByUsername(username, authorization);
         call.enqueue(new Callback<User>() {
             @Override
