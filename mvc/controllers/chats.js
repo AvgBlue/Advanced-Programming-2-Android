@@ -9,6 +9,11 @@ const userSockets = require('../services/socket.js');
 const admin = require('firebase-admin');
 const serviceAccount = require('../config/advanced-programming-2-android-firebase-adminsdk-u82e9-e8d7f4a76c.json');
 
+const io = require('socket.io-client')
+
+const socket = io.connect('http://localhost:7000');
+
+
 // Initialize the Firebase Admin SDK with the JSON key object
 admin.initializeApp({
     credential: admin.credential.cert(serviceAccount),
@@ -87,14 +92,12 @@ const addNewMessageByChatId = async (req, res) => {
             token: tokenFirebase,
         };
         // Send the notification
-        admin.messaging().send(message).then(() => {
-            console.log('Successfully sent message:', message);
-        });
+        admin.messaging().send(message);
     }
 
 
     if (!userSockets.has(givenUsername) && userSockets.has(sentToUsername)) {
-        userSockets.get(sentToUsername).to(sentToUsername).emit('newMessage');
+        socket.emit('addMessage', sentToUsername);
     }
 
 

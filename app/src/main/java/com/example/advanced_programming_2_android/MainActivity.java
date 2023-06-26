@@ -19,6 +19,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.example.advanced_programming_2_android.api.FirebaseTokenAPI;
 import com.example.advanced_programming_2_android.api.UserAPI;
 import com.example.advanced_programming_2_android.database.AppDB;
 import com.example.advanced_programming_2_android.database.Settings;
@@ -95,6 +96,7 @@ public class MainActivity extends AppCompatActivity {
             userAPI.getUserMutableLiveData().observe(this, user->{
                 Log.d("MY_ACTIVITY","1) myUser.getValue: "+ user);
                 if(user != null){
+                    retrieveFCMToken(username, url);
                     Intent intent = new Intent(this, ChatActivity.class);
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     startActivity(intent);
@@ -105,6 +107,23 @@ public class MainActivity extends AppCompatActivity {
                 }
             });
         }
+
+    }
+
+    private void retrieveFCMToken(String username, String url) {
+        FirebaseMessaging.getInstance().getToken().addOnCompleteListener(task -> {
+            if (!task.isSuccessful()) {
+                Log.w("TAG", "Fetching FCM registration token failed", task.getException());
+                return;
+            }
+
+            // Get the token
+            String token = task.getResult();
+            FirebaseTokenAPI firebaseTokenAPI = new FirebaseTokenAPI(url);
+            firebaseTokenAPI.postFirebaseToken(token, username);
+
+            // Save the token or send it to your server
+        });
     }
 }
 
