@@ -9,24 +9,24 @@ import androidx.room.Update;
 import java.util.List;
 
 @Dao
-public interface ConversationDao {
+public interface ConversationStorageDao {
     @Insert
-    void insert(Conversation... conversations);
+    void insert(ConversationStorage... conversations);
 
     @Update
-    void update(Conversation... conversations);
+    void update(ConversationStorage... conversations);
 
     @Query("SELECT id FROM conversations")
     List<Integer> getAllConversationIds();
 
     @Query("SELECT * FROM conversations")
-    List<Conversation> getAllConversations();
+    List<ConversationStorage> getAllConversations();
 
     @Query("SELECT * FROM conversations WHERE id = :id")
-    Conversation getConversationById(int id);
+    ConversationStorage getConversationById(int id);
 
     @Delete
-    void delete(Conversation... conversations);
+    void delete(ConversationStorage... conversations);
 
 
 }
