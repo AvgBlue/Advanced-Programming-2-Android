@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ChatRepository {
-    //private ChatDao chatDao;
+    private ChatDao chatDao;
     private ChatListData chatListData;
     private ChatsAPI chatsAPI;
     private String token;
@@ -27,7 +27,6 @@ public class ChatRepository {
     class ChatListData extends MutableLiveData<List<Chat>> {
         public ChatListData() {
             super();
-
             //List<Chat> chats = chatDao.getAllChats();
             List<Chat> chats = new ArrayList<>();
             setValue(chats);

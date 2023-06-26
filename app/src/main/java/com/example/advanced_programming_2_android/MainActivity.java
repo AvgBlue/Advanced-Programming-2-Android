@@ -4,21 +4,33 @@ import static com.example.advanced_programming_2_android.settings.ConfigParser.g
 import static com.example.advanced_programming_2_android.settings.ConfigParser.getDefaultTheme;
 import static com.example.advanced_programming_2_android.settings.ThemeManager.applyTheme;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
+import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.example.advanced_programming_2_android.api.FirebaseTokenAPI;
 import com.example.advanced_programming_2_android.api.UserAPI;
 import com.example.advanced_programming_2_android.database.AppDB;
-import com.example.advanced_programming_2_android.database.Storage;
+import com.example.advanced_programming_2_android.database.Settings;
+import com.example.advanced_programming_2_android.database.SettingsDao;
+import com.example.advanced_programming_2_android.database.User;
 import com.example.advanced_programming_2_android.viewModels.PreferencesViewModel;
+import com.example.advanced_programming_2_android.viewModels.PreferencesViewModelFactory;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.messaging.FirebaseMessaging;
 
 public class MainActivity extends AppCompatActivity {
     private Button btnSignIn;
@@ -26,8 +38,6 @@ public class MainActivity extends AppCompatActivity {
     private ImageView settingsButton;
 
     private PreferencesViewModel preferencesViewModel;
-
-    private Storage storage;
 
     public static final int PERMISSION_REQUEST_CODE = 1;
 
@@ -103,8 +113,6 @@ public class MainActivity extends AppCompatActivity {
                 else{
                     preferencesViewModel.setToken(this, null);
                     preferencesViewModel.setUsername(this, null);
-                    storage = Storage.getStorage(this);
-                    storage.clearStorage();
                 }
             });
         }

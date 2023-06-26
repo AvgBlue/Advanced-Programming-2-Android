@@ -4,7 +4,6 @@ import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Query;
-import androidx.room.Update;
 
 import java.util.List;
 
@@ -12,12 +11,6 @@ import java.util.List;
 public interface ConversationDao {
     @Insert
     void insert(Conversation... conversations);
-
-    @Update
-    void update(Conversation... conversations);
-
-    @Query("SELECT id FROM conversations")
-    List<Integer> getAllConversationIds();
 
     @Query("SELECT * FROM conversations")
     List<Conversation> getAllConversations();

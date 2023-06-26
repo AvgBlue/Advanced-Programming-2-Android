@@ -7,7 +7,6 @@ import androidx.annotation.NonNull;
 
 import com.google.gson.annotations.SerializedName;
 
-import java.util.Objects;
 
 
 // represent the response of GET /api/Chats
@@ -62,18 +61,12 @@ public class Chat {
     }
 
     @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
+    public String toString(){
+        String toString="id: "+id+", user: "+user.toString()+", lastMessage: "+"''.";
+        if(this.lastMessage!=null){
+            toString="id: "+id+", user: "+user.toString()+", lastMessage: "+lastMessage.toString() +".";
         }
-
-        if (obj == null || getClass() != obj.getClass()) {
-            return false;
-        }
-
-        Chat other = (Chat) obj;
-        return id == other.id &&
-                Objects.equals(user, other.user);
+        return toString;
     }
 }
 

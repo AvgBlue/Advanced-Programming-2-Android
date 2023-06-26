@@ -17,7 +17,6 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
-import com.example.advanced_programming_2_android.database.Storage;
 import com.example.advanced_programming_2_android.viewModels.PreferencesViewModel;
 import com.example.advanced_programming_2_android.viewModels.PreferencesViewModelFactory;
 
@@ -85,9 +84,6 @@ public class SettingsActivity extends AppCompatActivity {
 
 
             if(!editTextValue.equals(preferencesViewModel.getServerAddressLiveData(this).getValue())){
-                Storage storage = Storage.getStorage(this);
-                storage.clearStorage();
-
                 preferencesViewModel.setServerAddress(this, editTextValue);
                 Intent intent = new Intent(this, MainActivity.class);
                 preferencesViewModel.setToken(this, "");

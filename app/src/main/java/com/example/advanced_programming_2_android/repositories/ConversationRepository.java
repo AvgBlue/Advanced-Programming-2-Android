@@ -16,7 +16,7 @@ import com.example.advanced_programming_2_android.database.User;
 import java.util.ArrayList;
 
 public class ConversationRepository {
-    //private ConversationDao conversationDao;
+    private ConversationDao conversationDao;
     private ConversationData conversationData;
     private ChatsAPI chatsAPI;
     private String token;

@@ -12,7 +12,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class UserRepository {
-    //private UserDao userDao;
+    private UserDao userDao;
     private UsersListData usersListData;
     private UserAPI userAPI;
 
@@ -37,11 +37,9 @@ public class UserRepository {
             super.onActive();
 
             new Thread(() -> {
-               //usersListData.postValue(userDao.getAllUsers());
+                //usersListData.postValue(userDao.getAllUsers());
             }).start();
         }
-
-
     }
 
     public LiveData<List<User>> getAllUsers() {
