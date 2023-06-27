@@ -25,6 +25,7 @@ import com.example.advanced_programming_2_android.api.UserAPI;
 import com.example.advanced_programming_2_android.database.AppDB;
 import com.example.advanced_programming_2_android.database.Settings;
 import com.example.advanced_programming_2_android.database.SettingsDao;
+import com.example.advanced_programming_2_android.database.Storage;
 import com.example.advanced_programming_2_android.database.User;
 import com.example.advanced_programming_2_android.viewModels.PreferencesViewModel;
 import com.example.advanced_programming_2_android.viewModels.PreferencesViewModelFactory;
@@ -42,6 +43,8 @@ public class MainActivity extends AppCompatActivity {
     public static final int PERMISSION_REQUEST_CODE = 1;
 
     public static final String POST_NOTIFICATION_PERMISSION = "android.permission.POST_NOTIFICATIONS";
+
+    private Storage storage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -113,6 +116,8 @@ public class MainActivity extends AppCompatActivity {
                 else{
                     preferencesViewModel.setToken(this, null);
                     preferencesViewModel.setUsername(this, null);
+                    storage = Storage.getStorage(this);
+                    storage.clearStorage();
                 }
             });
         }
