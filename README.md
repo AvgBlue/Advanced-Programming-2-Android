@@ -17,6 +17,7 @@ Welcome to ChitChat, our last assignment chat website/app.
   - [Login Screen (Website)](#login-screen-website)
   - [Registration Screen](#registration-screen-1)
   - [Chat Screen](#chat-screen)
+- [Technologies](technologies)
 - [Credits](#credits)
 
 ## How to Run
@@ -132,6 +133,21 @@ Here is a preview of what the chat screen looks like:
 
 <img width="559" alt="image" src="https://github.com/nello0b/Advanced-Programming-2-Webserver/assets/116730693/584da3fe-940e-40fd-a69a-74b88f199d42">
 
+## Technologies
+
+The ChitChat app was developed using various technologies to provide a seamless and efficient user experience. The key technologies used in the development of the app include:
+
+- **Java**: The app's codebase is primarily written in Java, a widely used programming language known for its versatility and performance. Java provides a robust foundation for developing Android applications.
+
+- **Room**: Room is an Android library that provides an abstraction layer over SQLite, enabling efficient database operations. ChitChat utilizes Room to handle data persistence and manage the app's local database.
+
+- **Firebase**: Firebase is a comprehensive development platform provided by Google. ChitChat integrates Firebase to leverage its real-time database capabilities. This allows for instant updates and synchronization of messages and other data across devices.
+
+- **Retrofit**: Retrofit is a popular HTTP client library for Android. It simplifies the process of making network requests and handling responses. ChitChat utilizes Retrofit to interact with the server and perform various HTTP requests for chat-related functionalities.
+
+- **Shared Preferences**: Shared Preferences is a lightweight data storage mechanism provided by Android. ChitChat uses Shared Preferences to store and retrieve user preferences, such as theme settings and other small data that needs to be persisted across app sessions.
+
+These technologies were carefully chosen to ensure efficient data management, seamless communication with the server, and an intuitive user experience. By leveraging the power of Java, Room, Firebase, Retrofit, and Shared Preferences, ChitChat delivers a robust and reliable messaging platform.
 
 ## Credits
 
