@@ -4,6 +4,7 @@ Welcome to ChitChat, our last assignment chat website/app.
 
 ## Table of Contents
 
+- [Disclaimer](#disclaimer)
 - [How to Run](#how-to-run)
 - [App](#app)
   - [Main Screen](#main-screen)
@@ -19,6 +20,16 @@ Welcome to ChitChat, our last assignment chat website/app.
   - [Chat Screen](#chat-screen)
 - [Technologies](#technologies)
 - [Credits](#credits)
+
+## Disclaimer
+
+Please note that the ChitChat app has been primarily tested and developed using Android 7 (Nougat). While efforts have been made to ensure compatibility with various Android versions, there is a possibility that the app may not function properly or at all on later versions of Android.
+
+The app's features and functionalities heavily rely on APIs, libraries, and frameworks that may have undergone changes or updates in subsequent Android versions. As a result, certain aspects of the app may exhibit unexpected behavior or may not be fully supported on newer Android versions.
+
+To ensure optimal performance and compatibility, it is recommended to use the ChitChat app on Android 7 or later versions that are explicitly tested and supported. While the app may still function on newer Android versions, there might be limitations or issues that arise due to differences in platform behavior.
+
+Please consider these factors and use the app accordingly. We appreciate your understanding and encourage you to provide feedback or report any compatibility issues you encounter on different Android versions, as it helps us improve the app for a wider range of devices and users.
 
 ## How to Run
 You will need to npm,node.js,React and React Router.
