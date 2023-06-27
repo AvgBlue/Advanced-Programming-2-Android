@@ -6,15 +6,15 @@ Welcome to ChitChat are Last assignment chat website/app.
 
 - [How to Run](#how-to-run)
 - [App](#app)
-> - [Main Screen](main-screen)
-> - [Setting](setting)
-> - [Login Screen](login-screen)
-> - [Registration Screen](registration-screen)
-> - [Chats Screen](chats-screen)
-> - [Add Chat Screen](add-chat-screen)
-> - [Conversation Screen](conversation-screen)
+> - [Main Screen](#main-screen)
+> - [Setting](#setting)
+> - [Login Screen(App)](#login-screen(app))
+> - [Registration Screen](#registration-screen)
+> - [Chats Screen](#chats-screen)
+> - [Add Chat Screen](#add-chat-screen)
+> - [Conversation Screen](#conversation-screen)
 - [Website](#website)
-> - [Login Screen](#login-screen)
+> - [Login Screen(Website)](#login-screen(website))
 > - [Registration Screen](#registration-screen)
 > - [Chat Screen](#chat-screen)
 - [Credits](#credits)
@@ -56,7 +56,7 @@ To get out of the Settings screen press the back button.
 <img width="186" alt="image" src="https://github.com/AvgBlue/Advanced-Programming-2-Android/assets/72969087/8e4c58f7-93db-471b-8d59-6b3b2206101f">
 <img width="185" alt="image" src="https://github.com/AvgBlue/Advanced-Programming-2-Android/assets/72969087/cee2285f-c65f-44d3-b0c1-0914f20a71c9">
 
-### Login Screen
+### Login Screen(App)
 In the Login Screen you will be able to log into your user with your password, if the login is secsessful you will enter the up, if there is an error with your username or password, or the server is not available, a toast message will be printed with the appropriate information.
 
 <img width="183" alt="image" src="https://github.com/AvgBlue/Advanced-Programming-2-Android/assets/72969087/c2f4768a-b025-47a8-94df-63f8f2d8eeee">
@@ -90,7 +90,7 @@ In the Conversation Screen you will be to chat with your selected friend, you wi
 
 ## Website
 
-### Login Screen
+### Login Screen(Website)
 In the Login Screen you will be able to login to ChitChat be entering your username and password and pressing to the Login button, and then the user will continue to the [Chat Screen](#chat-screen).
 
 if you don't have a user, you will be needing to create a user be pressing to the "Click here" link continue to the [Registration Screen](#registration-screen)
