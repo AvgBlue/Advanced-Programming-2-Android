@@ -17,7 +17,9 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.example.advanced_programming_2_android.api.UserAPI;
+import com.example.advanced_programming_2_android.database.Conversation;
 import com.example.advanced_programming_2_android.database.Message;
+import com.example.advanced_programming_2_android.database.Storage;
 import com.example.advanced_programming_2_android.database.User;
 import com.example.advanced_programming_2_android.viewModels.ConversationViewModel;
 import com.example.advanced_programming_2_android.viewModels.ConversationViewModelFactory;
@@ -47,6 +49,9 @@ public class MessageActivity extends AppCompatActivity {
 
     private MessageAdapter messageAdapter;
     private firebaseService firebaseServiceInstance;
+
+    private Storage storage;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,6 +67,7 @@ public class MessageActivity extends AppCompatActivity {
         Uri profilePic = Uri.parse(getIntent().getStringExtra("profilePic"));
         String displayName = getIntent().getStringExtra("displayName");
         int chatId = getIntent().getIntExtra("chatId", 0);
+        String partnerUsername =  getIntent().getStringExtra("username");
 
         String url = preferencesViewModel.getServerAddressLiveData(this).getValue();
 
@@ -77,7 +83,22 @@ public class MessageActivity extends AppCompatActivity {
         messagesRecycleView =  findViewById(R.id.chatRecycleView);
 
         String username = preferencesViewModel.getUsernameLiveData(this).getValue();
-        messageAdapter = new MessageAdapter(new ArrayList<>(), username);
+
+        storage = Storage.getStorage(this);
+
+        List<String> users = new ArrayList<>();
+        users.add(partnerUsername);
+        users.add(username);
+        Conversation dbConversation = storage.getConversationByUsernames(users);
+        List<Message> dbMessages;
+        if(dbConversation != null){
+            dbMessages = dbConversation.getMessages();
+        }
+        else {
+            dbMessages = new ArrayList<>();
+        }
+
+        messageAdapter = new MessageAdapter(dbMessages, username);
         messagesRecycleView.setAdapter(messageAdapter);
         messagesRecycleView.setLayoutManager(new LinearLayoutManager(this));
 
@@ -97,6 +118,7 @@ public class MessageActivity extends AppCompatActivity {
                 if (messageAdapter.getItemCount() > 0) {
                     messagesRecycleView.smoothScrollToPosition(messageAdapter.getItemCount() - 1);
                 }
+                storage.updateConversation(conversation);
             }
         });
 
@@ -120,6 +142,8 @@ public class MessageActivity extends AppCompatActivity {
         });
 
         logout.setOnClickListener(view -> {
+            storage.clearStorage();
+
             preferencesViewModel.setToken(this, "");
             Intent intent = new Intent(this, MainActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);

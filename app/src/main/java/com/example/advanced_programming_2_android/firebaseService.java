@@ -36,7 +36,7 @@ public class firebaseService extends FirebaseMessagingService {
         // Create an intent for the notification's click action
         Intent intent = new Intent(this, MainActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
 
         // Create a notification channel (if needed)
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {

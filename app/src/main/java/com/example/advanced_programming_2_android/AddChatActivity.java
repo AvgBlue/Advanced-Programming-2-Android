@@ -17,8 +17,10 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.example.advanced_programming_2_android.api.UserAPI;
 import com.example.advanced_programming_2_android.database.Chat;
+import com.example.advanced_programming_2_android.database.Storage;
 import com.example.advanced_programming_2_android.database.User;
 import com.example.advanced_programming_2_android.viewModels.ChatViewModel;
+import com.example.advanced_programming_2_android.viewModels.ChatViewModelFactory;
 import com.example.advanced_programming_2_android.viewModels.PreferencesViewModel;
 import com.example.advanced_programming_2_android.viewModels.PreferencesViewModelFactory;
 import com.makeramen.roundedimageview.RoundedImageView;
@@ -36,6 +38,8 @@ public class AddChatActivity extends AppCompatActivity {
     private ChatViewModel chatViewModel;
 
     private PreferencesViewModel preferencesViewModel;
+
+    private Storage storage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,11 +72,16 @@ public class AddChatActivity extends AppCompatActivity {
                     .into(profilePic);
         });
 
-        chatViewModel = new ChatViewModel(token, url);
+        storage = Storage.getStorage(this);
+
+        //chatViewModel = new ChatViewModel(token, url);
+        ChatViewModelFactory factoryChat = new ChatViewModelFactory(token, url);
+        chatViewModel = new ViewModelProvider(this, factoryChat).get(ChatViewModel.class);
 
         chatViewModel.getChatsApi();
         chatViewModel.getChat().observe(this, chatList -> {
             chats = chatList;
+            storage.updateChats(chats);
         });
 
         btnAddChat.setOnClickListener(view -> {
@@ -105,6 +114,7 @@ public class AddChatActivity extends AppCompatActivity {
         });
 
         logout.setOnClickListener(view -> {
+            storage.clearStorage();
 
             preferencesViewModel.setToken(this, "");
             Intent intent = new Intent(this, MainActivity.class);
