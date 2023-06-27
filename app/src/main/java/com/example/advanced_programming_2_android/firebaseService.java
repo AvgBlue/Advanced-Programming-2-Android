@@ -32,7 +32,7 @@ public class firebaseService extends FirebaseMessagingService {
         // Retrieve the message data
         String title = remoteMessage.getNotification().getTitle();
         String body = remoteMessage.getNotification().getBody();
-        Log.d("tag", "i am here");
+        
         // Create an intent for the notification's click action
         Intent intent = new Intent(this, MainActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);

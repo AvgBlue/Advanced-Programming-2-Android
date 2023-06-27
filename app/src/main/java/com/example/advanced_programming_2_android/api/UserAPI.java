@@ -39,7 +39,7 @@ public class UserAPI {
     }
 
     public void getUserByUsername(String username, String authorization) {
-        Log.d("MY_ACTIVITY", "3) username: "+username+", authorization: "+authorization);
+
         Call<User> call = webServiceAPI.getUserByUsername(username, authorization);
         call.enqueue(new Callback<User>() {
             @Override
@@ -47,9 +47,7 @@ public class UserAPI {
                 if (response.isSuccessful()) {
                     User user = response.body();
                     userMutableLiveData.setValue(user);
-                } else {
-                    Toast.makeText(MyApplication.context, "Could not get your user", Toast.LENGTH_LONG).show();
-                }
+                } 
             }
 
             @Override
