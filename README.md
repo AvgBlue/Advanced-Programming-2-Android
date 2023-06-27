@@ -1,22 +1,22 @@
 # Advanced-Programming-2-Android
 
-Welcome to ChitChat are Last assignment chat website/app.
+Welcome to ChitChat, our last assignment chat website/app.
 
 ## Table of Contents
 
 - [How to Run](#how-to-run)
 - [App](#app)
-> - [Main Screen](#main-screen)
-> - [Setting](#setting)
-> - [Login Screen(App)](#login-screen-app)
-> - [Registration Screen](#registration-screen)
-> - [Chats Screen](#chats-screen)
-> - [Add Chat Screen](#add-chat-screen)
-> - [Conversation Screen](#conversation-screen)
+  - [Main Screen](#main-screen)
+  - [Setting](#setting)
+  - [Login Screen (App)](#login-screen-app)
+  - [Registration Screen](#registration-screen)
+  - [Chats Screen](#chats-screen)
+  - [Add Chat Screen](#add-chat-screen)
+  - [Conversation Screen](#conversation-screen)
 - [Website](#website)
-> - [Login Screen(Website)](#login-screen-website)
-> - [Registration Screen](#registration-screen)
-> - [Chat Screen](#chat-screen)
+  - [Login Screen (Website)](#login-screen-website)
+  - [Registration Screen](#registration-screen-1)
+  - [Chat Screen](#chat-screen)
 - [Credits](#credits)
 
 ## How to Run
