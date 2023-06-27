@@ -33,9 +33,9 @@ npm install
 npm start
 ```
 
-To run the app you will need to open this project with Android Studio, and build it there (we trust your intelligence and experience in the matter).
-
 Now you can enter [http://localhost:5000/](http://localhost:5000/) to browse our chat site.
+
+To run the app you will need to open this project with Android Studio, and build it there (we trust your intelligence and experience in the matter) and run it on your favorite emulator.
 
 ## App
 
