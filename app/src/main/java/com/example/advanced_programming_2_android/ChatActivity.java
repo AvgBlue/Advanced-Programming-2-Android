@@ -96,7 +96,7 @@ public class ChatActivity extends AppCompatActivity {
         chatAdapter = new ChatAdapter(dbChats);
         lvChats.setAdapter(chatAdapter);
 
-        Log.d("ChatActivity", "ChatActivity created"); // Debug print
+        
 
         chatViewModel.getChat().observe(this, chatList -> {
             chats = chatList;
@@ -159,13 +159,13 @@ public class ChatActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        Log.d("ChatActivity", "ChatActivity resumed"); // Debug print
+        
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        Log.d("ChatActivity", "ChatActivity paused"); // Debug print
+        
     }
 
     private void observeNotificationEvent() {

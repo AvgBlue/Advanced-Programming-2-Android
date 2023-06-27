@@ -61,9 +61,7 @@ public class SettingsActivity extends AppCompatActivity {
 
         serverAddressInput.setText(preferencesViewModel.getServerAddressLiveData(this).getValue());
 
-        Log.d("MY_ACTIVITY", "2) PREFERENCES: "+ preferencesViewModel.toString());
-        Log.d("MY_ACTIVITY", "2) THEME: "+preferencesViewModel.getThemeLiveData(this).getValue());
-        Log.d("MY_ACTIVITY", "2) ADDRESS: "+preferencesViewModel.getServerAddressLiveData(this).getValue());
+        
 
 
         Button applyButton = findViewById(R.id.btnApply);

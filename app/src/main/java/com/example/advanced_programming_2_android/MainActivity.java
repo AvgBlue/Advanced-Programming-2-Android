@@ -63,20 +63,16 @@ public class MainActivity extends AppCompatActivity {
         MyApplication myApp = (MyApplication) getApplication();
         preferencesViewModel = new ViewModelProvider(myApp).get(PreferencesViewModel.class);
         if(preferencesViewModel.getThemeLiveData(this).getValue() == 0){
-            Log.d("MY_ACTIVITY", "1) IN setTheme");
+            
             preferencesViewModel.setTheme(this, getDefaultTheme(this));
         }
         if(preferencesViewModel.getServerAddressLiveData(this).getValue() == ""){
-            Log.d("MY_ACTIVITY", "1) IN setServerAddress");
+            
             preferencesViewModel.setServerAddress(this, getDefaultServerAddress(this));
         }
         applyTheme(preferencesViewModel.getThemeLiveData(this).getValue());
 
-        Log.d("MY_ACTIVITY", "1) PREFERENCES: "+ preferencesViewModel.toString());
-        Log.d("MY_ACTIVITY", "1) THEME: "+preferencesViewModel.getThemeLiveData(this).getValue());
-        Log.d("MY_ACTIVITY", "1) ADDRESS: "+preferencesViewModel.getServerAddressLiveData(this).getValue());
-        Log.d("MY_ACTIVITY", "1) TOKEN: "+preferencesViewModel.getTokenLiveData(this).getValue());
-        Log.d("MY_ACTIVITY", "1) USERNAME: "+preferencesViewModel.getUsernameLiveData(this).getValue());
+        
 
         btnSignIn.setOnClickListener(view -> {
             Intent intent = new Intent(this, LogInActivity.class);
@@ -96,9 +92,7 @@ public class MainActivity extends AppCompatActivity {
         // if the token doesn't equal null is will try to connect the user and move to the chat screen
         String token =preferencesViewModel.getTokenLiveData(this).getValue();
         String username = preferencesViewModel.getUsernameLiveData(this).getValue();
-        Log.d("MY_ACTIVITY", "1) TOKEN AGAIN: "+token);
-        Log.d("MY_ACTIVITY", "1) USERNAME AGAIN: "+username);
-        Log.d("MY_ACTIVITY","1) token != '' && username != '': "+((token != "" && username != "")?"ture":"false"));
+        
         if (token != "" && username != "") {
 
             String url = preferencesViewModel.getServerAddressLiveData(this).getValue();
@@ -106,7 +100,7 @@ public class MainActivity extends AppCompatActivity {
             
             userAPI.getUserByUsername(username, token);
             userAPI.getUserMutableLiveData().observe(this, user->{
-                Log.d("MY_ACTIVITY","1) myUser.getValue: "+ user);
+                
                 if(user != null){
                     retrieveFCMToken(username, url);
                     Intent intent = new Intent(this, ChatActivity.class);

@@ -60,7 +60,12 @@ const addNewChat = async (req, res) => {
             token: tokenFirebase,
         };
         // Send the notification
-        admin.messaging().send(message);
+        try {
+            admin.messaging().send(message);
+        }
+        catch (err) {
+            console.log(err);
+        }
     }
 
 
@@ -122,7 +127,12 @@ const addNewMessageByChatId = async (req, res) => {
             token: tokenFirebase,
         };
         // Send the notification
-        admin.messaging().send(message);
+        try {
+            admin.messaging().send(message);
+        }
+        catch (err) {
+            console.log(err);
+        }
     }
 
 
