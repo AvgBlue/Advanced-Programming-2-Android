@@ -17,7 +17,7 @@ Welcome to ChitChat, our last assignment chat website/app.
   - [Login Screen (Website)](#login-screen-website)
   - [Registration Screen](#registration-screen-1)
   - [Chat Screen](#chat-screen)
-- [Technologies](technologies)
+- [Technologies](#technologies)
 - [Credits](#credits)
 
 ## How to Run
