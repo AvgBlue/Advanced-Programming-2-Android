@@ -123,11 +123,11 @@ public class MessageActivity extends AppCompatActivity {
         });
 
         sendButton.setOnClickListener(view -> {
-            String messageToSend = inputMessage.getText().toString();
+            String messageToSend = inputMessage.getText().toString().trim();
             if (!messageToSend.equals("")) {
                 conversationViewModel.sendMessageApi(messageToSend, chatId);
-                inputMessage.setText("");
             }
+            inputMessage.setText("");
             // scroll to the bottom of the list
             if (messageAdapter.getItemCount() > 0) {
                 messagesRecycleView.smoothScrollToPosition(messageAdapter.getItemCount() - 1);
