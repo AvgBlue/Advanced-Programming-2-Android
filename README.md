@@ -5,7 +5,7 @@ Welcome to ChitChat, our last assignment chat website/app.
 ## Table of Contents
 
 - [Disclaimer](#disclaimer)
-- [Firebase Reliability and Functionality](firebase-reliability-and-functionality)
+- [Firebase Reliability and Functionality](#firebase-reliability-and-functionality)
 - [How to Run](#how-to-run)
 - [Server](#server)
 - [App](#app)
