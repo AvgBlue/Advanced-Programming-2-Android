@@ -6,6 +6,7 @@ Welcome to ChitChat, our last assignment chat website/app.
 
 - [Disclaimer](#disclaimer)
 - [How to Run](#how-to-run)
+- [Server](#server)
 - [App](#app)
   - [Main Screen](#main-screen)
   - [Setting](#setting)
@@ -51,6 +52,12 @@ npm start
 Now you can enter [http://localhost:5000/](http://localhost:5000/) to browse our chat site.
 
 To run the app you will need to open this project with Android Studio, and build it there (we trust your intelligence and experience in the matter) and run it on your favorite emulator.
+
+## Server
+
+The ChitChat app relies on a server for handling various functionalities, such as user authentication, chat management, and data storage. The server code can be found in the following GitHub repository: [https://github.com/AvgBlue/Advanced-Programming-2-Android/tree/main/mvc](https://github.com/AvgBlue/Advanced-Programming-2-Android/tree/main/mvc)
+
+The server implementation is an integral part of the overall ChitChat system, and it works in conjunction with the client app to provide a seamless chat experience. It leverages technologies such as Node.js, Express.js, and MongoDB for efficient handling of requests, data storage, and real-time communication.
 
 ## App
 
