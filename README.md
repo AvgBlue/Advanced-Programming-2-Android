@@ -5,6 +5,7 @@ Welcome to ChitChat, our last assignment chat website/app.
 ## Table of Contents
 
 - [Disclaimer](#disclaimer)
+- [Firebase Reliability and Functionality](firebase-reliability-and-functionality)
 - [How to Run](#how-to-run)
 - [Server](#server)
 - [App](#app)
@@ -31,6 +32,10 @@ The app's features and functionalities heavily rely on APIs, libraries, and fram
 To ensure optimal performance and compatibility, it is recommended to use the ChitChat app on Android 7 or later versions that are explicitly tested and supported. While the app may still function on newer Android versions, there might be limitations or issues that arise due to differences in platform behavior.
 
 Please consider these factors and use the app accordingly. We appreciate your understanding and encourage you to provide feedback or report any compatibility issues you encounter on different Android versions, as it helps us improve the app for a wider range of devices and users.
+
+## Firebase Reliability and Functionality
+
+Please note that ChitChat relies on Firebase for its real-time database capabilities. While we have made efforts to optimize the app's functionality, it's important to understand that Firebase's performance and functionality are beyond our control. Occasional connectivity issues or delays in data synchronization may occur due to factors outside our control. Additionally, updates to the Firebase platform may affect certain features or functionalities. We appreciate your understanding and patience, and we're committed to addressing any issues promptly.
 
 ## How to Run
 You will need to npm,node.js,React and React Router.
