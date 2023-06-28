@@ -1,20 +1,41 @@
 # Advanced-Programming-2-Android
 
-Welcome to ChitChat are Last assignment chat website/app.
+Welcome to ChitChat, our last assignment chat website/app.
 
 ## Table of Contents
 
+- [Disclaimer](#disclaimer)
+- [Firebase Reliability and Functionality](#firebase-reliability-and-functionality)
 - [How to Run](#how-to-run)
+- [Server](#server)
 - [App](#app)
-> - [Main Screen](main-screen)
-> - [Setting](setting)
-> - [Login Screen](login-screen)
-> - [Login Screen](login-screen)
+  - [Main Screen](#main-screen)
+  - [Setting](#setting)
+  - [Login Screen (App)](#login-screen-app)
+  - [Registration Screen](#registration-screen)
+  - [Chats Screen](#chats-screen)
+  - [Add Chat Screen](#add-chat-screen)
+  - [Conversation Screen](#conversation-screen)
 - [Website](#website)
-> - [Login Screen](#login-screen)
-> - [Registration Screen](#registration-screen)
-> - [Chat Screen](#chat-screen)
+  - [Login Screen (Website)](#login-screen-website)
+  - [Registration Screen](#registration-screen-1)
+  - [Chat Screen](#chat-screen)
+- [Technologies](#technologies)
 - [Credits](#credits)
+
+## Disclaimer
+
+Please note that the ChitChat app has been primarily tested and developed using Android 7 (Nougat). While efforts have been made to ensure compatibility with various Android versions, there is a possibility that the app may not function properly or at all on later versions of Android.
+
+The app's features and functionalities heavily rely on APIs, libraries, and frameworks that may have undergone changes or updates in subsequent Android versions. As a result, certain aspects of the app may exhibit unexpected behavior or may not be fully supported on newer Android versions.
+
+To ensure optimal performance and compatibility, it is recommended to use the ChitChat app on Android 7 or later versions that are explicitly tested and supported. While the app may still function on newer Android versions, there might be limitations or issues that arise due to differences in platform behavior.
+
+Please consider these factors and use the app accordingly. We appreciate your understanding and encourage you to provide feedback or report any compatibility issues you encounter on different Android versions, as it helps us improve the app for a wider range of devices and users.
+
+## Firebase Reliability and Functionality
+
+Please note that ChitChat relies on Firebase for its real-time database capabilities. While we have made efforts to optimize the app's functionality, it's important to understand that Firebase's performance and functionality are beyond our control. Occasional connectivity issues or delays in data synchronization may occur due to factors outside our control. Additionally, updates to the Firebase platform may affect certain features or functionalities. We appreciate your understanding and patience, and we're committed to addressing any issues promptly.
 
 ## How to Run
 You will need to npm,node.js,React and React Router.
@@ -33,9 +54,15 @@ npm install
 npm start
 ```
 
-To run the app you will need to open this project with Android Studio, and build it there (we trust your intelligence and experience in the matter).
-
 Now you can enter [http://localhost:5000/](http://localhost:5000/) to browse our chat site.
+
+To run the app you will need to open this project with Android Studio, and build it there (we trust your intelligence and experience in the matter) and run it on your favorite emulator.
+
+## Server
+
+The ChitChat app relies on a server for handling various functionalities, such as user authentication, chat management, and data storage. The server code can be found in the following GitHub repository: [https://github.com/AvgBlue/Advanced-Programming-2-Android/tree/main/mvc](https://github.com/AvgBlue/Advanced-Programming-2-Android/tree/main/mvc)
+
+The server implementation is an integral part of the overall ChitChat system, and it works in conjunction with the client app to provide a seamless chat experience. It leverages technologies such as Node.js, Express.js, and MongoDB for efficient handling of requests, data storage, and real-time communication.
 
 ## App
 
@@ -53,7 +80,7 @@ To get out of the Settings screen press the back button.
 <img width="186" alt="image" src="https://github.com/AvgBlue/Advanced-Programming-2-Android/assets/72969087/8e4c58f7-93db-471b-8d59-6b3b2206101f">
 <img width="185" alt="image" src="https://github.com/AvgBlue/Advanced-Programming-2-Android/assets/72969087/cee2285f-c65f-44d3-b0c1-0914f20a71c9">
 
-### Login Screen
+### Login Screen(App)
 In the Login Screen you will be able to log into your user with your password, if the login is secsessful you will enter the up, if there is an error with your username or password, or the server is not available, a toast message will be printed with the appropriate information.
 
 <img width="183" alt="image" src="https://github.com/AvgBlue/Advanced-Programming-2-Android/assets/72969087/c2f4768a-b025-47a8-94df-63f8f2d8eeee">
@@ -87,7 +114,7 @@ In the Conversation Screen you will be to chat with your selected friend, you wi
 
 ## Website
 
-### Login Screen
+### Login Screen(Website)
 In the Login Screen you will be able to login to ChitChat be entering your username and password and pressing to the Login button, and then the user will continue to the [Chat Screen](#chat-screen).
 
 if you don't have a user, you will be needing to create a user be pressing to the "Click here" link continue to the [Registration Screen](#registration-screen)
@@ -129,6 +156,21 @@ Here is a preview of what the chat screen looks like:
 
 <img width="559" alt="image" src="https://github.com/nello0b/Advanced-Programming-2-Webserver/assets/116730693/584da3fe-940e-40fd-a69a-74b88f199d42">
 
+## Technologies
+
+The ChitChat app was developed using various technologies to provide a seamless and efficient user experience. The key technologies used in the development of the app include:
+
+- **Java**: The app's codebase is primarily written in Java, a widely used programming language known for its versatility and performance. Java provides a robust foundation for developing Android applications.
+
+- **Room**: Room is an Android library that provides an abstraction layer over SQLite, enabling efficient database operations. ChitChat utilizes Room to handle data persistence and manage the app's local database.
+
+- **Firebase**: Firebase is a comprehensive development platform provided by Google. ChitChat integrates Firebase to leverage its real-time database capabilities. This allows for instant updates and synchronization of messages and other data across devices.
+
+- **Retrofit**: Retrofit is a popular HTTP client library for Android. It simplifies the process of making network requests and handling responses. ChitChat utilizes Retrofit to interact with the server and perform various HTTP requests for chat-related functionalities.
+
+- **Shared Preferences**: Shared Preferences is a lightweight data storage mechanism provided by Android. ChitChat uses Shared Preferences to store and retrieve user preferences, such as theme settings and other small data that needs to be persisted across app sessions.
+
+These technologies were carefully chosen to ensure efficient data management, seamless communication with the server, and an intuitive user experience. By leveraging the power of Java, Room, Firebase, Retrofit, and Shared Preferences, ChitChat delivers a robust and reliable messaging platform.
 
 ## Credits
 
